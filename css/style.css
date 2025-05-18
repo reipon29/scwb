@@ -1,0 +1,260 @@
+/* style.css */
+:root {
+  --color-primary: #54A5C7;
+  --color-primary-dark: #3D89A6;
+  --color-secondary: #E3BE34;
+  --color-background: #FFFFFF;
+  --color-text: #333;
+  --font-family: 'Noto Sans JP', 'Helvetica Neue', Arial, sans-serif;
+  --spacing: 1.5rem;
+  --radius: 8px;
+}
+
+/* リセット＆基本 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  font-family: var(--font-family);
+  background: var(--color-background);
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+/* レイアウト */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ヘッダー */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--color-primary);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing) 0;
+}
+
+/* ロゴ */
+.logo {
+  height: 60px;
+  transition: transform .3s;
+}
+.logo-link:hover .logo {
+  transform: scale(1.1);
+}
+
+/* ハンバーガー */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: var(--spacing);
+  right: var(--spacing);
+  z-index: 2001;
+}
+.nav-toggle .bar {
+  height: 2px;
+  background: #fff;
+  border-radius: 1px;
+  transition: transform .3s, opacity .3s;
+}
+.nav-toggle.open .bar:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+.nav-toggle.open .bar:nth-child(2) {
+  opacity: 0;
+}
+.nav-toggle.open .bar:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+/* メインナビ（デスクトップ） */
+.nav-menu {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+.nav-menu a {
+  position: relative;
+  padding: .5rem 0;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color .3s;
+}
+.nav-menu a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--color-secondary);
+  transition: width .3s, left .3s;
+}
+.nav-menu a:hover {
+  color: var(--color-secondary);
+}
+.nav-menu a:hover::after {
+  left: 0;
+  width: 100%;
+}
+
+/* モバイル：ドロップダウン隠す */
+@media (max-width: 1024px) {
+  .nav-toggle {
+    display: flex;
+  }
+  .nav-menu {
+    display: none !important;
+  }
+}
+
+/* 全画面オーバーレイ */
+.menu-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: var(--color-primary);
+  color: #fff;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity .4s, transform .4s;
+  z-index: 2000;
+}
+.menu-overlay.open {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.menu-overlay.open {
+  animation: slideIn .5s ease-out forwards;
+}
+.menu-overlay ul {
+  list-style: none;
+  text-align: center;
+}
+.menu-overlay li {
+  margin: 1rem 0;
+}
+.menu-overlay a {
+  font-size: 1.8rem;
+  color: #fff;
+  text-decoration: none;
+  transition: color .3s;
+}
+.menu-overlay a:hover {
+  color: var(--color-secondary);
+}
+.menu-close {
+  position: absolute;
+  top: var(--spacing);
+  right: var(--spacing);
+  background: none;
+  border: none;
+  font-size: 2.5rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* ヒーロー */
+.hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+  text-align: center;
+  color: #fff;
+  background: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)),
+              url('../img/desktop1.jpg') center/cover fixed no-repeat;
+  overflow: hidden;
+}
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-content {
+  opacity: 0;
+}
+.hero.loaded .hero-content {
+  animation: fadeInDown 1s ease-out forwards;
+}
+
+/* ボタン */
+.btn-primary {
+  display: inline-block;
+  background: var(--color-secondary);
+  color: #fff;
+  padding: .8rem 1.5rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform .3s;
+}
+@keyframes pulse {
+  0%,100% { transform: scale(1); }
+  50%    { transform: scale(1.05); }
+}
+.btn-primary:hover {
+  animation: pulse .6s ease-in-out;
+}
+
+/* セクション */
+.section {
+  padding: 4rem 0;
+}
+.section h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  padding-left: .5rem;
+  border-left: 4px solid var(--color-secondary);
+}
+
+/* カード */
+.card {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: var(--spacing);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  opacity: 0;
+  transform: translateY(20px);
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+/* IntersectionObserver で .visible が付いたら実行 */
+.card.visible {
+  animation: fadeInUp .6s ease-out forwards;
+  /* 遅延をつけたい場合は JS で style.animationDelay を追加 */
+}
+
+/* SNS／フッター等は前と同じスタイル残し */
