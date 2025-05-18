@@ -73,6 +73,8 @@ body {
   z-index: 2001;
 }
 .nav-toggle .bar {
+  display: block;      /* span をブロック化して幅を効かせる */
+  width: 100%;         /* 親ボタンいっぱいに引き伸ばし */
   height: 2px;
   background: #fff;
   border-radius: 1px;
