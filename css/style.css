@@ -169,7 +169,7 @@ body {
 }
 
 .menu-overlay a {
-  font-size: 1.8rem; /* フォントサイズ */
+  font-size: 1.2rem; /* フォントサイズ */
   color: #fff; /* テキストカラー */
   text-decoration: none; /* 下線なし */
   transition: color var(--transition-fast); /* トランジション効果 */
