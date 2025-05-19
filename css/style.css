@@ -1,262 +1,545 @@
-/* style.css */
+/* ── Root Variables ─────────────────────────────── */
 :root {
-  --color-primary: #54A5C7;
-  --color-primary-dark: #3D89A6;
-  --color-secondary: #E3BE34;
-  --color-background: #FFFFFF;
-  --color-text: #333;
-  --font-family: 'Noto Sans JP', 'Helvetica Neue', Arial, sans-serif;
-  --spacing: 1.5rem;
-  --radius: 8px;
+  /* カラーパレット */
+  --color-primary: #54A5C7;          /* プライマリカラー */
+  --color-primary-dark: #3D89A6;     /* プライマリダークカラー */
+  --color-secondary: #E3BE34;        /* セカンダリカラー */
+  --color-background: #FFFFFF;       /* 背景色 */
+  --color-text: #333333;             /* テキストカラー */
+
+  /* フォントとスペーシング */
+  --font-family: 'Noto Sans JP', 'Helvetica Neue', Arial, sans-serif; /* フォントファミリー */
+  --spacing: 1.5rem;                 /* スペーシング */
+  --radius: 8px;                     /* ボーダー半径 */
+  --transition-fast: 0.3s ease;      /* トランジション速度 */
 }
 
-/* リセット＆基本 */
+/* ── Reset & Base Styles ───────────────────────── */
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  box-sizing: border-box; /* ボックスモデルの設定 */
 }
+
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: smooth; /* スムーズスクロール */
 }
+
 body {
-  font-family: var(--font-family);
-  background: var(--color-background);
-  color: var(--color-text);
-  line-height: 1.6;
+  font-family: var(--font-family); /* フォントファミリーの適用 */
+  background-color: var(--color-background); /* 背景色の適用 */
+  color: var(--color-text); /* テキストカラーの適用 */
+  line-height: 1.6; /* 行間の設定 */
 }
 
-/* レイアウト */
+/* ── Container ─────────────────────────────────── */
 .container {
-  width: 90%;
-  max-width: 1200px;
-  margin: 0 auto;
+  width: 90%; /* 幅の設定 */
+  max-width: 1200px; /* 最大幅の設定 */
+  margin: 0 auto; /* 中央寄せ */
 }
 
-/* ヘッダー */
+/* ── Header ────────────────────────────────────── */
 .site-header {
-  position: sticky;
+  position: sticky; /* スティッキーヘッダー */
   top: 0;
-  z-index: 1000;
-  background: var(--color-primary);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-}
-.header-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--spacing) 0;
-}
-
-/* ロゴ */
-.logo {
-  height: 60px;
-  transition: transform .3s;
-}
-.logo-link:hover .logo {
-  transform: scale(1.1);
-}
-
-/* ハンバーガー */
-.nav-toggle {
-  display: none;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 28px;
-  height: 20px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  position: absolute;
-  top: var(--spacing);
-  right: var(--spacing);
-  z-index: 2001;
-}
-.nav-toggle .bar {
-  display: block;      /* span をブロック化して幅を効かせる */
-  width: 100%;         /* 親ボタンいっぱいに引き伸ばし */
-  height: 2px;
-  background: #fff;
-  border-radius: 1px;
-  transition: transform .3s, opacity .3s;
-}
-.nav-toggle.open .bar:nth-child(1) {
-  transform: translateY(9px) rotate(45deg);
-}
-.nav-toggle.open .bar:nth-child(2) {
-  opacity: 0;
-}
-.nav-toggle.open .bar:nth-child(3) {
-  transform: translateY(-9px) rotate(-45deg);
-}
-
-/* メインナビ（デスクトップ） */
-.nav-menu {
-  display: flex;
-  gap: 2rem;
-  list-style: none;
-}
-.nav-menu a {
-  position: relative;
-  padding: .5rem 0;
-  color: #fff;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color .3s;
-}
-.nav-menu a::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 50%;
-  width: 0;
-  height: 2px;
-  background: var(--color-secondary);
-  transition: width .3s, left .3s;
-}
-.nav-menu a:hover {
-  color: var(--color-secondary);
-}
-.nav-menu a:hover::after {
-  left: 0;
   width: 100%;
+  background-color: var(--color-primary); /* プライマリカラーの適用 */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15); /* シャドウ効果 */
+  z-index: 1000; /* 重なり順序 */
+  transition: background-color var(--transition-fast), box-shadow var(--transition-fast); /* トランジション効果 */
 }
 
-/* モバイル：ドロップダウン隠す */
+.header-inner {
+  display: flex; /* フレックスボックスの使用 */
+  align-items: center; /* 垂直方向の中央揃え */
+  justify-content: space-between; /* 水平方向のスペース分配 */
+  padding: 0.5rem 1rem; /* パディングの設定 */
+}
+
+/* ── Logo ─────────────────────────────────────── */
+.logo {
+  height: 80px; /* ロゴの高さ */
+  transition: transform var(--transition-fast); /* トランジション効果 */
+}
+
+.logo-link:hover .logo {
+  transform: scale(1.1); /* ホバー時の拡大効果 */
+}
+
+/* ── Navigation ───────────────────────────────── */
+.nav-toggle {
+  display: none; /* デフォルトでは非表示 */
+  flex-direction: column; /* 縦並び */
+  justify-content: space-between; /* スペース分配 */
+  width: 28px; /* 幅の設定 */
+  height: 20px; /* 高さの設定 */
+  background: none; /* 背景なし */
+  border: none; /* ボーダーなし */
+  cursor: pointer; /* カーソルをポインターに */
+  position: absolute; /* 絶対位置 */
+  top: var(--spacing); /* 上部のスペーシング */
+  right: var(--spacing); /* 右側のスペーシング */
+  z-index: 2001; /* 重なり順序 */
+}
+
+.nav-toggle .bar {
+  width: 100%; /* 幅の設定 */
+  height: 2px; /* 高さの設定 */
+  background-color: #fff; /* バーの色 */
+  border-radius: 1px; /* ボーダー半径 */
+  transition: transform var(--transition-fast), opacity var(--transition-fast); /* トランジション効果 */
+}
+
+/* ナビゲーションメニュー */
+.nav-menu {
+  display: flex; /* フレックスボックスの使用 */
+  gap: 2rem; /* アイテム間のスペース */
+  list-style: none; /* リストスタイルなし */
+}
+
+.nav-menu a {
+  position: relative; /* 相対位置 */
+  color: #fff; /* テキストカラー */
+  text-decoration: none; /* 下線なし */
+  font-weight: 500; /* フォントウェイト */
+  transition: color var(--transition-fast); /* トランジション効果 */
+}
+
+.nav-menu a::after {
+  content: ''; /* 擬似要素 */
+  position: absolute; /* 絶対位置 */
+  bottom: -2px; /* 下部の位置 */
+  left: 50%; /* 中央揃え */
+  width: 0; /* 初期幅 */
+  height: 2px; /* 高さの設定 */
+  background-color: var(--color-secondary); /* セカンダリカラーの適用 */
+  transition: width var(--transition-fast), left var(--transition-fast); /* トランジション効果 */
+}
+
+.nav-menu a:hover {
+  color: var(--color-secondary); /* ホバー時の色変更 */
+}
+
+.nav-menu a:hover::after {
+  left: 0; /* 左端に移動 */
+  width: 100%; /* 幅を100%に */
+}
+
+/* ── Media Queries ────────────────────────────── */
 @media (max-width: 1024px) {
   .nav-toggle {
-    display: flex;
+    display: flex; /* モバイル時に表示 */
   }
   .nav-menu {
-    display: none !important;
+    display: none; /* モバイル時は非表示 */
   }
 }
 
-/* 全画面オーバーレイ */
+/* ── Overlay Menu ─────────────────────────────── */
 .menu-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: var(--color-primary);
-  color: #fff;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transform: translateY(-20px);
-  transition: opacity .4s, transform .4s;
-  z-index: 2000;
+  display: none; /* デフォルトでは非表示 */
+  position: fixed; /* 固定位置 */
+  inset: 0; /* 全面をカバー */
+  background-color: var(--color-primary); /* プライマリカラーの適用 */
+  color: #fff; /* テキストカラー */
+  flex-direction: column; /* 縦並び */
+  align-items: center; /* 中央揃え */
+  justify-content: center; /* 中央揃え */
+  opacity: 0; /* 初期透明度 */
+  transform: translateY(-20px); /* 初期位置 */
+  transition: opacity 0.4s ease, transform 0.4s ease; /* トランジション効果 */
+  z-index: 2000; /* 重なり順序 */
 }
+
 .menu-overlay.open {
-  display: flex;
-  opacity: 1;
-  transform: translateY(0);
+  display: flex; /* 開いたときに表示 */
+  opacity: 1; /* 不透明に */
+  transform: translateY(0); /* 元の位置に戻す */
 }
-@keyframes slideIn {
-  from { opacity: 0; transform: translateY(-20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-.menu-overlay.open {
-  animation: slideIn .5s ease-out forwards;
-}
+
 .menu-overlay ul {
-  list-style: none;
-  text-align: center;
+  list-style: none; /* リストスタイルなし */
+  text-align: center; /* 中央揃え */
 }
+
 .menu-overlay li {
-  margin: 1rem 0;
+  margin: 1rem 0; /* アイテム間のマージン */
 }
+
 .menu-overlay a {
-  font-size: 1.8rem;
-  color: #fff;
-  text-decoration: none;
-  transition: color .3s;
+  font-size: 1.8rem; /* フォントサイズ */
+  color: #fff; /* テキストカラー */
+  text-decoration: none; /* 下線なし */
+  transition: color var(--transition-fast); /* トランジション効果 */
 }
+
 .menu-overlay a:hover {
-  color: var(--color-secondary);
+  color: var(--color-secondary); /* ホバー時の色変更 */
 }
+
 .menu-close {
-  position: absolute;
-  top: var(--spacing);
-  right: var(--spacing);
-  background: none;
-  border: none;
-  font-size: 2.5rem;
-  color: #fff;
-  cursor: pointer;
+  position: absolute; /* 絶対位置 */
+  top: var(--spacing); /* 上部のスペーシング */
+  right: var(--spacing); /* 右側のスペーシング */
+  background: none; /* 背景なし */
+  border: none; /* ボーダーなし */
+  font-size: 2.5rem; /* フォントサイズ */
+  color: #fff; /* テキストカラー */
+  cursor: pointer; /* カーソルをポインターに */
 }
 
-/* ヒーロー */
+/* ── Hero Section ─────────────────────────────── */
 .hero {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 80vh;
-  text-align: center;
-  color: #fff;
-  background: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)),
-              url('../img/desktop1.jpg') center/cover fixed no-repeat;
-  overflow: hidden;
+  position: relative; /* 相対位置 */
+  display: flex; /* フレックスボックスの使用 */
+  align-items: center; /* 垂直方向の中央揃え */
+  justify-content: center; /* 水平方向の中央揃え */
+  height: 80vh; /* 高さの設定 */
+  overflow: hidden; /* オーバーフローを隠す */
+  background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), /* グラデーションオーバーレイ */
+              url('img/desktop1.jpg') center/cover fixed no-repeat; /* デスクトップ用背景画像 */
 }
-@keyframes fadeInDown {
-  from { opacity: 0; transform: translateY(-20px); }
-  to   { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 768px) {
+  .hero {
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), /* グラデーションオーバーレイ */
+                url('img/mobile1.jpg') center/cover no-repeat; /* モバイル用背景画像 */
+    background-attachment: scroll; /* スクロール時の背景動作 */
+  }
 }
+
 .hero-content {
-  opacity: 0;
+  position: relative; /* 相対位置 */
+  text-align: center; /* 中央揃え */
+  color: #fff; /* テキストカラー */
+  opacity: 0; /* 初期透明度 */
+  transform: translateY(20px); /* 初期位置 */
+  transition: opacity 1s ease, transform 1s ease; /* トランジション効果 */
 }
+
 .hero.loaded .hero-content {
-  animation: fadeInDown 1s ease-out forwards;
+  opacity: 1; /* 不透明に */
+  transform: translateY(0); /* 元の位置に戻す */
 }
 
-/* ボタン */
-.btn-primary {
-  display: inline-block;
-  background: var(--color-secondary);
-  color: #fff;
-  padding: .8rem 1.5rem;
-  border-radius: var(--radius);
-  font-weight: 600;
-  text-decoration: none;
-  transition: transform .3s;
-}
-@keyframes pulse {
-  0%,100% { transform: scale(1); }
-  50%    { transform: scale(1.05); }
-}
-.btn-primary:hover {
-  animation: pulse .6s ease-in-out;
+.hero-content h1 {
+  font-size: 2.5rem; /* 見出しのフォントサイズ */
+  margin-bottom: 1rem; /* 下部のマージン */
 }
 
-/* セクション */
+.hero-content p {
+  font-size: 1.2rem; /* 段落のフォントサイズ */
+  margin-bottom: 1.5rem; /* 下部のマージン */
+}
+
+.hero-content .btn-primary {
+  padding: 1rem 2rem; /* パディングの設定 */
+  font-size: 1rem; /* フォントサイズ */
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast); /* トランジション効果 */
+}
+
+.hero-content .btn-primary:hover {
+  transform: translateY(-3px); /* ホバー時の位置変更 */
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2); /* シャドウ効果 */
+}
+
+/* ── Sections & Cards ─────────────────────────── */
 .section {
-  padding: 4rem 0;
+  padding: 4rem 0; /* パディングの設定 */
+  opacity: 0; /* 初期透明度 */
+  transform: translateY(20px); /* 初期位置 */
+  transition: opacity 0.6s ease, transform 0.6s ease; /* トランジション効果 */
 }
+
+.section.visible,
+.fade-up.visible {
+  opacity: 1; /* 不透明に */
+  transform: translateY(0); /* 元の位置に戻す */
+}
+
 .section h2 {
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
-  padding-left: .5rem;
-  border-left: 4px solid var(--color-secondary);
+  font-size: 2rem; /* 見出しのフォントサイズ */
+  margin-bottom: 1.5rem; /* 下部のマージン */
+  border-left: 4px solid var(--color-secondary); /* 左ボーダー */
+  padding-left: 0.5rem; /* 左側のパディング */
 }
 
-/* カード */
 .card {
-  background: #fff;
-  border-radius: var(--radius);
-  padding: var(--spacing);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  opacity: 0;
-  transform: translateY(20px);
-}
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-/* IntersectionObserver で .visible が付いたら実行 */
-.card.visible {
-  animation: fadeInUp .6s ease-out forwards;
-  /* 遅延をつけたい場合は JS で style.animationDelay を追加 */
+  background-color: #fff; /* カードの背景色 */
+  border-radius: var(--radius); /* ボーダー半径 */
+  padding: var(--spacing); /* パディングの設定 */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05); /* シャドウ効果 */
+  opacity: 0; /* 初期透明度 */
+  transform: translateY(20px); /* 初期位置 */
+  transition: opacity 0.6s ease, transform 0.6s ease; /* トランジション効果 */
 }
 
-/* SNS／フッター等は前と同じスタイル残し */
+.card.visible {
+  opacity: 1; /* 不透明に */
+  transform: translateY(0); /* 元の位置に戻す */
+}
+
+.card:hover {
+  transform: translateY(-5px) scale(1.02); /* ホバー時の位置変更と拡大 */
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1); /* シャドウ効果 */
+}
+
+/* ── Buttons ──────────────────────────────────── */
+.btn-primary {
+  display: inline-block; /* インラインブロック */
+  background-color: var(--color-secondary); /* セカンダリカラーの適用 */
+  color: #fff; /* テキストカラー */
+  padding: 0.8rem 1.5rem; /* パディングの設定 */
+  border-radius: var(--radius); /* ボーダー半径 */
+  font-weight: 600; /* フォントウェイト */
+  text-decoration: none; /* 下線なし */
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast); /* トランジション効果 */
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px); /* ホバー時の位置変更 */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* シャドウ効果 */
+}
+
+/* ── SNS Embeds ───────────────────────────────── */
+.sns-embeds {
+  display: grid; /* グリッドレイアウト */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* 自動フィット */
+  gap: 2rem; /* アイテム間のスペース */
+}
+
+.instagram-link img {
+  width: 60px; /* 画像の幅 */
+  height: auto; /* 高さ自動 */
+  transition: transform var(--transition-fast); /* トランジション効果 */
+}
+
+.instagram-link:hover img {
+  transform: scale(1.1) rotate(5deg); /* ホバー時の拡大と回転 */
+}
+
+/* ── Responsive Embeds ────────────────────────── */
+.facebook-embed,
+.youtube-embed,
+.instagram-embed {
+  width: 100%; /* 幅の設定 */
+  max-width: 560px; /* 最大幅の設定 */
+  margin: 0 auto; /* 中央寄せ */
+}
+
+.facebook-embed iframe {
+  display: block; /* ブロック表示 */
+  width: 100%; /* 幅の設定 */
+  height: auto; /* 高さ自動 */
+  aspect-ratio: 9/16; /* アスペクト比 */
+}
+
+.youtube-embed iframe {
+  display: block; /* ブロック表示 */
+  width: 100%; /* 幅の設定 */
+  height: auto; /* 高さ自動 */
+  aspect-ratio: 16/9; /* アスペクト比 */
+}
+
+/* ── Activities Section ────────────────────────── */
+#activities .wrapper {
+  display: grid; /* グリッドレイアウト */
+  grid-template-columns: 1fr 1fr; /* 2カラム */
+  gap: 2rem; /* アイテム間のスペース */
+  align-items: start; /* 上揃え */
+  margin-top: 1.5rem; /* 上部のマージン */
+}
+
+.location-info {
+  background-color: #fff; /* 背景色 */
+  padding: 2rem; /* パディングの設定 */
+  border-radius: var(--radius); /* ボーダー半径 */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05); /* シャドウ効果 */
+}
+
+.location-info .sub-title {
+  font-size: 1.5rem; /* サブタイトルのフォントサイズ */
+  margin-bottom: 1rem; /* 下部のマージン */
+  color: var(--color-primary); /* プライマリカラーの適用 */
+}
+
+.location-info p {
+  line-height: 1.6; /* 行間の設定 */
+  color: var(--color-text); /* テキストカラー */
+}
+
+.location-map {
+  position: relative; /* 相対位置 */
+  overflow: hidden; /* オーバーフローを隠す */
+  border-radius: var(--radius); /* ボーダー半径 */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05); /* シャドウ効果 */
+}
+
+/* iframe をレスポンシブに */
+.location-map iframe {
+  display: block; /* ブロック表示 */
+  width: 100%; /* 幅の設定 */
+  height: auto; /* 高さ自動 */
+  aspect-ratio: 16/9; /* アスペクト比 */
+}
+
+/* ── Mobile Layout ────────────────────────────── */
+@media (max-width: 768px) {
+  #activities .wrapper {
+    grid-template-columns: 1fr; /* モバイル時は1カラム */
+  }
+}
+
+/* ── Contact Cards ────────────────────────────── */
+.contact-wrapper {
+  display: flex; /* フレックスボックスの使用 */
+  flex-wrap: wrap; /* ラップ */
+  gap: 2rem; /* アイテム間のスペース */
+  justify-content: center; /* 中央揃え */
+  margin-top: 2rem; /* 上部のマージン */
+}
+
+.contact-item {
+  background-color: #fff; /* 背景色 */
+  padding: 2rem; /* パディングの設定 */
+  width: 260px; /* 幅の設定 */
+  text-align: center; /* 中央揃え */
+  border-radius: var(--radius); /* ボーダー半径 */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05); /* シャドウ効果 */
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast); /* トランジション効果 */
+}
+
+.contact-item:hover {
+  transform: translateY(-5px); /* ホバー時の位置変更 */
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1); /* シャドウ効果 */
+}
+
+.contact-item i {
+  font-size: 2rem; /* アイコンのフォントサイズ */
+  color: var(--color-secondary); /* セカンダリカラーの適用 */
+  margin-bottom: 0.75rem; /* 下部のマージン */
+  display: block; /* ブロック表示 */
+}
+
+.contact-item h3 {
+  font-size: 1.1rem; /* タイトルのフォントサイズ */
+  margin-bottom: 0.5rem; /* 下部のマージン */
+}
+
+.contact-item a {
+  color: var(--color-primary); /* プライマリカラーの適用 */
+  text-decoration: none; /* 下線なし */
+  font-weight: 500; /* フォントウェイト */
+  transition: color var(--transition-fast); /* トランジション効果 */
+}
+
+.contact-item a:hover {
+  color: var(--color-secondary); /* ホバー時の色変更 */
+}
+
+/* ── Footer Base ──────────────────────────────── */
+.site-footer {
+  background-color: var(--color-primary-dark); /* プライマリダークカラーの適用 */
+  color: #fff; /* テキストカラー */
+  padding: 2rem 0; /* パディングの設定 */
+  text-align: center; /* 中央揃え */
+  position: relative; /* 相対位置 */
+  overflow: hidden; /* オーバーフローを隠す */
+  opacity: 0; /* 初期透明度 */
+  transform: translateY(20px); /* 初期位置 */
+  transition: opacity 0.6s ease, transform 0.6s ease; /* トランジション効果 */
+}
+
+.site-footer.visible {
+  opacity: 1; /* 不透明に */
+  transform: translateY(0); /* 元の位置に戻す */
+}
+
+/* ── Background Pattern ───────────────────────── */
+.site-footer::before {
+  content: ""; /* 擬似要素 */
+  position: absolute; /* 絶対位置 */
+  top: -20%; /* 上部の位置 */
+  left: -10%; /* 左側の位置 */
+  width: 120%; /* 幅の設定 */
+  height: 200%; /* 高さの設定 */
+  background: url('img/footer-bg.svg') center/cover no-repeat; /* 背景画像 */
+  opacity: 0.05; /* 透明度 */
+  transform: rotate(15deg); /* 回転 */
+}
+
+/* ── Footer Info ──────────────────────────────── */
+.footer-info {
+  text-align: center; /* 中央揃え */
+  color: #fff; /* テキストカラー */
+  margin-bottom: 1.5rem; /* 下部のマージン */
+}
+
+.footer-title {
+  font-size: 1.25rem; /* タイトルのフォントサイズ */
+  font-weight: bold; /* フォントウェイト */
+  margin-bottom: 0.5rem; /* 下部のマージン */
+}
+
+.footer-info p {
+  margin: 0.25rem 0; /* マージンの設定 */
+  line-height: 1.4; /* 行間の設定 */
+}
+
+/* ── Footer Divider ───────────────────────────── */
+.footer-divider {
+  width: 80%; /* 幅の設定 */
+  margin: 2rem auto; /* 中央寄せ */
+  border: 1px solid rgba(255,255,255,0.3); /* ボーダー */
+}
+
+/* ── Footer Navigation ────────────────────────── */
+.footer-nav ul {
+  display: flex; /* フレックスボックスの使用 */
+  flex-wrap: wrap; /* ラップ */
+  justify-content: center; /* 中央揃え */
+  gap: 1rem 2rem; /* アイテム間のスペース */
+  padding: 0; /* パディングなし */
+  list-style: none; /* リストスタイルなし */
+}
+
+.footer-nav a {
+  position: relative; /* 相対位置 */
+  color: #fff; /* テキストカラー */
+  text-decoration: none; /* 下線なし */
+  transition: color var(--transition-fast); /* トランジション効果 */
+}
+
+.footer-nav a::after {
+  content: ''; /* 擬似要素 */
+  position: absolute; /* 絶対位置 */
+  bottom: -4px; /* 下部の位置 */
+  left: 50%; /* 中央揃え */
+  width: 0; /* 初期幅 */
+  height: 2px; /* 高さの設定 */
+  background-color: var(--color-secondary); /* セカンダリカラーの適用 */
+  transition: width var(--transition-fast), left var(--transition-fast); /* トランジション効果 */
+}
+
+.footer-nav a:hover {
+  color: var(--color-secondary); /* ホバー時の色変更 */
+}
+
+.footer-nav a:hover::after {
+  left: 0; /* 左端に移動 */
+  width: 100%; /* 幅を100%に */
+}
+
+/* ── Copyright ────────────────────────────────── */
+.footer-copy {
+  display: block; /* ブロック表示 */
+  margin-top: 1.5rem; /* 上部のマージン */
+  font-size: 0.875rem; /* フォントサイズ */
+  color: rgba(255,255,255,0.7); /* 透明度付きのテキストカラー */
+}
+
+/* ── Helper Classes ───────────────────────────── */
+.hide-btn {
+  visibility: hidden; /* 非表示 */
+}

@@ -1,33 +1,47 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>諏訪市民吹奏楽団</title>
+  <title>諏訪市民吹奏楽団（すわしすい）</title>
   <meta name="description" content="新入団員募集中・コンサート情報など">
+
+  <!-- Google Fonts: Noto Sans JP と Oswald フォントを読み込み -->
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP|Oswald&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome: アイコンライブラリ -->
+  <script src="https://kit.fontawesome.com/YOUR_KIT_ID.js" crossorigin="anonymous"></script>
+
+  <!-- プロジェクト用スタイルシート -->
   <link rel="stylesheet" href="css/style.css">
-  <script async defer crossorigin="anonymous"
-    src="https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v15.0"></script>
+  
+  <!-- ファビコン -->
+  <link rel="icon" type="image/png" href="img/icon.png">
 </head>
 <body>
+  <!-- ====================
+       ヘッダー
+  ==================== -->
   <header class="site-header">
     <div class="container header-inner">
+      <!-- ロゴリンク -->
       <a href="index.html" class="logo-link" aria-label="ホーム">
         <img src="img/logo.png" alt="諏訪市民吹奏楽団" class="logo">
       </a>
+      <!-- モバイルメニュー切替ボタン -->
       <button class="nav-toggle" aria-label="メニューを開く" aria-expanded="false">
         <span class="bar"></span>
         <span class="bar"></span>
         <span class="bar"></span>
       </button>
-      <nav>
+      <!-- ナビゲーション (デスクトップ表示) -->
+      <nav aria-hidden="true">
         <ul id="primary-menu" class="nav-menu">
           <li><a href="shokai.html">楽団紹介</a></li>
           <li><a href="kiyaku.html">規約</a></li>
           <li><a href="sindai.html">新入団員募集</a></li>
-          <li><a href="record.html">演奏記録</a></li>
-          <li><a href="concert.html">コンサート情報</a></li>
+          <li><a href="http://cornettist.music.coocan.jp/history.html">演奏記録</a></li>
+          <li><a href="http://cornettist.music.coocan.jp/concert.html">コンサート情報</a></li>
           <li><a href="leaflet.html">チラシ</a></li>
           <li><a href="gara.html">フォトギャラリー</a></li>
           <li><a href="media.html">メディア</a></li>
@@ -37,13 +51,16 @@
     </div>
   </header>
 
+  <!-- ====================
+       モバイルメニューオーバーレイ
+  ==================== -->
   <div class="menu-overlay" id="mobile-menu" aria-hidden="true">
     <button class="menu-close" aria-label="閉じる">&times;</button>
     <ul>
       <li><a href="shokai.html">楽団紹介</a></li>
       <li><a href="kiyaku.html">規約</a></li>
       <li><a href="sindai.html">新入団員募集</a></li>
-      <li><a href="record.html">演奏記録</a></li>
+      <li><a href="http://cornettist.music.coocan.jp/history.html">演奏記録</a></li>
       <li><a href="concert.html">コンサート情報</a></li>
       <li><a href="leaflet.html">チラシ</a></li>
       <li><a href="gara.html">フォトギャラリー</a></li>
@@ -52,7 +69,11 @@
     </ul>
   </div>
 
+  <!-- ====================
+       メインコンテンツ
+  ==================== -->
   <main>
+    <!-- ヒーローセクション -->
     <section class="hero">
       <div class="hero-content">
         <h1>心に響く演奏を、一緒に創りませんか？</h1>
@@ -61,62 +82,119 @@
       </div>
     </section>
 
+    <!-- お知らせセクション -->
     <section id="news" class="section fade-up">
       <div class="container">
         <h2>お知らせ</h2>
         <div class="card">
-          全パートで新入団員募集中！
-          <a href="sindai.html">詳細はこちら</a>
+          🎺 <a href="https://www.instagram.com/suwacitywindband/" class="instagram-link" target="_blank" aria-label="Instagram">Instagram</a>始めました！
         </div>
         <div class="card">
-          次回定期演奏会は7月20日開催予定。チケット発売中。
+          🥁 全パートで新入団員募集中！<a href="sindai.html">詳細はこちら</a>
+        </div>
+        <div class="card">
+          🎷 定期演奏会は12月7日、茅野市民館にて開催予定！
         </div>
       </div>
     </section>
 
-    <section id="activities" class="section fade-up">
-      <div class="container">
-        <h2>活動</h2>
-        <div class="card">毎週火・木曜 19:00～21:00 練習</div>
-        <div class="card">地域イベントへの出演、ボランティア演奏</div>
-      </div>
-    </section>
-
+    <!-- SNS埋め込みセクション -->
     <section id="sns" class="section fade-up">
       <div class="container">
         <h2>SNS</h2>
         <div class="sns-embeds">
-          <div class="fb-post"
-               data-href="https://www.facebook.com/SuwaCityWindBand/posts/POST_ID"
-               data-width="500"></div>
-          <div class="youtube-embed">
-            <iframe src="https://www.youtube.com/embed/VIDEO_ID"
-                    title="YouTube video player" frameborder="0" allowfullscreen>
-            </iframe>
+          <!-- Facebook埋め込み -->
+          <div class="facebook-embed">
+            <h3>Facebook</h3>
+            <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FSuwaCityWindBand&tabs=timeline&width=340&height=500" width="340" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen></iframe>
           </div>
-          <a href="https://www.instagram.com/suwacitywindband/"
-             class="instagram-link" target="_blank" aria-label="Instagram">
-            <img src="img/instagram.svg" alt="Instagram">
-          </a>
+          <!-- YouTube埋め込み -->
+          <div class="youtube-embed">
+            <h3>YouTube</h3>
+            <iframe src="https://www.youtube.com/embed/IHgYDZVFAJA?si=o-4J0ZrW20fj3sbX" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
+          </div>
+          <!-- Instagramリンク -->
+          <div class="instagram-embed">
+            <h3>Instagram</h3>
+            <a href="https://www.instagram.com/suwacitywindband/" class="instagram-link" target="_blank" aria-label="Instagram">
+              <img src="img/icon_insta.png" alt="Instagram">
+            </a>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="contact" class="section fade-up">
+    <!-- 活動時間・場所セクション -->
+    <section id="activities" class="section fade-up">
+      <div class="container">
+        <h2>活動時間・場所</h2>
+        <div class="wrapper">
+          <!-- 活動場所情報 -->
+          <div class="location-info">
+            <h3 class="sub-title">諏訪中学校 小体育館</h3>
+            <p>
+              住所：長野県諏訪市清水3丁目3619-3<br>
+              活動時間：19:00〜21:00<br>
+              火曜日：合奏練習、木曜日：個人練習
+            </p>
+          </div>
+          <!-- 地図埋め込み -->
+          <div class="location-map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1140.7211504668137!2d138.11959034832887!3d36.03380397025016!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x601c5432cb5208c5%3A0x2d975ca7a7d0b740!2z6KuP6Kiq5biC56uL6KuP6Kiq5Lit5a2m5qCh!5e0!3m2!1sja!2sjp!4v1745564184221!5m2!1sja!2sjp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- お問い合わせセクション -->
+    <section id="contact" class="section contact-section fade-up">
       <div class="container">
         <h2>お問い合わせ</h2>
-        <p>電話: <a href="tel:03-1234-5678">03-1234-5678</a></p>
-        <p>Email: <a href="mailto:info@scwb.net">info@scwb.net</a></p>
+        <div class="contact-wrapper">
+          <!-- メールお問い合わせ -->
+          <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <h3>メール</h3>
+            <a href="mailto:info@scwb.net">info@scwb.net</a>
+          </div>
+          <!-- 電話お問い合わせ -->
+          <div class="contact-item">
+            <i class="fas fa-phone-alt"></i>
+            <h3>お電話（事務局）</h3>
+            <a href="tel:080-6933-4114">080-6933-4114</a>
+          </div>
+        </div>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer fade-up">
-    <div class="container">
-      <p>&copy; 2025 諏訪市民吹奏楽団</p>
+  <!-- ====================
+       フッター
+  ==================== -->
+  <footer class="site-footer">
+    <div class="footer-info">
+      <p class="footer-title">諏訪市民吹奏楽団</p>
+      <p>毎週の活動　19:00〜21:00</p>
+      <p>火曜日に合奏練習、木曜日に個人練習</p>
     </div>
+    <hr class="footer-divider">
+    <nav class="footer-nav">
+      <ul>
+        <li><a href="shokai.html">楽団紹介</a></li>
+        <li><a href="kiyaku.html">規約</a></li>
+        <li><a href="sindai.html">新入団員募集</a></li>
+        <li><a href="http://cornettist.music.coocan.jp/history.html">演奏記録</a></li>
+        <li><a href="concert.html" target="_blank">コンサート情報</a></li>
+        <li><a href="leaflet.html">演奏会チラシ</a></li>
+        <li><a href="gara.html">フォトギャラリー</a></li>
+        <li><a href="media.html">メディアギャラリー</a></li>
+        <li><a href="link.html">リンク</a></li>
+      </ul>
+    </nav>
+    <small class="footer-copy">Copyright © 諏訪市民吹奏楽団</small>
   </footer>
 
+  <!-- プロジェクト用スクリプト -->
   <script src="js/script.js"></script>
 </body>
 </html>
