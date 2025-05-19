@@ -342,6 +342,24 @@ body {
   aspect-ratio: 16/9; /* アスペクト比 */
 }
 
+.responsive-map {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 比率 */
+  height: 0;
+  overflow: hidden;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.responsive-map iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
 /* ── Activities Section ────────────────────────── */
 #activities .wrapper {
   display: grid; /* グリッドレイアウト */
@@ -542,4 +560,50 @@ body {
 /* ── Helper Classes ───────────────────────────── */
 .hide-btn {
   visibility: hidden; /* 非表示 */
+}
+
+/* ── 章内のリスト ───────────────────────── */
+.chapter ul,
+.chapter ol {
+  margin: 1em 0;           /* 上下に余白 */
+  padding-left: 1.5em;     /* インデント */
+  list-style-position: inside;
+}
+
+.chapter li {
+  margin-bottom: 0.5em;    /* 各項目の間隔 */
+}
+
+/* ── 定義リスト(dl) ───────────────────────── */
+.chapter dl {
+  margin: 1em 0;
+}
+
+.chapter dt {
+  font-weight: 600;        /* 見出しを強調 */
+  margin-top: 0.75em;
+}
+
+.chapter dd {
+  margin: 0.25em 0 0.75em 1em; 
+  line-height: 1.4;
+}
+
+/* ── 表(table) ───────────────────────────── */
+.chapter table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1em 0;
+}
+
+.chapter th,
+.chapter td {
+  border: 1px solid #ccc;
+  padding: 0.5em;
+  text-align: left;
+}
+
+.chapter th {
+  background-color: var(--color-primary); /* 見出し行を背景色で強調 */
+  color: #fff;
 }
