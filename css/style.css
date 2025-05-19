@@ -54,13 +54,14 @@ body {
   display: flex; /* フレックスボックスの使用 */
   align-items: center; /* 垂直方向の中央揃え */
   justify-content: space-between; /* 水平方向のスペース分配 */
-  padding: 0.5rem 1rem; /* パディングの設定 */
+  padding: 0.5rem 0.5rem; /* パディングの設定 */
 }
 
 /* ── Logo ─────────────────────────────────────── */
 .logo {
   height: 80px; /* ロゴの高さ */
   transition: transform var(--transition-fast); /* トランジション効果 */
+  margin-left: -0.5rem;
 }
 
 .logo-link:hover .logo {
@@ -78,8 +79,8 @@ body {
   border: none; /* ボーダーなし */
   cursor: pointer; /* カーソルをポインターに */
   position: absolute; /* 絶対位置 */
-  top: var(--spacing); /* 上部のスペーシング */
-  right: var(--spacing); /* 右側のスペーシング */
+  top: 2rem; /* 上部のスペーシング */
+  right: 1.5rem; /* 右側のスペーシング */
   z-index: 2001; /* 重なり順序 */
 }
 
@@ -259,7 +260,6 @@ body {
 }
 
 .section h2 {
-  font-size: 2rem; /* 見出しのフォントサイズ */
   margin-bottom: 1.5rem; /* 下部のマージン */
   border-left: 4px solid var(--color-secondary); /* 左ボーダー */
   padding-left: 0.5rem; /* 左側のパディング */
