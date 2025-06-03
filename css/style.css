@@ -620,3 +620,38 @@ body {
   color: var(--color-secondary);
   margin-right: 0.3em;
 }
+
+/* ── Concert Photos ───────────────────────────── */
+.concert-photo {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  border-radius: 8px;
+  margin: 0 auto 1rem auto;
+  /* display:block は指定しない */
+}
+
+.concert-photo-pair {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.concert-photo-pair a {
+  flex: 1 1 48%;
+  max-width: 48%;
+}
+
+.concert-photo-pair img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  .concert-photo-pair a {
+    flex: 1 1 90%;
+    max-width: 90%;
+  }
+}
