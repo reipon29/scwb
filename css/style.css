@@ -608,3 +608,15 @@ body {
   background-color: var(--color-primary); /* 見出し行を背景色で強調 */
   color: #fff;
 }
+
+/* ── 箇条書き（メディア） ───────────────────────────── */
+.media-list {
+  list-style: none;
+  padding-left: 1.5em;  /* インデントは自分で調整 */
+}
+
+.media-list li::before {
+  content: "♬ ";
+  color: var(--color-secondary);
+  margin-right: 0.3em;
+}
