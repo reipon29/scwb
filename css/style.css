@@ -130,9 +130,16 @@ body {
 }
 
 /* ── Media Queries ────────────────────────────── */
-@media (max-width: 1024px) {
+@media (max-width: 900px) {
   .nav-toggle { display: flex; } /* タブレット以下でハンバーガー表示 */
   .nav-menu  { display: none; }  /* 代わりにオーバーレイメニューを使用 */
+}
+
+/* デスクトップ幅に戻った時の強制リセット（開きっぱなし防止） */
+@media (min-width: 901px) {
+  .nav-toggle { display: none !important; }   /* ハンバーガーは消す */
+  .nav-menu  { display: flex !important; }    /* 通常ナビを再表示 */
+  .menu-overlay { display: none !important; } /* オーバーレイが開きっぱなしでも非表示に */
 }
 
 /* ── Overlay Menu ─────────────────────────────── */
@@ -200,11 +207,12 @@ body {
               url('img/desktop1.jpg') center/cover fixed no-repeat; /* 中央寄せ/全面/固定で迫力演出 */
 }
 
-@media (max-width: 768px) {
+/* タッチ端末（iPad等）では画面幅に関係なくモバイル背景を使用 */
+@media (hover: none) and (pointer: coarse) {
   .hero {
-    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), /* モバイルでも可読性維持 */
-                url('img/mobile1.jpg') center/cover no-repeat;     /* 軽量なモバイル画像へ切替 */
-    background-attachment: scroll; /* パララックス負荷を避ける（モバイル最適化） */
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
+                url('img/mobile1.jpg') center/cover no-repeat; /* タブレットでも軽量画像に切替 */
+    background-attachment: scroll; /* iOS Safari の fixed 非対応対策 */
   }
 }
 
@@ -352,7 +360,7 @@ body {
 }
 
 /* 既定の比率（必要なら修飾クラスで上書き） */
-.facebook-embed { aspect-ratio: 1 / 1; }   /* Facebook は縦横比がまちまち→既定は正方形 */
+.facebook-embed { aspect-ratio: 9 / 16; min-height: clamp(360px, 56vw, 640px); } 
 .youtube-embed  { position: relative; height: 0; padding-top: 56.25%; } /* YouTubeは常にパディング比率で高さ先取り（端末差での欠け防止） */
 .instagram-embed{ aspect-ratio: 1 / 1; }   /* Instagram 標準 */
 
@@ -378,11 +386,18 @@ body {
 @supports not (aspect-ratio: 1 / 1) {
   .facebook-embed,
   .youtube-embed,
-  .instagram-embed { position: relative; height: 0; padding-top: 100%; }
-  .youtube-embed { padding-top: 56.25%; }     /* 16:9 */
+  .instagram-embed { position: relative; height: 0; }
+
+  /* 既定比率（aspect-ratio未対応環境向け） */
+  .facebook-embed { padding-top: 177.78%; }   /* 9:16 縦長（デフォルト） */
+  .youtube-embed  { padding-top: 56.25%;  }   /* 16:9 */
+  .instagram-embed{ padding-top: 100%;    }   /* 1:1 */
+
+  /* Facebook 比率プリセットの上書き（必要時） */
   .facebook-embed.fb-portrait { padding-top: 177.78%; } /* 9:16 */
   .facebook-embed.fb-landscape { padding-top: 56.25%; } /* 16:9 */
   .facebook-embed.fb-post { padding-top: 66.66%; }      /* 3:2 */
+
   .facebook-embed iframe,
   .youtube-embed iframe,
   .instagram-embed iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
