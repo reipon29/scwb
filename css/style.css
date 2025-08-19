@@ -1,360 +1,405 @@
-@charset "utf-8";
+@charset "utf-8"; /* 文字コードを明示（文字化け防止。最上段必須） */
+
 /* ── Root Variables ─────────────────────────────── */
 :root {
-  /* カラーパレット */
-  --color-primary: #54A5C7;          /* プライマリカラー */
-  --color-primary-dark: #3D89A6;     /* プライマリダークカラー */
-  --color-secondary: #E3BE34;        /* セカンダリカラー */
-  --color-background: #FFFFFF;       /* 背景色 */
-  --color-text: #333333;             /* テキストカラー */
+  /* カラーパレット（“どこで使うか”まで記述） */
+  --color-primary: #54A5C7;          /* ブランド基調色：ヘッダー/リンク強調でサイトの印象を統一 */
+  --color-primary-dark: #3D89A6;     /* 濃色：フッター等の広い面に使い、下部を引き締める */
+  --color-secondary: #E3BE34;        /* アクセント：ボタン/ホバー下線/アイコンで視線誘導 */
+  --color-background: #FFFFFF;       /* 標準背景：白で可読性と印刷適性を確保 */
+  --color-text: #333333;             /* 本文色：黒より疲れにくいダークグレーでコントラスト十分 */
 
-  /* フォントとスペーシング */
-  --font-family: 'Noto Sans JP', 'Helvetica Neue', Arial, sans-serif; /* フォントファミリー */
-  --spacing: 1.5rem;                 /* スペーシング */
-  --radius: 8px;                     /* ボーダー半径 */
-  --transition-fast: 0.3s ease;      /* トランジション速度 */
+  /* タイポグラフィ & スケール */
+  --font-family: 'Noto Sans JP', 'Helvetica Neue', Arial, sans-serif; /* 日本語で崩れにくい汎用サンセリフ */
+  --spacing: 1.5rem;                 /* コンポーネントの基準余白（パディング/マージンの物差し） */
+  --radius: 8px;                     /* 標準角丸（カード/ボタン/埋め込みで統一感） */
+  --transition-fast: 0.3s ease;      /* ホバーや開閉など短いインタラクション用の既定時間 */
 }
 
 /* ── Reset & Base Styles ───────────────────────── */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box; /* ボックスモデルの設定 */
+  margin: 0;              /* 既定の外側余白をクリアして意図通りに設計 */
+  padding: 0;             /* 既定の内側余白をクリアして意図通りに設計 */
+  box-sizing: border-box; /* パディング/ボーダーをサイズ計算に含めて崩れを防止 */
 }
 
 html {
-  scroll-behavior: smooth; /* スムーズスクロール */
+  scroll-behavior: smooth; /* アンカー移動を滑らかに（※reduce motion対応は別途検討可） */
 }
 
 body {
-  font-family: var(--font-family); /* フォントファミリーの適用 */
-  background-color: var(--color-background); /* 背景色の適用 */
-  color: var(--color-text); /* テキストカラーの適用 */
-  line-height: 1.6; /* 行間の設定 */
+  font-family: var(--font-family);           /* 日本語対応フォントで可読性を確保 */
+  background-color: var(--color-background); /* 白背景でコンテンツを際立たせる */
+  color: var(--color-text);                  /* 本文色は高コントラストで長文でも読みやすく */
+  line-height: 1.6;                          /* 行間を広めにして視線移動を楽にする */
 }
 
 /* ── Container ─────────────────────────────────── */
 .container {
-  width: 90%; /* 幅の設定 */
-  max-width: 1200px; /* 最大幅の設定 */
-  margin: 0 auto; /* 中央寄せ */
+  width: 90%;            /* 端に余白を残し、狭小画面での張り付き感を防ぐ */
+  max-width: 1200px;     /* 行長が伸びすぎない上限幅で読みやすさ維持 */
+  margin: 0 auto;        /* 水平中央寄せで視線の負担を軽減 */
 }
 
 /* ── Header ────────────────────────────────────── */
 .site-header {
-  position: sticky; /* スティッキーヘッダー */
-  top: 0;
-  width: 100%;
-  background-color: var(--color-primary); /* プライマリカラーの適用 */
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15); /* シャドウ効果 */
-  z-index: 1000; /* 重なり順序 */
-  transition: background-color var(--transition-fast), box-shadow var(--transition-fast); /* トランジション効果 */
+  position: sticky; /* 常に上部に残り、ナビゲーションを即利用可能に */
+  top: 0;           /* 画面最上端に固定 */
+  width: 100%;      /* 全幅で帯状に展開 */
+  background-color: var(--color-primary); /* ブランド色で印象統一 */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15); /* 下に影を落としてコンテンツと階層分離 */
+  z-index: 1000;    /* コンテンツより前に出し、重なり不具合を回避 */
+  transition: background-color var(--transition-fast), box-shadow var(--transition-fast); /* スクロール時の変化を滑らかに */
 }
 
 .header-inner {
-  display: flex; /* フレックスボックスの使用 */
-  align-items: center; /* 垂直方向の中央揃え */
-  justify-content: space-between; /* 水平方向のスペース分配 */
-  padding: 0.5rem 0.5rem; /* パディングの設定 */
+  display: flex;                 /* ロゴとナビを横並び */
+  align-items: center;           /* 高さを揃え、縦方向中央 */
+  justify-content: space-between;/* 左右端に配置して空間を有効活用 */
+  padding: 0.5rem 0.5rem;        /* タップ/クリック余白も最低限確保 */
 }
 
 /* ── Logo ─────────────────────────────────────── */
 .logo {
-  height: 80px; /* ロゴの高さ */
-  transition: transform var(--transition-fast); /* トランジション効果 */
-  margin-left: -0.5rem;
+  height: 80px;                              /* 視認性とヘッダー高さのバランス */
+  transition: transform var(--transition-fast); /* ホバー拡大を滑らかに */
+  margin-left: -0.5rem;                      /* 光学的中央合わせの微調整（任意） */
 }
 
 .logo-link:hover .logo {
-  transform: scale(1.1); /* ホバー時の拡大効果 */
+  transform: scale(1.1); /* ホバーで軽く拡大し、注目を誘導 */
 }
 
 /* ── Navigation ───────────────────────────────── */
 .nav-toggle {
-  display: none; /* デフォルトでは非表示 */
-  flex-direction: column; /* 縦並び */
-  justify-content: space-between; /* スペース分配 */
-  width: 28px; /* 幅の設定 */
-  height: 20px; /* 高さの設定 */
-  background: none; /* 背景なし */
-  border: none; /* ボーダーなし */
-  cursor: pointer; /* カーソルをポインターに */
-  position: absolute; /* 絶対位置 */
-  top: 2rem; /* 上部のスペーシング */
-  right: 1.5rem; /* 右側のスペーシング */
-  z-index: 2001; /* 重なり順序 */
+  display: none;             /* PCでは非表示（ブレークポイント以下で表示） */
+  flex-direction: column;    /* 3本線を縦に積むハンバーガー構造 */
+  justify-content: space-between; /* 均等配置で視覚的安定 */
+  width: 28px;               /* タップできる最小目安を確保 */
+  height: 20px;              /* 3本線が収まる高さ */
+  background: none;          /* 装飾を持たず軽量 */
+  border: none;              /* 枠線を排除してミニマルに */
+  cursor: pointer;           /* クリック対象であることを明示 */
+  position: absolute;        /* 右上固定配置（レイアウトから独立） */
+  top: 2rem;                 /* ロゴとの干渉を避ける上オフセット */
+  right: 1.5rem;             /* 到達しやすい右端オフセット */
+  z-index: 2001;             /* オーバーレイ(2000)より前に出して操作性確保 */
 }
 
 .nav-toggle .bar {
-  width: 100%; /* 幅の設定 */
-  height: 2px; /* 高さの設定 */
-  background-color: #fff; /* バーの色 */
-  border-radius: 1px; /* ボーダー半径 */
-  transition: transform var(--transition-fast), opacity var(--transition-fast); /* トランジション効果 */
+  width: 100%;                                   /* トグル幅いっぱいのライン */
+  height: 2px;                                    /* 細いが視認可能な厚み */
+  background-color: #fff;                         /* プライマリ上で映える白 */
+  border-radius: 1px;                              /* 角丸でタッチフレンドリー */
+  transition: transform var(--transition-fast), opacity var(--transition-fast); /* アイコン変形を滑らかに */
 }
 
 /* ナビゲーションメニュー */
 .nav-menu {
-  display: flex; /* フレックスボックスの使用 */
-  gap: 2rem; /* アイテム間のスペース */
-  list-style: none; /* リストスタイルなし */
+  display: flex;     /* 横並びのグローバルナビ */
+  gap: 2rem;         /* 誤タップ防止と可読性のため十分な間隔 */
+  list-style: none;  /* ディスクを排除してフラットに */
 }
 
 .nav-menu a {
-  position: relative; /* 相対位置 */
-  color: #fff; /* テキストカラー */
-  text-decoration: none; /* 下線なし */
-  font-weight: 500; /* フォントウェイト */
-  transition: color var(--transition-fast); /* トランジション効果 */
+  position: relative;              /* 下線アニメの基準にする */
+  color: #fff;                     /* プライマリ背景上で高コントラスト */
+  text-decoration: none;           /* 既定下線を排除 */
+  font-weight: 500;                /* 中太で視認性を確保 */
+  transition: color var(--transition-fast); /* ホバーの色変化を滑らかに */
 }
 
 .nav-menu a::after {
-  content: ''; /* 擬似要素 */
-  position: absolute; /* 絶対位置 */
-  bottom: -2px; /* 下部の位置 */
-  left: 50%; /* 中央揃え */
-  width: 0; /* 初期幅 */
-  height: 2px; /* 高さの設定 */
-  background-color: var(--color-secondary); /* セカンダリカラーの適用 */
-  transition: width var(--transition-fast), left var(--transition-fast); /* トランジション効果 */
+  content: '';                                       /* 下線として用いる擬似要素 */
+  position: absolute;                                /* テキストの下に重ねる */
+  bottom: -2px;                                      /* ベースラインと干渉しない位置 */
+  left: 50%;                                         /* 中央から伸びる演出に備える */
+  width: 0;                                          /* 初期はゼロで非表示 */
+  height: 2px;                                       /* 細いラインで上品に */
+  background-color: var(--color-secondary);          /* アクセント色で反応を視覚化 */
+  transition: width var(--transition-fast), left var(--transition-fast); /* 伸縮を滑らかに */
 }
 
 .nav-menu a:hover {
-  color: var(--color-secondary); /* ホバー時の色変更 */
+  color: var(--color-secondary); /* 文字色もアクセントへ切替し、反応を明確化 */
 }
 
 .nav-menu a:hover::after {
-  left: 0; /* 左端に移動 */
-  width: 100%; /* 幅を100%に */
+  left: 0;          /* 開始位置を左端へ移動 */
+  width: 100%;      /* 下線を全幅までスライド展開 */
 }
 
 /* ── Media Queries ────────────────────────────── */
 @media (max-width: 1024px) {
-  .nav-toggle {
-    display: flex; /* モバイル時に表示 */
-  }
-  .nav-menu {
-    display: none; /* モバイル時は非表示 */
-  }
+  .nav-toggle { display: flex; } /* タブレット以下でハンバーガー表示 */
+  .nav-menu  { display: none; }  /* 代わりにオーバーレイメニューを使用 */
 }
 
 /* ── Overlay Menu ─────────────────────────────── */
 .menu-overlay {
-  display: none; /* デフォルトでは非表示 */
-  position: fixed; /* 固定位置 */
-  inset: 0; /* 全面をカバー */
-  background-color: var(--color-primary); /* プライマリカラーの適用 */
-  color: #fff; /* テキストカラー */
-  flex-direction: column; /* 縦並び */
-  align-items: center; /* 中央揃え */
-  justify-content: center; /* 中央揃え */
-  opacity: 0; /* 初期透明度 */
-  transform: translateY(-20px); /* 初期位置 */
-  transition: opacity 0.4s ease, transform 0.4s ease; /* トランジション効果 */
-  z-index: 2000; /* 重なり順序 */
+  display: none;                              /* 初期は非表示（.open で表示） */
+  position: fixed;                            /* 画面全域に固定配置 */
+  inset: 0;                                   /* 上下左右0で全面カバー */
+  background-color: var(--color-primary);     /* ブランド色で一体感 */
+  color: #fff;                                /* 白文字で高コントラスト */
+  flex-direction: column;                     /* 項目を縦積み */
+  align-items: center;                        /* 横方向中央揃え */
+  justify-content: center;                    /* 縦方向中央揃え */
+  opacity: 0;                                 /* フェードイン前の透明 */
+  transform: translateY(-20px);               /* 上からスライドインする初期位置 */
+  transition: opacity 0.4s ease, transform 0.4s ease; /* 視認性のよい速度感 */
+  z-index: 2000;                              /* ヘッダー(1000)より上、トグル(2001)より下 */
 }
 
 .menu-overlay.open {
-  display: flex; /* 開いたときに表示 */
-  opacity: 1; /* 不透明に */
-  transform: translateY(0); /* 元の位置に戻す */
+  display: flex;         /* 表示状態 */
+  opacity: 1;            /* 不透明化で可視に */
+  transform: translateY(0); /* 位置リセット */
 }
 
 .menu-overlay ul {
-  list-style: none; /* リストスタイルなし */
-  text-align: center; /* 中央揃え */
+  list-style: none;   /* 行頭マーカーを排除 */
+  text-align: center; /* テキストを中央に整列 */
 }
 
 .menu-overlay li {
-  margin: 1rem 0; /* アイテム間のマージン */
+  margin: 1rem 0;     /* タップ間隔を十分に確保 */
 }
 
 .menu-overlay a {
-  font-size: 1.2rem; /* フォントサイズ */
-  color: #fff; /* テキストカラー */
-  text-decoration: none; /* 下線なし */
-  transition: color var(--transition-fast); /* トランジション効果 */
+  font-size: 1.2rem;                      /* タップに十分な文字サイズ */
+  color: #fff;                            /* 背景上で視認性確保 */
+  text-decoration: none;                  /* 下線を消してボタン風に */
+  transition: color var(--transition-fast); /* ホバーの色変化を滑らかに */
 }
 
 .menu-overlay a:hover {
-  color: var(--color-secondary); /* ホバー時の色変更 */
+  color: var(--color-secondary); /* 反応が分かるアクセント色へ */
 }
 
 .menu-close {
-  position: absolute; /* 絶対位置 */
-  top: var(--spacing); /* 上部のスペーシング */
-  right: var(--spacing); /* 右側のスペーシング */
-  background: none; /* 背景なし */
-  border: none; /* ボーダーなし */
-  font-size: 2.5rem; /* フォントサイズ */
-  color: #fff; /* テキストカラー */
-  cursor: pointer; /* カーソルをポインターに */
+  position: absolute;  /* 右上固定配置 */
+  top: var(--spacing); /* 上オフセットは共通スケールを使用 */
+  right: var(--spacing); /* 右オフセットも共通スケール */
+  background: none;    /* 背景なしで×を際立たせる */
+  border: none;        /* 枠線なしで軽量 */
+  font-size: 2.5rem;   /* 大きい×で押しやすく */
+  color: #fff;         /* 視認性の高い白 */
+  cursor: pointer;     /* ポインターで操作対象を示す */
 }
 
 /* ── Hero Section ─────────────────────────────── */
 .hero {
-  position: relative; /* 相対位置 */
-  display: flex; /* フレックスボックスの使用 */
-  align-items: center; /* 垂直方向の中央揃え */
-  justify-content: center; /* 水平方向の中央揃え */
-  height: 80vh; /* 高さの設定 */
-  overflow: hidden; /* オーバーフローを隠す */
-  background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), /* グラデーションオーバーレイ */
-              url('img/desktop1.jpg') center/cover fixed no-repeat; /* デスクトップ用背景画像 */
+  position: relative; /* 子要素の重なり制御の基準 */
+  display: flex;      /* 中央配置に強いFlex */
+  align-items: center;/* 垂直中央 */
+  justify-content: center; /* 水平中央 */
+  height: 80vh;       /* ファーストビューの存在感を確保 */
+  overflow: hidden;   /* 背景画像のはみ出しを隠す */
+  background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), /* 文字の可読性を上げる半透明黒の被せ */
+              url('img/desktop1.jpg') center/cover fixed no-repeat; /* 中央寄せ/全面/固定で迫力演出 */
 }
 
 @media (max-width: 768px) {
   .hero {
-    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), /* グラデーションオーバーレイ */
-                url('img/mobile1.jpg') center/cover no-repeat; /* モバイル用背景画像 */
-    background-attachment: scroll; /* スクロール時の背景動作 */
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), /* モバイルでも可読性維持 */
+                url('img/mobile1.jpg') center/cover no-repeat;     /* 軽量なモバイル画像へ切替 */
+    background-attachment: scroll; /* パララックス負荷を避ける（モバイル最適化） */
   }
 }
 
 .hero-content {
-  position: relative; /* 相対位置 */
-  text-align: center; /* 中央揃え */
-  color: #fff; /* テキストカラー */
-  opacity: 0; /* 初期透明度 */
-  transform: translateY(20px); /* 初期位置 */
-  transition: opacity 1s ease, transform 1s ease; /* トランジション効果 */
+  position: relative;                          /* 将来のバッジ/飾りにも対応しやすい */
+  text-align: center;                          /* 見出し/本文/ボタンを中央に配置 */
+  color: #fff;                                  /* 背景と反転で高コントラスト */
+  opacity: 0;                                   /* アニメ開始時は透明 */
+  transform: translateY(20px);                  /* 下からフェードアップの初期位置 */
+  transition: opacity 1s ease, transform 1s ease; /* ゆったりと表示 */
 }
 
 .hero.loaded .hero-content {
-  opacity: 1; /* 不透明に */
-  transform: translateY(0); /* 元の位置に戻す */
+  opacity: 1;                 /* 表示へ */
+  transform: translateY(0);   /* 位置リセット */
 }
 
 .hero-content h1 {
-  font-size: 2.5rem; /* 見出しのフォントサイズ */
-  margin-bottom: 1rem; /* 下部のマージン */
+  font-size: 2.5rem;  /* 大きな見出しで注目を集める */
+  margin-bottom: 1rem;/* 見出しと本文の距離を確保 */
 }
 
 .hero-content p {
-  font-size: 1.2rem; /* 段落のフォントサイズ */
-  margin-bottom: 1.5rem; /* 下部のマージン */
+  font-size: 1.2rem;  /* リード文に適した大きさ */
+  margin-bottom: 1.5rem; /* CTAボタンとの距離を確保 */
 }
 
 .hero-content .btn-primary {
-  padding: 1rem 2rem; /* パディングの設定 */
-  font-size: 1rem; /* フォントサイズ */
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast); /* トランジション効果 */
+  padding: 1rem 2rem; /* 押しやすいボタン面積 */
+  font-size: 1rem;    /* 標準テキストサイズ */
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast); /* 触感のある反応 */
 }
 
 .hero-content .btn-primary:hover {
-  transform: translateY(-3px); /* ホバー時の位置変更 */
-  box-shadow: 0 6px 12px rgba(0,0,0,0.2); /* シャドウ効果 */
+  transform: translateY(-3px);           /* わずかに浮かせて反応を可視化 */
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);/* 影で立体感を付与 */
 }
 
 /* ── Sections & Cards ─────────────────────────── */
 .section {
-  padding: 4rem 0; /* パディングの設定 */
-  opacity: 0; /* 初期透明度 */
-  transform: translateY(20px); /* 初期位置 */
-  transition: opacity 0.6s ease, transform 0.6s ease; /* トランジション効果 */
+  padding: 4rem 0;                   /* ブロック間の余白をしっかり取り区切りを明確化 */
+  opacity: 0;                        /* 出現アニメ前の透明状態 */
+  transform: translateY(20px);       /* 下からフェードアップ */
+  transition: opacity 0.6s ease, transform 0.6s ease; /* 自然な速度感 */
 }
 
 .section.visible,
 .fade-up.visible {
-  opacity: 1; /* 不透明に */
-  transform: translateY(0); /* 元の位置に戻す */
+  opacity: 1;               /* 表示状態に */
+  transform: translateY(0); /* オフセット解除 */
 }
 
 .section h2 {
-  margin-bottom: 1.5rem; /* 下部のマージン */
-  border-left: 4px solid var(--color-secondary); /* 左ボーダー */
-  padding-left: 0.5rem; /* 左側のパディング */
+  margin-bottom: 1.5rem;                         /* 見出し下に余白 */
+  border-left: 4px solid var(--color-secondary); /* 左ラインで章を識別 */
+  padding-left: 0.5rem;                           /* テキストとラインの間隔を確保 */
 }
 
 .card {
-  background-color: #fff; /* カードの背景色 */
-  border-radius: var(--radius); /* ボーダー半径 */
-  padding: var(--spacing); /* パディングの設定 */
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05); /* シャドウ効果 */
-  opacity: 0; /* 初期透明度 */
-  transform: translateY(20px); /* 初期位置 */
-  transition: opacity 0.6s ease, transform 0.6s ease; /* トランジション効果 */
+  background-color: #fff;                         /* 白地で情報を際立たせる */
+  border-radius: var(--radius);                   /* 角丸でフレンドリーに */
+  padding: var(--spacing);                        /* 内側余白で読みやすく */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);        /* うっすら影で層分け */
+  opacity: 0;                                     /* 出現前 */
+  transform: translateY(20px);                    /* 下から表示 */
+  transition: opacity 0.6s ease, transform 0.6s ease; /* 滑らかな表示 */
 }
 
 .card.visible {
-  opacity: 1; /* 不透明に */
-  transform: translateY(0); /* 元の位置に戻す */
+  opacity: 1;                 /* 表示 */
+  transform: translateY(0);   /* 位置リセット */
 }
 
 .card:hover {
-  transform: translateY(-5px) scale(1.02); /* ホバー時の位置変更と拡大 */
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1); /* シャドウ効果 */
+  transform: translateY(-5px) scale(1.02); /* 浮かせ＆1.02倍でインタラクションを明確に */
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);  /* 影を強めてクリック可能性を示唆 */
 }
 
 /* ── Buttons ──────────────────────────────────── */
 .btn-primary {
-  display: inline-block; /* インラインブロック */
-  background-color: var(--color-secondary); /* セカンダリカラーの適用 */
-  color: #fff; /* テキストカラー */
-  padding: 0.8rem 1.5rem; /* パディングの設定 */
-  border-radius: var(--radius); /* ボーダー半径 */
-  font-weight: 600; /* フォントウェイト */
-  text-decoration: none; /* 下線なし */
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast); /* トランジション効果 */
+  display: inline-block;                                /* 連続配置しやすい表示形式 */
+  background-color: var(--color-secondary);             /* アクセント色で視線誘導 */
+  color: #fff;                                          /* 反転色でコントラスト確保 */
+  padding: 0.8rem 1.5rem;                               /* 十分なタップ面積 */
+  border-radius: var(--radius);                         /* 角丸で親しみやすい印象 */
+  font-weight: 600;                                     /* 太めでCTAを強調 */
+  text-decoration: none;                                /* 下線を排除 */
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast); /* 触った瞬間の反応を滑らかに */
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px); /* ホバー時の位置変更 */
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* シャドウ効果 */
+  transform: translateY(-2px);                /* わずかに浮かせて反応を可視化 */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);    /* 影で奥行きを付加 */
 }
 
 /* ── SNS Embeds ───────────────────────────────── */
 .sns-embeds {
-  display: grid; /* グリッドレイアウト */
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* 自動フィット */
-  gap: 2rem; /* アイテム間のスペース */
+  display: grid;                                             /* 自動整列に強いGridで可変段組み */
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); /* カラムの最小幅を広げ、埋め込み同士の押し合い・重なりを防止 */
+  gap: 2rem;                                                 /* アイテム間に十分な余白 */
+  align-items: start;                 /* 各カードの高さが異なっても重ならないよう上揃え */
+  grid-auto-rows: auto;               /* 自然な高さに展開（固定行高を避ける） */
+  grid-auto-flow: row;           /* 明示的に行方向で配置（詰め込みでの重なりを抑止） */
+  overflow: visible;             /* 子がスケールした場合もレイアウト崩れを避ける */
+}
+
+.sns-embeds > * {
+  min-width: 0;   /* グリッドトラックからのはみ出し抑止 */
+  min-height: 0;  /* トラック計算と高さの食い違いを防止 */
+  box-sizing: border-box; /* パディング/ボーダー込みで幅計算し、食い違いを防止 */
+}
+
+/* --- SNS 1カラム化（画面幅が狭い時） --- */
+@media (max-width: 1100px) {
+  .sns-embeds { grid-template-columns: 1fr; }             /* 1列に固定 */
+  .sns-embeds > .facebook-embed,
+  .sns-embeds > .youtube-embed,
+  .sns-embeds > .instagram-embed { 
+    max-width: 560px;                                      /* 既存の埋め込み上限と揃える */
+    margin: 0 auto;                                        /* 1列時も中央に */
+  }
 }
 
 .instagram-link img {
-  width: 60px; /* 画像の幅 */
-  height: auto; /* 高さ自動 */
-  transition: transform var(--transition-fast); /* トランジション効果 */
+  width: 60px;                                /* 目に留まるが主張しすぎないサイズ */
+  height: auto;                               /* 比率維持で歪み防止 */
+  transition: transform var(--transition-fast); /* ホバー拡大を滑らかに */
 }
 
 .instagram-link:hover img {
-  transform: scale(1.1) rotate(5deg); /* ホバー時の拡大と回転 */
+  transform: scale(1.1) rotate(5deg); /* 拡大＋微回転で楽しい反応 */
 }
 
 /* ── Responsive Embeds ────────────────────────── */
+/* ラッパーに比率を持たせて親要素の高さを先に確保 → 読み込み中の潰れや重なりを防止 */
 .facebook-embed,
 .youtube-embed,
 .instagram-embed {
-  width: 100%; /* 幅の設定 */
-  max-width: 560px; /* 最大幅の設定 */
-  margin: 0 auto; /* 中央寄せ */
+  width: 100%;                  /* 親幅に追従 */
+  max-width: 560px;             /* PC時の読みやすい最大幅 */
+  margin: 0 auto;               /* 中央寄せ */
+  overflow: hidden;             /* 角丸からのはみ出しを隠す */
+  border-radius: var(--radius); /* 他のカードと統一 */
+  contain: layout;              /* レイアウトの影響範囲を局所化（重なり事故を予防） */
 }
 
-.facebook-embed iframe {
-  display: block; /* ブロック表示 */
-  width: 100%; /* 幅の設定 */
-  height: auto; /* 高さ自動 */
-  aspect-ratio: 9/16; /* アスペクト比 */
+/* 既定の比率（必要なら修飾クラスで上書き） */
+.facebook-embed { aspect-ratio: 1 / 1; }   /* Facebook は縦横比がまちまち→既定は正方形 */
+.youtube-embed  { position: relative; height: 0; padding-top: 56.25%; } /* YouTubeは常にパディング比率で高さ先取り（端末差での欠け防止） */
+.instagram-embed{ aspect-ratio: 1 / 1; }   /* Instagram 標準 */
+
+/* 比率プリセット：HTML 側でラッパーにクラス付与して切替 */
+.facebook-embed.fb-portrait { aspect-ratio: 9 / 16; }
+.facebook-embed.fb-landscape { aspect-ratio: 16 / 9; }
+.facebook-embed.fb-post { aspect-ratio: 3 / 2; }
+
+/* iframe はラッパーの中で100%フィット（高さはラッパーの比率に従う） */
+.facebook-embed iframe,
+.youtube-embed iframe,
+.instagram-embed iframe {
+  display: block;  /* 余白ずれ防止 */
+  width: 100%;
+  height: 100%;
+  border: 0;
 }
 
-.youtube-embed iframe {
-  display: block; /* ブロック表示 */
-  width: 100%; /* 幅の設定 */
-  height: auto; /* 高さ自動 */
-  aspect-ratio: 16/9; /* アスペクト比 */
+/* YouTube は iframe を絶対配置でフィットさせ、UI の欠けを防ぐ */
+.youtube-embed iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+/* aspect-ratio 非対応ブラウザ向け：padding-top テクで高さを先取り */
+@supports not (aspect-ratio: 1 / 1) {
+  .facebook-embed,
+  .youtube-embed,
+  .instagram-embed { position: relative; height: 0; padding-top: 100%; }
+  .youtube-embed { padding-top: 56.25%; }     /* 16:9 */
+  .facebook-embed.fb-portrait { padding-top: 177.78%; } /* 9:16 */
+  .facebook-embed.fb-landscape { padding-top: 56.25%; } /* 16:9 */
+  .facebook-embed.fb-post { padding-top: 66.66%; }      /* 3:2 */
+  .facebook-embed iframe,
+  .youtube-embed iframe,
+  .instagram-embed iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 }
 
 .responsive-map {
-  position: relative;
-  width: 100%;
-  padding-bottom: 56.25%; /* 16:9 比率 */
-  height: 0;
-  overflow: hidden;
-  border-radius: var(--radius);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  position: relative;               /* 子iframeの絶対配置基準 */
+  width: 100%;                      /* 親幅いっぱいに */
+  padding-bottom: 56.25%;           /* 16:9 比率ボックス（高さを padding で確保） */
+  height: 0;                        /* 高さは padding で表現するテクニック */
+  overflow: hidden;                 /* 角丸からのはみ出しを隠す */
+  border-radius: var(--radius);     /* 角丸でUI一貫性 */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05); /* うっすら影でカード化 */
 }
 
 .responsive-map iframe {
-  position: absolute;
+  position: absolute; /* 比率ボックス内に張り付ける */
   top: 0;
   left: 0;
   width: 100%;
@@ -363,295 +408,281 @@ body {
 
 /* ── Activities Section ────────────────────────── */
 #activities .wrapper {
-  display: grid; /* グリッドレイアウト */
-  grid-template-columns: 1fr 1fr; /* 2カラム */
-  gap: 2rem; /* アイテム間のスペース */
-  align-items: start; /* 上揃え */
-  margin-top: 1.5rem; /* 上部のマージン */
+  display: grid;                      /* 2カラム構成に適したGrid */
+  grid-template-columns: 1fr 1fr;     /* 情報と地図を左右に均等配置 */
+  gap: 2rem;                          /* カラム間の適切な間隔 */
+  align-items: start;                 /* 上揃えで読み順を自然に */
+  margin-top: 1.5rem;                 /* 見出しとの距離を確保 */
 }
 
 .location-info {
-  background-color: #fff; /* 背景色 */
-  padding: 2rem; /* パディングの設定 */
-  border-radius: var(--radius); /* ボーダー半径 */
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05); /* シャドウ効果 */
+  background-color: #fff;                          /* 白地で本文の可読性を確保 */
+  padding: 2rem;                                   /* 内側余白で読みやすく */
+  border-radius: var(--radius);                    /* カード風の角丸 */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);         /* うっすら影で層を分ける */
 }
 
 .location-info .sub-title {
-  font-size: 1.5rem; /* サブタイトルのフォントサイズ */
-  margin-bottom: 1rem; /* 下部のマージン */
-  color: var(--color-primary); /* プライマリカラーの適用 */
+  font-size: 1.5rem;                /* 小見出しを少し大きめに */
+  margin-bottom: 1rem;              /* 下の本文との間隔 */
+  color: var(--color-primary);      /* ブランド色で強調 */
 }
 
 .location-info p {
-  line-height: 1.6; /* 行間の設定 */
-  color: var(--color-text); /* テキストカラー */
+  line-height: 1.6;                 /* 本文の読みやすさを維持 */
+  color: var(--color-text);         /* 本文色を統一 */
 }
 
 .location-map {
-  position: relative; /* 相対位置 */
-  overflow: hidden; /* オーバーフローを隠す */
-  border-radius: var(--radius); /* ボーダー半径 */
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05); /* シャドウ効果 */
+  position: relative;                      /* iframe 絶対配置の基準 */
+  overflow: hidden;                        /* 角丸からのはみ出しを防止 */
+  border-radius: var(--radius);            /* 角丸で雰囲気統一 */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05); /* 軽い影でカード化 */
 }
 
 /* iframe をレスポンシブに */
 .location-map iframe {
-  display: block; /* ブロック表示 */
-  width: 100%; /* 幅の設定 */
-  height: auto; /* 高さ自動 */
-  aspect-ratio: 16/9; /* アスペクト比 */
+  display: block;        /* 余白ズレ防止 */
+  width: 100%;           /* 親幅にフィット */
+  height: auto;          /* アスペクト比で高さ自動 */
+  aspect-ratio: 16/9;    /* 標準的な横長比率 */
 }
 
-/* ── Mobile Layout ────────────────────────────── */
+/* ── Mobile Layout ───────────────────────────── */
 @media (max-width: 768px) {
   #activities .wrapper {
-    grid-template-columns: 1fr; /* モバイル時は1カラム */
+    grid-template-columns: 1fr; /* モバイルは1カラムで縦積み表示 */
   }
 }
 
 /* ── Contact Cards ────────────────────────────── */
 .contact-wrapper {
-  display: flex; /* フレックスボックスの使用 */
-  flex-wrap: wrap; /* ラップ */
-  gap: 2rem; /* アイテム間のスペース */
-  justify-content: center; /* 中央揃え */
-  margin-top: 2rem; /* 上部のマージン */
+  display: flex;                       /* カードを横並び（折返し対応） */
+  flex-wrap: wrap;                     /* 狭い画面で自然に段落ち */
+  gap: 2rem;                           /* カード間隔で読みやすく */
+  justify-content: center;             /* センター配置で安定 */
+  margin-top: 2rem;                    /* 上部に余白を確保 */
 }
 
 .contact-item {
-  background-color: #fff; /* 背景色 */
-  padding: 2rem; /* パディングの設定 */
-  width: 260px; /* 幅の設定 */
-  text-align: center; /* 中央揃え */
-  border-radius: var(--radius); /* ボーダー半径 */
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05); /* シャドウ効果 */
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast); /* トランジション効果 */
+  background-color: #fff;                         /* 白地で情報に集中させる */
+  padding: 2rem;                                   /* 内側余白で読みやすく */
+  width: 260px;                                    /* カード幅の統一 */
+  text-align: center;                              /* 中央揃えで整然と */
+  border-radius: var(--radius);                    /* 角丸で親しみやすく */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);         /* ほんのり影で浮かせる */
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast); /* ホバー反応を滑らかに */
 }
 
 .contact-item:hover {
-  transform: translateY(-5px); /* ホバー時の位置変更 */
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1); /* シャドウ効果 */
+  transform: translateY(-5px);                   /* 上に少し持ち上げてインタラクションを可視化 */
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);        /* 影を強めてクリック感を出す */
 }
 
 .contact-item i {
-  font-size: 2rem; /* アイコンのフォントサイズ */
-  color: var(--color-secondary); /* セカンダリカラーの適用 */
-  margin-bottom: 0.75rem; /* 下部のマージン */
-  display: block; /* ブロック表示 */
+  font-size: 2rem;                 /* 視認性の高いアイコンサイズ */
+  color: var(--color-secondary);   /* アクセント色で誘目性向上 */
+  margin-bottom: 0.75rem;          /* タイトルとの距離を確保 */
+  display: block;                  /* レイアウトの安定化 */
 }
 
 .contact-item h3 {
-  font-size: 1.1rem; /* タイトルのフォントサイズ */
-  margin-bottom: 0.5rem; /* 下部のマージン */
+  font-size: 1.1rem;  /* タイトルをやや強調 */
+  margin-bottom: 0.5rem; /* タイトル下の余白 */
 }
 
 .contact-item a {
-  color: var(--color-primary); /* プライマリカラーの適用 */
-  text-decoration: none; /* 下線なし */
-  font-weight: 500; /* フォントウェイト */
-  transition: color var(--transition-fast); /* トランジション効果 */
+  color: var(--color-primary);                  /* ブランド色でリンクを統一 */
+  text-decoration: none;                        /* 下線を消してカードと馴染ませる */
+  font-weight: 500;                             /* 少し太めで視認性UP */
+  transition: color var(--transition-fast);     /* ホバー色変化を滑らかに */
 }
 
 .contact-item a:hover {
-  color: var(--color-secondary); /* ホバー時の色変更 */
+  color: var(--color-secondary); /* ホバー時にアクセント色へ変化 */
 }
 
 /* ── Footer Base ──────────────────────────────── */
 .site-footer {
-  background-color: var(--color-primary-dark); /* プライマリダークカラーの適用 */
-  color: #fff; /* テキストカラー */
-  padding: 2rem 0; /* パディングの設定 */
-  text-align: center; /* 中央揃え */
-  position: relative; /* 相対位置 */
-  overflow: hidden; /* オーバーフローを隠す */
-  opacity: 0; /* 初期透明度 */
-  transform: translateY(20px); /* 初期位置 */
-  transition: opacity 0.6s ease, transform 0.6s ease; /* トランジション効果 */
+  background-color: var(--color-primary-dark); /* 濃色で下部を引き締め、ページの締めに */
+  color: #fff;                                  /* 高コントラストの白文字 */
+  padding: 2rem 0;                               /* ゆったり余白で情報を整理 */
+  text-align: center;                            /* テキストを中央寄せに */
+  position: relative;                            /* 装飾要素の基準 */
+  overflow: hidden;                              /* 装飾のはみ出しを隠す */
+  opacity: 0;                                    /* 出現アニメ前の透明 */
+  transform: translateY(20px);                   /* 下から現れる初期位置 */
+  transition: opacity 0.6s ease, transform 0.6s ease; /* 穏やかな表示アニメ */
 }
 
 .site-footer.visible {
-  opacity: 1; /* 不透明に */
-  transform: translateY(0); /* 元の位置に戻す */
+  opacity: 1;               /* 表示状態に */
+  transform: translateY(0); /* 位置をリセット */
 }
 
 /* ── Background Pattern ───────────────────────── */
 .site-footer::before {
-  content: ""; /* 擬似要素 */
-  position: absolute; /* 絶対位置 */
-  top: -20%; /* 上部の位置 */
-  left: -10%; /* 左側の位置 */
-  width: 120%; /* 幅の設定 */
-  height: 200%; /* 高さの設定 */
-  background: url('img/footer-bg.svg') center/cover no-repeat; /* 背景画像 */
-  opacity: 0.05; /* 透明度 */
-  transform: rotate(15deg); /* 回転 */
+  content: "";                                      /* 装飾用の擬似要素を生成 */
+  position: absolute;                               /* 自由配置 */
+  top: -20%; left: -10%;                            /* 斜めに大きく配置して背景感を演出 */
+  width: 120%; height: 200%;                        /* 大きめに敷き、動きを出す */
+  background: url('img/footer-bg.svg') center/cover no-repeat; /* 装飾SVGを全面に */
+  opacity: 0.05;                                    /* テキストを邪魔しない薄さ */
+  transform: rotate(15deg);                         /* 角度を付けて表情を作る */
 }
 
 /* ── Footer Info ──────────────────────────────── */
 .footer-info {
-  text-align: center; /* 中央揃え */
-  color: #fff; /* テキストカラー */
-  margin-bottom: 1.5rem; /* 下部のマージン */
+  text-align: center; /* 中央揃えで視線を集約 */
+  color: #fff;        /* 白で統一 */
+  margin-bottom: 1.5rem; /* 情報とナビの間隔を確保 */
 }
 
 .footer-title {
-  font-size: 1.25rem; /* タイトルのフォントサイズ */
-  font-weight: bold; /* フォントウェイト */
-  margin-bottom: 0.5rem; /* 下部のマージン */
+  font-size: 1.25rem; /* 見出しをやや大きめに */
+  font-weight: bold;  /* 太字でタイトル性を強調 */
+  margin-bottom: 0.5rem; /* 次要素との距離 */
 }
 
 .footer-info p {
-  margin: 0.25rem 0; /* マージンの設定 */
-  line-height: 1.4; /* 行間の設定 */
+  margin: 0.25rem 0; /* 行間を詰めすぎない程度の余白 */
+  line-height: 1.4;  /* コンパクトな段落行間 */
 }
 
 /* ── Footer Divider ───────────────────────────── */
 .footer-divider {
-  width: 80%; /* 幅の設定 */
-  margin: 2rem auto; /* 中央寄せ */
-  border: 1px solid rgba(255,255,255,0.3); /* ボーダー */
+  width: 80%;                                  /* 横幅をやや狭めて中央に配置 */
+  margin: 2rem auto;                           /* 上下余白＋中央寄せ */
+  border: 1px solid rgba(255,255,255,0.3);     /* 目立ちすぎないセパレーター */
 }
 
 /* ── Footer Navigation ────────────────────────── */
 .footer-nav ul {
-  display: flex; /* フレックスボックスの使用 */
-  flex-wrap: wrap; /* ラップ */
-  justify-content: center; /* 中央揃え */
-  gap: 1rem 2rem; /* アイテム間のスペース */
-  padding: 0; /* パディングなし */
-  list-style: none; /* リストスタイルなし */
+  display: flex;          /* 横並びのナビ */
+  flex-wrap: wrap;        /* 幅が狭い時は折り返し */
+  justify-content: center;/* 中央配置で見やすく */
+  gap: 1rem 2rem;         /* 縦1rem/横2rem の間隔 */
+  padding: 0;             /* 既定の内側余白を排除 */
+  list-style: none;       /* 行頭マーカーなし */
 }
 
 .footer-nav a {
-  position: relative; /* 相対位置 */
-  color: #fff; /* テキストカラー */
-  text-decoration: none; /* 下線なし */
-  transition: color var(--transition-fast); /* トランジション効果 */
+  position: relative;                 /* 下線アニメ基準 */
+  color: #fff;                        /* 白文字で視認性 */
+  text-decoration: none;              /* 下線を消してミニマルに */
+  transition: color var(--transition-fast); /* 色遷移を滑らかに */
 }
 
 .footer-nav a::after {
-  content: ''; /* 擬似要素 */
-  position: absolute; /* 絶対位置 */
-  bottom: -4px; /* 下部の位置 */
-  left: 50%; /* 中央揃え */
-  width: 0; /* 初期幅 */
-  height: 2px; /* 高さの設定 */
-  background-color: var(--color-secondary); /* セカンダリカラーの適用 */
-  transition: width var(--transition-fast), left var(--transition-fast); /* トランジション効果 */
+  content: '';                                /* 下線用擬似要素 */
+  position: absolute;                         /* 文字下に固定 */
+  bottom: -4px;                               /* 読みやすい位置に */
+  left: 50%;                                  /* 中央から伸ばす演出 */
+  width: 0; height: 2px;                      /* 初期ゼロ長の細線 */
+  background-color: var(--color-secondary);   /* アクセント線 */
+  transition: width var(--transition-fast), left var(--transition-fast); /* 伸縮アニメ */
 }
 
 .footer-nav a:hover {
-  color: var(--color-secondary); /* ホバー時の色変更 */
+  color: var(--color-secondary); /* 文字色もアクセントへ */
 }
 
 .footer-nav a:hover::after {
-  left: 0; /* 左端に移動 */
-  width: 100%; /* 幅を100%に */
+  left: 0; width: 100%; /* ラインを全幅に展開 */
 }
 
 /* ── Copyright ────────────────────────────────── */
 .footer-copy {
-  display: block; /* ブロック表示 */
-  margin-top: 1.5rem; /* 上部のマージン */
-  font-size: 0.875rem; /* フォントサイズ */
-  color: rgba(255,255,255,0.7); /* 透明度付きのテキストカラー */
+  display: block;                      /* 独立行で下部に配置 */
+  margin-top: 1.5rem;                  /* ナビとの距離を確保 */
+  font-size: 0.875rem;                 /* 控えめサイズで二次情報化 */
+  color: rgba(255,255,255,0.7);        /* 薄めの白で軽く表示 */
 }
 
 /* ── Helper Classes ───────────────────────────── */
 .hide-btn {
-  visibility: hidden; /* 非表示 */
+  visibility: hidden; /* レイアウトを保ったまま非表示（※スクリーンリーダー用は別クラスで） */
 }
 
 /* ── 章内のリスト ───────────────────────── */
 .chapter ul,
 .chapter ol {
-  margin: 1em 0;           /* 上下に余白 */
-  padding-left: 1.5em;     /* インデント */
-  list-style-position: inside;
+  margin: 1em 0;               /* 上下余白で本文と区切る */
+  padding-left: 1.5em;         /* インデントで階層を表現 */
+  list-style-position: inside; /* マーカーを文字側に寄せ改行ズレ軽減 */
 }
 
 .chapter li {
-  margin-bottom: 0.5em;    /* 各項目の間隔 */
+  margin-bottom: 0.5em;        /* 項目間に間隔を取り可読性UP */
 }
 
 /* ── 定義リスト(dl) ───────────────────────── */
-.chapter dl {
-  margin: 1em 0;
-}
-
-.chapter dt {
-  font-weight: 600;        /* 見出しを強調 */
-  margin-top: 0.75em;
-}
-
-.chapter dd {
-  margin: 0.25em 0 0.75em 1em; 
-  line-height: 1.4;
-}
+.chapter dl { margin: 1em 0; }                         /* ブロック上下の余白 */
+.chapter dt { font-weight: 600; margin-top: 0.75em; }  /* 用語見出しを強調＋前段との距離 */
+.chapter dd { margin: 0.25em 0 0.75em 1em; line-height: 1.4; } /* 定義文のインデントと行高 */
 
 /* ── 表(table) ───────────────────────────── */
 .chapter table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 1em 0;
+  width: 100%;               /* 親幅にフィット */
+  border-collapse: collapse; /* 二重線を防止しすっきり表示 */
+  margin: 1em 0;             /* 上下余白で本文と区切る */
 }
 
 .chapter th,
 .chapter td {
-  border: 1px solid #ccc;
-  padding: 0.5em;
-  text-align: left;
+  border: 1px solid #ccc; /* 薄い罫線でセルを区切る */
+  padding: 0.5em;         /* セル内余白で読みやすく */
+  text-align: left;       /* 左揃えで自然な読順 */
 }
 
 .chapter th {
-  background-color: var(--color-primary); /* 見出し行を背景色で強調 */
-  color: #fff;
+  background-color: var(--color-primary); /* 見出し行をブランド色で強調 */
+  color: #fff;                             /* 反転色でコントラスト確保 */
 }
 
 /* ── 箇条書き（メディア） ───────────────────────────── */
 .media-list {
-  list-style: none;
-  padding-left: 1.5em;  /* インデントは自分で調整 */
+  list-style: none;       /* 既定マーカーを消す */
+  padding-left: 1.5em;    /* カスタム記号分のインデントを確保 */
 }
 
 .media-list li::before {
-  content: "♬ ";
-  color: var(--color-secondary);
-  margin-right: 0.3em;
+  content: "♬ ";                 /* 音符の装飾でテーマ性を演出 */
+  color: var(--color-secondary); /* アクセント色で視線誘導 */
+  margin-right: 0.3em;           /* 記号と本文の間隔を確保 */
 }
 
 /* ── Concert Photos ───────────────────────────── */
 .concert-photo {
-  width: 100%;
-  max-width: 600px;
-  height: auto;
-  border-radius: 8px;
-  margin: 0 auto 1rem auto;
-  /* display:block は指定しない */
+  width: 100%;            /* 親幅いっぱいに表示 */
+  max-width: 600px;       /* 横幅の上限で読みやすく */
+  height: auto;           /* 画像比率を維持 */
+  border-radius: 8px;     /* 角丸で柔らかい印象 */
+  margin: 0 auto 1rem auto; /* 中央寄せ＋下余白 */
+  /* display:block は既定挙動で足りるため未指定 */
 }
 
 .concert-photo-pair {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  flex-wrap: wrap;
+  display: flex;          /* 2枚の写真を横並び */
+  justify-content: center;/* センター配置で安定 */
+  gap: 1rem;              /* 写真間の余白 */
+  flex-wrap: wrap;        /* 幅不足時は折り返し */
 }
 
 .concert-photo-pair a {
-  flex: 1 1 48%;
-  max-width: 48%;
+  flex: 1 1 48%;  /* ほぼ等分で配置（可変） */
+  max-width: 48%; /* 2枚横並び時の上限幅 */
 }
 
 .concert-photo-pair img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
+  width: 100%;     /* a要素幅いっぱいに表示 */
+  height: auto;    /* 画像比率を維持 */
+  border-radius: 8px; /* 角丸で統一感 */
 }
 
 @media (max-width: 768px) {
   .concert-photo-pair a {
-    flex: 1 1 90%;
-    max-width: 90%;
+    flex: 1 1 90%;  /* モバイルでは縦積み中心に */
+    max-width: 90%; /* 横幅を抑えて中央寄せ */
   }
 }
