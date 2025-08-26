@@ -36,66 +36,66 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // -------------------------------
-// 3. Background Cross-Fade
-// -------------------------------
-if (hero) {
-  const desktopLayers = ['desktop1.jpg', 'desktop2.jpg', 'desktop3.jpg'];
-  const mobileLayers  = ['mobile1.jpg','mobile2.jpg','mobile3.jpg','mobile4.jpg','mobile5.jpg','mobile6.jpg'];
+  // 3. Background Cross-Fade
+  // -------------------------------
+  if (hero) {
+    const desktopLayers = ['desktop1.jpg', 'desktop2.jpg', 'desktop3.jpg'];
+    const mobileLayers  = ['mobile1.jpg','mobile2.jpg','mobile3.jpg','mobile4.jpg','mobile5.jpg','mobile6.jpg'];
 
-  // Viewport width helper (iPad Safariでツールバー表示/非表示によるレイアウト変動に強い)
-  const getViewportWidth = () => {
-    const vv = window.visualViewport;
-    return Math.min(window.innerWidth, vv ? Math.round(vv.width) : window.innerWidth);
-  };
+    // Viewport width helper (iPad Safariでツールバー表示/非表示によるレイアウト変動に強い)
+    const getViewportWidth = () => {
+      const vv = window.visualViewport;
+      return Math.min(window.innerWidth, vv ? Math.round(vv.width) : window.innerWidth);
+    };
 
-  // CSSと同じ判定に合わせる（767.98px以下をモバイル）
-  const isMobileMQ = () => window.matchMedia('(max-width: 767.98px)').matches;
+    // CSSと同じ判定に合わせる（767.98px以下をモバイル）
+    const isMobileMQ = () => window.matchMedia('(max-width: 767.98px)').matches;
 
-  // PC/Tablet判定（背景fixedはPCのみ）
-  const isPC = () => getViewportWidth() >= 1024;
+    // PC/Tablet判定（背景fixedはPCのみ）
+    const isPC = () => getViewportWidth() >= 1367;
 
-  // 現在のレイヤーセット
-  let layers = isMobileMQ() ? mobileLayers : desktopLayers;
-  let idx = 0;
+    // 現在のレイヤーセット
+    let layers = isMobileMQ() ? mobileLayers : desktopLayers;
+    let idx = 0;
 
-  function applyBg() {
-    // 背景attachmentはPCのみfixed、その他はscroll（＝指定しない）
-    const attachment = isPC() ? 'fixed' : 'no-repeat';
-    hero.style.background = `
-      linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
-      url('img/${layers[idx]}') center/cover ${attachment}
-    `;
-  }
+    function applyBg() {
+      // 背景attachmentはPCのみfixed、その他はscroll（＝指定しない）
+      const attachment = isPC() ? 'fixed' : 'no-repeat';
+      hero.style.background = `
+        linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
+        url('img/${layers[idx]}') center/cover ${attachment}
+      `;
+    }
 
-  // 初期適用
-  applyBg();
-
-  // リサイズ/向き変更/ビューポート変化に反応（iPad Safari対策）
-  let rafId = null;
-  const onResize = () => {
-    if (rafId) cancelAnimationFrame(rafId);
-    rafId = requestAnimationFrame(() => {
-      const nextLayers = isMobileMQ() ? mobileLayers : desktopLayers;
-      if (nextLayers !== layers) {
-        layers = nextLayers;
-        idx = 0; // セットが変わったら先頭に戻す
-      }
-      applyBg();
-    });
-  };
-
-  window.addEventListener('resize', onResize, { passive: true });
-  window.addEventListener('orientationchange', onResize);
-  if (window.visualViewport) {
-    window.visualViewport.addEventListener('resize', onResize, { passive: true });
-  }
-
-  // 4秒ごとに背景を巡回
-  setInterval(() => {
-    idx = (idx + 1) % layers.length;
+    // 初期適用
     applyBg();
-  }, 4000);
-}
+
+    // リサイズ/向き変更/ビューポート変化に反応（iPad Safari対策）
+    let rafId = null;
+    const onResize = () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        const nextLayers = isMobileMQ() ? mobileLayers : desktopLayers;
+        if (nextLayers !== layers) {
+          layers = nextLayers;
+          idx = 0; // セットが変わったら先頭に戻す
+        }
+        applyBg();
+      });
+    };
+
+    window.addEventListener('resize', onResize, { passive: true });
+    window.addEventListener('orientationchange', onResize);
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', onResize, { passive: true });
+    }
+
+    // 4秒ごとに背景を巡回
+    setInterval(() => {
+      idx = (idx + 1) % layers.length;
+      applyBg();
+    }, 4000);
+  }
 
   // -------------------------------
   // 4. Scroll-triggered Fade-in (IntersectionObserver)

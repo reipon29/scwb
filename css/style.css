@@ -211,8 +211,8 @@ body {
   }
 }
 
-/* Tablet (iPad等): デスクトップ画像を使うが fixed は無効化 */
-@media (min-width: 768px) and (max-width: 1024px) {
+/* Tablet (iPad / iPad Pro等): デスクトップ画像を使うが fixed は無効化 */
+@media (min-width: 768px) and (max-width: 1366px) {
   .hero {
     background-attachment: scroll; /* fixed を解除 */
     background-position: center;   /* 念のため明示 */
