@@ -36,7 +36,7 @@ body {
 /* ── Container ─────────────────────────────────── */
 .container {
   width: 90%; /* 幅の設定 */
-  max-width: 1200px; /* 最大幅の設定 */
+  max-width: 1280px; /* 最大幅の設定 */
   margin: 0 auto; /* 中央寄せ */
 }
 
@@ -349,7 +349,7 @@ body {
   flex-direction: column;
   align-items: center;
   transition: transform var(--transition-fast), box-shadow var(--transition-fast);
-  max-width: 560px;           /* カードの最大幅（FB/YouTube） */
+  max-width: 570px;           /* カードの最大幅（FB/YouTube） */
   margin: 0 auto;             /* トラック内で中央寄せ */
 }
 
@@ -401,17 +401,52 @@ body {
 }
 
 /* Service-specific aspect ratios */
-.sns-card--fb .sns-frame { 
-  aspect-ratio: 9 / 16; 
-} 
+/* Facebook frame sizing: make it larger on desktop, centered on all sizes */
+.sns-card--fb .sns-frame {
+  width: 100%;
+  max-width: 500px;        /* FB公式の最大幅 */
+  aspect-ratio: auto;      /* 高さはFB側に任せる */
+  margin-left: auto;
+  margin-right: auto;      /* 常に中央寄せ */
+}
+
+/* Tablet: やや大きめ（最大420px） */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .sns-card--fb .sns-frame { max-width: 420px; }
+}
+
+/* Desktop: 最大サイズ（500px）＆カード幅も少し広げる */
+@media (min-width: 1025px) {
+  .sns-card--fb { max-width: 800px; }   /* カード自体も余裕を持たせる */
+  .sns-card--fb .sns-frame { max-width: 500px; }
+  .sns-card { max-width: 680px; }           /* FB/YouTubeカードを少しワイドに */
+  .sns-card--insta { max-width: 380px; }    /* インスタもバランスよく拡大 */
+}
+
+/* Mobile: 以前のご要望どおり 300px 中央寄せ */
+@media (max-width: 767.98px) {
+  .sns-card--fb .sns-frame {
+    max-width: 300px;      /* 300pxに固定 */
+  }
+}
 .sns-card--yt .sns-frame { 
   aspect-ratio: 16 / 9; 
 } 
 
-/* Facebookプラグインの内蔵サイズを無視してフレームにフィット */
-.sns-card--fb iframe { 
-  width: 100% !important; 
-  height: 100% !important; 
+/* Facebookプラグイン iframeのサイズ調整 */
+.sns-card--fb iframe {
+  display: block;
+  width: 100% !important;
+  height: 500px; /* PCデフォルト */
+  border: 0;
+}
+
+@media (max-width: 1024px) {
+  .sns-card--fb iframe { height: 640px; }
+}
+
+@media (max-width: 767.98px) {
+  .sns-card--fb iframe { height: 560px; }
 }
 
 /* ── Activities Section ────────────────────────── */

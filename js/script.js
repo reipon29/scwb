@@ -126,4 +126,37 @@ document.addEventListener('DOMContentLoaded', () => {
       closeBtn.click();
     }
   });
+  // -------------------------------
+  // 6. Facebook Page Plugin (iframe) responsive sizing
+  // -------------------------------
+  (function(){
+    const fbEl = document.getElementById('fbPage');
+    if (!fbEl) return; // Facebook iframe が無いページはスキップ
+
+    const FB_PAGE_URL = 'https%3A%2F%2Fwww.facebook.com%2FSuwaCityWindBand';
+    const BASE = `https://www.facebook.com/plugins/page.php?href=${FB_PAGE_URL}&tabs=timeline&hide_cover=false&show_facepile=true&adapt_container_width=false`;
+
+    const getVW = () => {
+      const vv = window.visualViewport;
+      return Math.min(window.innerWidth, vv ? Math.round(vv.width) : window.innerWidth);
+    };
+    const pickWidth  = vw => (vw <= 767 ? 300 : (vw <= 1024 ? 420 : 500));
+    const pickHeight = vw => (vw <= 767 ? 560 : (vw <= 1024 ? 640 : 700));
+
+    const applySrc = () => {
+      const vw = getVW();
+      const w = pickWidth(vw);
+      const h = pickHeight(vw);
+      fbEl.src = `${BASE}&width=${w}&height=${h}`;
+      fbEl.style.height = h + 'px';
+    };
+
+    // 初期適用とイベント登録
+    applySrc();
+    window.addEventListener('resize', applySrc, { passive: true });
+    window.addEventListener('orientationchange', applySrc);
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', applySrc, { passive: true });
+    }
+  })();
 });
