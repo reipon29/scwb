@@ -36,39 +36,45 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // -------------------------------
-  // 3. Background Cross-Fade
-  // -------------------------------
-  if (hero) {
-    const desktopLayers = ['desktop1.jpg', 'desktop2.jpg', 'desktop3.jpg'];
-    const mobileLayers  = ['mobile1.jpg','mobile2.jpg','mobile3.jpg','mobile4.jpg','mobile5.jpg','mobile6.jpg'];
-    let layers = window.innerWidth > 768 ? desktopLayers : mobileLayers;
-    let idx = 0;
+// 3. Background Cross-Fade
+// -------------------------------
+if (hero) {
+  const desktopLayers = ['desktop1.jpg', 'desktop2.jpg', 'desktop3.jpg'];
+  const mobileLayers  = ['mobile1.jpg','mobile2.jpg','mobile3.jpg','mobile4.jpg','mobile5.jpg','mobile6.jpg'];
 
-    // Apply current background image
-    function applyBg() {
-      const isPC = window.innerWidth > 768;
-      hero.style.background = `
-        linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
-        url('img/${layers[idx]}') center/cover ${isPC ? 'fixed' : 'no-repeat'}
-      `;
-    }
+  // ★ 768px以上はデスクトップ画像（iPadをデスクトップ側に）
+  let layers = window.innerWidth >= 768 ? desktopLayers : mobileLayers;
+  let idx = 0;
 
-    // Initial background
-    applyBg();
+  function applyBg() {
+    // タブレット: 768–1023 / PC: 1024+
+    const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
+    const isPC     = window.innerWidth >= 1024;
 
-    // Update on window resize
-    window.addEventListener('resize', () => {
-      layers = window.innerWidth > 768 ? desktopLayers : mobileLayers;
-      idx = 0;
-      applyBg();
-    });
-
-    // Cycle backgrounds every 4 seconds
-    setInterval(() => {
-      idx = (idx + 1) % layers.length;
-      applyBg();
-    }, 4000);
+    // PCのみ attachment: fixed、それ以外は scroll（＝明示しない）
+    hero.style.background = `
+      linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
+      url('img/${layers[idx]}') center/cover ${isPC ? 'fixed' : 'no-repeat'}
+    `;
+    // ※ 'no-repeat' は background-repeat の指定（非PC時に attachment は既定の scroll）
   }
+
+  // 初期適用
+  applyBg();
+
+  // リサイズ時に配列を切り替え & 再適用
+  window.addEventListener('resize', () => {
+    layers = window.innerWidth >= 768 ? desktopLayers : mobileLayers; // ★ 変更点
+    idx = 0;
+    applyBg();
+  });
+
+  // 4秒ごとに背景を巡回
+  setInterval(() => {
+    idx = (idx + 1) % layers.length;
+    applyBg();
+  }, 4000);
+}
 
   // -------------------------------
   // 4. Scroll-triggered Fade-in (IntersectionObserver)

@@ -203,11 +203,20 @@ body {
               url('img/desktop1.jpg') center/cover fixed no-repeat; /* デスクトップ用背景画像 */
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767.98px) {
   .hero {
     background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), /* グラデーションオーバーレイ */
                 url('img/mobile1.jpg') center/cover no-repeat; /* モバイル用背景画像 */
     background-attachment: scroll; /* スクロール時の背景動作 */
+  }
+}
+
+/* Tablet (iPad等): デスクトップ画像を使うが fixed は無効化 */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .hero {
+    background-attachment: scroll; /* fixed を解除 */
+    background-position: center;   /* 念のため明示 */
+    background-size: cover;        /* 念のため明示 */
   }
 }
 
