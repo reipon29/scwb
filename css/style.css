@@ -212,11 +212,29 @@ body {
 }
 
 /* Tablet (iPad / iPad Pro等): デスクトップ画像を使うが fixed は無効化 */
+
 @media (min-width: 768px) and (max-width: 1366px) {
   .hero {
     background-attachment: scroll; /* fixed を解除 */
     background-position: center;   /* 念のため明示 */
     background-size: cover;        /* 念のため明示 */
+  }
+}
+
+/* ==== Hero sizing fixes (avoid square on narrow desktop) ==== */
+.hero {
+  aspect-ratio: auto;        /* 万一どこかで付与された比率を解除 */
+  min-height: 72vh;          /* 画面高ベースで高さを確保 */
+}
+
+@media (max-width: 1024px) {
+  .hero { min-height: 78vh; }
+}
+
+@media (max-width: 767.98px) {
+  .hero {
+    min-height: 88vh;        /* モバイル/狭幅でも縦方向をしっかり確保 */
+    height: 88vh;            /* padding比率で高さが決まらないように明示 */
   }
 }
 
