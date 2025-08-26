@@ -586,6 +586,45 @@ body {
   color: rgba(255,255,255,0.7); /* 透明度付きのテキストカラー */
 }
 
+/* Footer SNS Icons */
+.site-footer::before {
+  pointer-events: none;
+}
+
+.footer-sns {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 1.2rem;
+}
+
+/* フッターSNSアイコンの見た目 & クリック性向上 */
+.footer-sns a {
+  position: relative;         /* 前面に載せる */
+  z-index: 1;                 /* 背景より手前 */
+  width: 44px;                /* ちょい大きめでタップしやすく */
+  height: 44px;
+  text-decoration: none;
+  border: 2px solid rgba(255,255,255,0.85); /* 薄い縁取りで視認性UP */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+}
+
+.footer-sns a i {
+  pointer-events: none;       /* アイコン自体にタップが取られないよう保険 */
+}
+
+/* ブランドカラー寄りに（お好みで） */
+.footer-sns a[aria-label="Facebook"] { color: #1877F2; background:#fff; }
+.footer-sns a[aria-label="YouTube"]  { color: #FF0000; background:#fff; }
+.footer-sns a[aria-label="Instagram"]{ color: #C13584; background:#fff; }
+
+/* ホバー時（PC） */
+.footer-sns a:hover {
+  background: var(--color-secondary);
+  color: #fff;
+  border-color: transparent;
+}
+
 /* ── Helper Classes ───────────────────────────── */
 .hide-btn {
   visibility: hidden; /* 非表示 */
