@@ -42,32 +42,53 @@ if (hero) {
   const desktopLayers = ['desktop1.jpg', 'desktop2.jpg', 'desktop3.jpg'];
   const mobileLayers  = ['mobile1.jpg','mobile2.jpg','mobile3.jpg','mobile4.jpg','mobile5.jpg','mobile6.jpg'];
 
-  // ★ 768px以上はデスクトップ画像（iPadをデスクトップ側に）
-  let layers = window.innerWidth >= 768 ? desktopLayers : mobileLayers;
+  // Viewport width helper (iPad Safariでツールバー表示/非表示によるレイアウト変動に強い)
+  const getViewportWidth = () => {
+    const vv = window.visualViewport;
+    return Math.min(window.innerWidth, vv ? Math.round(vv.width) : window.innerWidth);
+  };
+
+  // CSSと同じ判定に合わせる（767.98px以下をモバイル）
+  const isMobileMQ = () => window.matchMedia('(max-width: 767.98px)').matches;
+
+  // PC/Tablet判定（背景fixedはPCのみ）
+  const isPC = () => getViewportWidth() >= 1024;
+
+  // 現在のレイヤーセット
+  let layers = isMobileMQ() ? mobileLayers : desktopLayers;
   let idx = 0;
 
   function applyBg() {
-    // タブレット: 768–1023 / PC: 1024+
-    const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
-    const isPC     = window.innerWidth >= 1024;
-
-    // PCのみ attachment: fixed、それ以外は scroll（＝明示しない）
+    // 背景attachmentはPCのみfixed、その他はscroll（＝指定しない）
+    const attachment = isPC() ? 'fixed' : 'no-repeat';
     hero.style.background = `
       linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
-      url('img/${layers[idx]}') center/cover ${isPC ? 'fixed' : 'no-repeat'}
+      url('img/${layers[idx]}') center/cover ${attachment}
     `;
-    // ※ 'no-repeat' は background-repeat の指定（非PC時に attachment は既定の scroll）
   }
 
   // 初期適用
   applyBg();
 
-  // リサイズ時に配列を切り替え & 再適用
-  window.addEventListener('resize', () => {
-    layers = window.innerWidth >= 768 ? desktopLayers : mobileLayers; // ★ 変更点
-    idx = 0;
-    applyBg();
-  });
+  // リサイズ/向き変更/ビューポート変化に反応（iPad Safari対策）
+  let rafId = null;
+  const onResize = () => {
+    if (rafId) cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(() => {
+      const nextLayers = isMobileMQ() ? mobileLayers : desktopLayers;
+      if (nextLayers !== layers) {
+        layers = nextLayers;
+        idx = 0; // セットが変わったら先頭に戻す
+      }
+      applyBg();
+    });
+  };
+
+  window.addEventListener('resize', onResize, { passive: true });
+  window.addEventListener('orientationchange', onResize);
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', onResize, { passive: true });
+  }
 
   // 4秒ごとに背景を巡回
   setInterval(() => {
