@@ -69,6 +69,25 @@ body {
   transform: scale(1.1); /* ホバー時の拡大効果 */
 }
 
+/* --- Mobile header logo sizing --- */
+@media (max-width: 767.98px) {
+  .header-inner { padding: 0.4rem 0.5rem; }
+  .logo {
+    height: 52px;      /* モバイルでロゴを小さく */
+    width: auto;       /* 縦横比を維持 */
+    margin-left: 0;    /* 負のマージンを解除 */
+    display: block;    /* 不要な余白防止 */
+  }
+  .logo-link {
+    display: flex;
+    align-items: center;
+  }
+}
+
+@media (max-width: 360px) {
+  .logo { height: 46px; }
+}
+
 /* ── Navigation ───────────────────────────────── */
 .nav-toggle {
   display: none; /* デフォルトでは非表示 */
