@@ -10,8 +10,10 @@
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP|Oswald&display=swap" rel="stylesheet">
 
   <!-- FontAwesome: アイコンライブラリ -->
-  <script src="https://kit.fontawesome.com/YOUR_KIT_ID.js" crossorigin="anonymous"></script>
-
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css"
+  />
   <!-- プロジェクト用スタイルシート -->
   <link rel="stylesheet" href="css/style.css">
   
@@ -96,23 +98,48 @@
       <div class="container">
         <h2>SNS</h2>
         <div class="sns-embeds">
-          <!-- Facebook埋め込み -->
-          <div class="facebook-embed">
+
+          <!-- Facebook：縦長カード -->
+          <div class="sns-card sns-card--fb">
             <h3>Facebook</h3>
-            <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FSuwaCityWindBand&tabs=timeline&width=340&height=500" width="340" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen></iframe>
-          </div>
-          <!-- YouTube埋め込み -->
-          <div class="youtube-embed">
-            <h3>YouTube</h3>
-            <iframe src="https://www.youtube.com/embed/IHgYDZVFAJA?si=o-4J0ZrW20fj3sbX" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
-          </div>
-          <!-- Instagramリンク -->
-          <div class="instagram-embed">
-            <h3>Instagram</h3>
-            <a href="https://www.instagram.com/suwacitywindband/" class="instagram-link" target="_blank" aria-label="Instagram">
-              <img src="img/icon_insta.png" alt="Instagram">
+            <div class="sns-frame">
+              <iframe
+                src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FSuwaCityWindBand&tabs=timeline"
+                frameborder="0" allowfullscreen></iframe>
+            </div>
+            <a href="https://www.facebook.com/SuwaCityWindBand"
+              class="btn btn-primary" target="_blank" aria-label="Facebookページへ">
+              フォローする
             </a>
           </div>
+
+          <!-- YouTube：横長カード -->
+          <div class="sns-card sns-card--yt">
+            <h3>YouTube</h3>
+            <div class="sns-frame">
+              <iframe
+                src="https://www.youtube.com/embed/IHgYDZVFAJA?si=o-4J0ZrW20fj3sbX"
+                title="YouTube video player" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <a href="https://youtube.com/channel/UCslfo6opiRdj1zpFQ0ggwzA?si=N1rQtGrbsjeUWc8A"
+              class="btn btn-primary" target="_blank" aria-label="YouTubeチャンネルへ">
+              チャンネルを見る
+            </a>
+          </div>
+
+          <!-- Instagram：正方形ロゴカード（リンクのまま） -->
+          <div class="sns-card sns-card--insta">
+            <h3>Instagram</h3>
+            <div class="sns-frame">
+              <a href="https://www.instagram.com/suwacitywindband/"
+                class="instagram-link" target="_blank" aria-label="Instagram">
+                <img src="img/icon_insta.png" alt="Instagramロゴ">
+              </a>
+            </div>
+            <a href="https://www.instagram.com/suwacitywindband/"
+              class="btn btn-primary" target="_blank">フォローする</a>
+          </div>
+
         </div>
       </div>
     </section>

@@ -303,63 +303,92 @@ body {
   box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* シャドウ効果 */
 }
 
-/* ── SNS Embeds ───────────────────────────────── */
 .sns-embeds {
-  display: grid; /* グリッドレイアウト */
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* 自動フィット */
-  gap: 2rem; /* アイテム間のスペース */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  align-items: start; /* 高さを揃えず各カードを自動高さに */
+  justify-content: center; /* 1カラム時でも中央寄せ */
 }
 
-.instagram-link img {
-  width: 60px; /* 画像の幅 */
-  height: auto; /* 高さ自動 */
-  transition: transform var(--transition-fast); /* トランジション効果 */
+/* ── SNS Embeds ───────────────────────────────── */
+/* 共通SNSカード */
+.sns-card {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  max-width: 560px;           /* カードの最大幅（FB/YouTube） */
+  margin: 0 auto;             /* トラック内で中央寄せ */
 }
 
-.instagram-link:hover img {
-  transform: scale(1.1) rotate(5deg); /* ホバー時の拡大と回転 */
+.sns-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
 }
 
-/* ── Responsive Embeds ────────────────────────── */
-.facebook-embed,
-.youtube-embed,
-.instagram-embed {
-  width: 100%; /* 幅の設定 */
-  max-width: 560px; /* 最大幅の設定 */
-  margin: 0 auto; /* 中央寄せ */
+.sns-card h3 {
+  margin-bottom: 1rem;
+  color: var(--color-primary);
 }
 
-.facebook-embed iframe {
-  display: block; /* ブロック表示 */
-  width: 100%; /* 幅の設定 */
-  height: auto; /* 高さ自動 */
-  aspect-ratio: 9/16; /* アスペクト比 */
-}
-
-.youtube-embed iframe {
-  display: block; /* ブロック表示 */
-  width: 100%; /* 幅の設定 */
-  height: auto; /* 高さ自動 */
-  aspect-ratio: 16/9; /* アスペクト比 */
-}
-
-.responsive-map {
-  position: relative;
+.sns-frame {
   width: 100%;
-  padding-bottom: 56.25%; /* 16:9 比率 */
-  height: 0;
+  aspect-ratio: 16/9;
+  margin-bottom: 1rem;
   overflow: hidden;
   border-radius: var(--radius);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
-.responsive-map iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
+.sns-frame iframe,
+.sns-frame img {
   width: 100%;
   height: 100%;
+  object-fit: cover;
+  display: block;
 }
+
+.sns-card iframe { border: 0; }
+
+.sns-card--insta {
+  max-width: 320px;           /* Instagramカードを少し小さく */
+}
+/* Instagram card modifier: square frame with centered logo */
+.sns-card--insta .sns-frame {
+  aspect-ratio: 1 / 1;            /* 正方形にする */
+  display: flex;                   /* 中央配置用 */
+  align-items: center;
+  justify-content: center;
+  background: #fff;                /* 白背景（ロゴを見やすく） */
+}
+.sns-card--insta .sns-frame img {
+  width: 40%;                      /* ロゴを少し小さく */
+  height: auto;                    /* 縦横比を保持 */
+  object-fit: contain;             /* 伸び縮みせず収める */
+  display: block;                  /* 余白制御 */
+  margin: 0 auto;                  /* 中央寄せ */
+}
+
+/* Service-specific aspect ratios */
+.sns-card--fb .sns-frame { 
+  aspect-ratio: 9 / 16; 
+} 
+.sns-card--yt .sns-frame { 
+  aspect-ratio: 16 / 9; 
+} 
+
+/* Facebookプラグインの内蔵サイズを無視してフレームにフィット */
+.sns-card--fb iframe { 
+  width: 100% !important; 
+  height: 100% !important; 
+}
+
+
+
 
 /* ── Activities Section ────────────────────────── */
 #activities .wrapper {
@@ -483,7 +512,6 @@ body {
   left: -10%; /* 左側の位置 */
   width: 120%; /* 幅の設定 */
   height: 200%; /* 高さの設定 */
-  background: url('img/footer-bg.svg') center/cover no-repeat; /* 背景画像 */
   opacity: 0.05; /* 透明度 */
   transform: rotate(15deg); /* 回転 */
 }
