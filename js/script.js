@@ -48,8 +48,8 @@ function initHeaderInteractions() {
 
 document.addEventListener('DOMContentLoaded', async () => {
   await Promise.all([
-    injectHTML('include-header', '/common/header.html'),
-    injectHTML('include-footer', '/common/footer.html')
+    injectHTML('include-header', 'common/header.html'),
+    injectHTML('include-footer', 'common/footer.html')
   ]);
   initHeaderInteractions();
 
@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       const repeat = 'no-repeat';
       hero.style.background = `
         linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
-        url('/img/${layers[idx]}') center / cover ${repeat} ${attachment}
+        url('img/${layers[idx]}') center / cover ${repeat} ${attachment}
       `;
     }
 

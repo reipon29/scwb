@@ -214,13 +214,13 @@ body {
   height: 80vh; /* 高さの設定 */
   overflow: hidden; /* オーバーフローを隠す */
   background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), /* グラデーションオーバーレイ */
-              url('/img/desktop1.jpg') center/cover fixed no-repeat; /* デスクトップ用背景画像 */
+              url('img/desktop1.jpg') center/cover fixed no-repeat; /* デスクトップ用背景画像 */
 }
 
 @media (max-width: 767.98px) {
   .hero {
     background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), /* グラデーションオーバーレイ */
-                url('/img/mobile1.jpg') center/cover no-repeat; /* モバイル用背景画像 */
+                url('img/mobile1.jpg') center/cover no-repeat; /* モバイル用背景画像 */
     background-attachment: scroll; /* スクロール時の背景動作 */
   }
 }
