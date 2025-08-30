@@ -42,6 +42,7 @@ body {
 
 /* ── Header ────────────────────────────────────── */
 .site-header {
+  position: -webkit-sticky; /* Safari 対策 */
   position: sticky; /* スティッキーヘッダー */
   top: 0;
   width: 100%;
@@ -49,6 +50,19 @@ body {
   box-shadow: 0 2px 8px rgba(0,0,0,0.15); /* シャドウ効果 */
   z-index: 1000; /* 重なり順序 */
   transition: background-color var(--transition-fast), box-shadow var(--transition-fast); /* トランジション効果 */
+  min-height: 56px; /* ヘッダーの最低高さ（追従時のレイアウト安定） */
+}
+
+/* JSで .is-fixed が付与されたときに強制固定する（全ブラウザ安定用） */
+.site-header.is-fixed {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  width: 100%;
+  background-color: var(--color-primary);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
 .header-inner {
@@ -82,7 +96,7 @@ body {
   position: absolute; /* 絶対位置 */
   top: 2rem; /* 上部のスペーシング */
   right: 1.5rem; /* 右側のスペーシング */
-  z-index: 2001; /* 重なり順序 */
+  z-index: 1500; /* ヘッダーより上・オーバーレイより下 */
 }
 
 .nav-toggle .bar {
@@ -151,7 +165,7 @@ body {
   opacity: 0; /* 初期透明度 */
   transform: translateY(-20px); /* 初期位置 */
   transition: opacity 0.4s ease, transform 0.4s ease; /* トランジション効果 */
-  z-index: 2000; /* 重なり順序 */
+  z-index: 2000; /* ヘッダー/トグルより上 */
 }
 
 .menu-overlay.open {
@@ -200,13 +214,13 @@ body {
   height: 80vh; /* 高さの設定 */
   overflow: hidden; /* オーバーフローを隠す */
   background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), /* グラデーションオーバーレイ */
-              url('img/desktop1.jpg') center/cover fixed no-repeat; /* デスクトップ用背景画像 */
+              url('/img/desktop1.jpg') center/cover fixed no-repeat; /* デスクトップ用背景画像 */
 }
 
 @media (max-width: 767.98px) {
   .hero {
     background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), /* グラデーションオーバーレイ */
-                url('img/mobile1.jpg') center/cover no-repeat; /* モバイル用背景画像 */
+                url('/img/mobile1.jpg') center/cover no-repeat; /* モバイル用背景画像 */
     background-attachment: scroll; /* スクロール時の背景動作 */
   }
 }

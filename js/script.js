@@ -1,24 +1,34 @@
-document.addEventListener('DOMContentLoaded', () => {
-  // -------------------------------
-  // 1. Navigation Elements
-  // -------------------------------
+/* === Shared header/footer injection (added) === */
+async function injectHTML(targetId, url) {
+  const host = document.getElementById(targetId);
+  if (!host) return null;
+  try {
+    const res = await fetch(url, { credentials: 'same-origin' });
+    if (!res.ok) throw new Error(`Failed to load ${url}: ${res.status}`);
+    host.innerHTML = await res.text();
+    return host;
+  } catch (e) {
+    console.error(e);
+    return null;
+  }
+}
+
+function initHeaderInteractions() {
+  if (document.body.dataset.headerInited === '1') return;
   const navToggle = document.querySelector('.nav-toggle');
   const overlay   = document.getElementById('mobile-menu');
   const closeBtn  = document.querySelector('.menu-close');
+  if (!navToggle || !overlay || !closeBtn) return;
 
-  // Toggle mobile overlay menu on hamburger click
   navToggle.addEventListener('click', () => {
     const isOpen = !overlay.classList.contains('open');
     overlay.classList.toggle('open', isOpen);
-    overlay.setAttribute('aria-hidden', !isOpen);
+    overlay.setAttribute('aria-hidden', String(!isOpen));
     navToggle.classList.toggle('open', isOpen);
-    navToggle.setAttribute('aria-expanded', isOpen);
-    navToggle.setAttribute('aria-label',
-      isOpen ? 'メニューを閉じる' : 'メニューを開く'
-    );
+    navToggle.setAttribute('aria-expanded', String(isOpen));
+    navToggle.setAttribute('aria-label', isOpen ? 'メニューを閉じる' : 'メニューを開く');
   });
 
-  // Close overlay when close button clicked
   closeBtn.addEventListener('click', () => {
     overlay.classList.remove('open');
     overlay.setAttribute('aria-hidden', 'true');
@@ -26,6 +36,58 @@ document.addEventListener('DOMContentLoaded', () => {
     navToggle.setAttribute('aria-expanded', 'false');
     navToggle.setAttribute('aria-label', 'メニューを開く');
   });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 1024 && overlay.classList.contains('open')) {
+      closeBtn.click();
+    }
+  }, { passive: true });
+
+  document.body.dataset.headerInited = '1';
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+  await Promise.all([
+    injectHTML('include-header', '/common/header.html'),
+    injectHTML('include-footer', '/common/footer.html')
+  ]);
+  initHeaderInteractions();
+
+  // Sticky (JS-driven): ブラウザ差を無視して常にスクロール量で固定化を制御
+  (function initStickyFixed() {
+    const header = document.querySelector('.site-header');
+    if (!header) return;
+
+    // ヘッダー高をCSS変数へ反映（固定化時のレイアウトジャンプ防止）
+    const setHeaderHeight = () => {
+      const h = header.getBoundingClientRect().height;
+      document.documentElement.style.setProperty('--header-height', `${h}px`);
+    };
+    setHeaderHeight();
+    window.addEventListener('resize', setHeaderHeight, { passive: true });
+
+    // スクロールで .is-fixed を付与／削除
+    const onScroll = () => {
+      const sc = window.pageYOffset || document.documentElement.scrollTop || 0;
+      if (sc > 0) {
+        if (!header.classList.contains('is-fixed')) {
+          header.classList.add('is-fixed');
+        }
+        document.body.style.paddingTop =
+          getComputedStyle(document.documentElement).getPropertyValue('--header-height');
+      } else {
+        header.classList.remove('is-fixed');
+        document.body.style.paddingTop = '';
+      }
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+
+  // -------------------------------
+  // (nav interactions are initialized in initHeaderInteractions() after injection)
+  // -------------------------------
 
   // -------------------------------
   // 2. Hero Text Animation
@@ -59,11 +121,12 @@ document.addEventListener('DOMContentLoaded', () => {
     let idx = 0;
 
     function applyBg() {
-      // 背景attachmentはPCのみfixed、その他はscroll（＝指定しない）
-      const attachment = isPC() ? 'fixed' : 'no-repeat';
+      // 背景attachmentはPCのみfixed、その他はscroll
+      const attachment = isPC() ? 'fixed' : 'scroll';
+      const repeat = 'no-repeat';
       hero.style.background = `
         linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
-        url('img/${layers[idx]}') center/cover ${attachment}
+        url('/img/${layers[idx]}') center / cover ${repeat} ${attachment}
       `;
     }
 
@@ -122,8 +185,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // 5. Close mobile menu on resize
   // -------------------------------
   window.addEventListener('resize', () => {
-    if (window.innerWidth > 1024 && overlay.classList.contains('open')) {
-      closeBtn.click();
+    if (window.innerWidth > 1024) {
+      const overlay = document.getElementById('mobile-menu');
+      const closeBtn = document.querySelector('.menu-close');
+      if (overlay && closeBtn && overlay.classList.contains('open')) {
+        closeBtn.click();
+      }
     }
   });
   // -------------------------------
