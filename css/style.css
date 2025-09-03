@@ -33,6 +33,13 @@ body {
   line-height: 1.6; /* 行間の設定 */
 }
 
+/* Year navigation current link emphasis */
+.year-nav a.is-current {
+  font-weight: 700;
+  text-decoration: none;
+  pointer-events: none;
+}
+
 /* ── Container ─────────────────────────────────── */
 .container {
   width: 90%; /* 幅の設定 */

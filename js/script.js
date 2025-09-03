@@ -53,6 +53,27 @@ document.addEventListener('DOMContentLoaded', async () => {
   ]);
   initHeaderInteractions();
 
+  // Inject concert year navigation if placeholder exists
+  const navHost = await injectHTML('concert-year-nav', 'concert/year-nav.html');
+  if (navHost) {
+    // Highlight current year link via aria-current + class (no DOM replacement)
+    const anchors = Array.from(navHost.querySelectorAll('a'));
+    const cur = (location.pathname || '')
+      .replace(/\\+/g, '/')
+      .replace(/.*\/concert\//, 'concert/');
+    const applyCurrent = (a) => {
+      a.setAttribute('aria-current', 'page');
+      a.classList.add('is-current');
+    };
+    const match = anchors.find(a => a.getAttribute('href') === cur);
+    if (match) {
+      applyCurrent(match);
+    } else if (cur.endsWith('/concert/') || cur.endsWith('/concert')) {
+      const a = anchors.find(a => a.getAttribute('href') === 'concert/concert.html');
+      if (a) applyCurrent(a);
+    }
+  }
+
   // Sticky (JS-driven): ブラウザ差を無視して常にスクロール量で固定化を制御
   (function initStickyFixed() {
     const header = document.querySelector('.site-header');
