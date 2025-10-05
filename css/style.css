@@ -801,3 +801,73 @@ body {
     max-width: 90%;
   }
 }
+
+/* ── Teien 2025 Concert Page ───────────────────── */
+.teien-event {
+  display: grid;
+  gap: 2rem;
+}
+
+.teien-event .event-title {
+  font-size: clamp(1.9rem, 2.8vw, 2.8rem);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.teien-event .event-lead {
+  font-size: 1.1rem;
+  line-height: 1.9;
+}
+
+.teien-event .event-intro {
+  display: grid;
+  gap: 1rem;
+}
+
+.teien-event .event-details dl {
+  display: grid;
+  grid-template-columns: minmax(120px, 1fr) 2fr;
+  row-gap: 0.75rem;
+  column-gap: 1rem;
+}
+
+.teien-event .event-details dt {
+  font-weight: 700;
+}
+
+.teien-event .event-details dd {
+  margin: 0;
+}
+
+.teien-event .event-poster {
+  margin: 0;
+}
+
+.teien-event .event-poster img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.teien-event .event-map iframe {
+  width: 100%;
+  min-height: 360px;
+  border: 0;
+  border-radius: var(--radius);
+}
+
+.teien-event .event-map .map-note {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.teien-event .event-program p + p {
+  margin-top: 1rem;
+}
+
+@media (max-width: 599px) {
+  .teien-event .event-details dl {
+    grid-template-columns: 1fr;
+  }
+}
