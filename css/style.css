@@ -402,6 +402,14 @@ body {
   text-decoration: underline;
 }
 
+.news-photo {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  object-fit: contain;
+}
+
 @media (max-width: 768px) {
   .news-item {
     grid-template-columns: 1fr;
