@@ -334,6 +334,82 @@ body {
   box-shadow: 0 8px 20px rgba(0,0,0,0.1); /* シャドウ効果 */
 }
 
+.card ol{
+  list-style-type: none;
+}
+
+/* ── News List ───────────────────────────────── */
+.news-actions {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+  padding: 0.75rem 2.25rem;
+  border-radius: 999px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.btn-outline:hover {
+  background-color: var(--color-primary);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.12);
+}
+
+.news-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border: 1px solid #e6e6e6;
+  border-radius: var(--radius);
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+}
+
+.news-item {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 1.5rem;
+  padding: 1.25rem 1.5rem;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+}
+
+.news-item:last-child {
+  border-bottom: none;
+}
+
+.news-date {
+  font-weight: 600;
+  color: #666;
+  white-space: nowrap;
+}
+
+/* news-title links use default anchor styling (same as index) */
+
+.news-photo {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  object-fit: contain;
+}
+
+@media (max-width: 768px) {
+  .news-item {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+  }
+}
+
 /* ── Buttons ──────────────────────────────────── */
 .btn-primary {
   display: inline-block; /* インラインブロック */
