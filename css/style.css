@@ -393,14 +393,7 @@ body {
   white-space: nowrap;
 }
 
-.news-title a {
-  color: var(--color-text);
-  text-decoration: none;
-}
-
-.news-title a:hover {
-  text-decoration: underline;
-}
+/* news-title links use default anchor styling (same as index) */
 
 .news-photo {
   width: 100%;
