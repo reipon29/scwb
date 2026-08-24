@@ -3,10 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#54A5C7">
   <base href="../">
   <title>演奏記録 | 諏訪市民吹奏楽団</title>
   <meta name="description" content="諏訪市民吹奏楽団の演奏記録を掲載しています。">
   <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP|Oswald&display=swap" rel="stylesheet">
   <!-- FontAwesome: アイコンライブラリ -->
   <link
@@ -21,13 +24,12 @@
 <div id="include-header"></div>
 
   <!-- メインコンテンツ -->
-   <main>
+   <main id="main">
     <section id="history" class="section fade-up">
       <div class="container">
         <h2 class="section-title">諏訪市民吹奏楽団<br>演奏記録一覧</h2>
         <p>団結成以来の諏訪市吹の活動を、演奏曲目とともにまとめてみました。</p>
-        <br>
-        <p id="history-year-nav" class="year-nav"></p>
+                <p id="history-year-nav" class="year-nav"></p>
       </div>
     </section>
 
@@ -35,7 +37,7 @@
       <div class="container chapter">
         <h2>第３回定期演奏会</h2>
         <p>1997年11月16日（日）　諏訪市文化センター</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <thead>
               <tr><th colspan="3">第１部</th></tr>
@@ -85,7 +87,7 @@
       <div class="container chapter">
         <h2>第３回上社の杜音楽祭</h2>
         <p>1997年10月5日（日）　諏訪市博物館前・美しき広場</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>ディズニー・ファンティリュージョン</td><td>星出尚志編曲</td></tr>
@@ -103,7 +105,7 @@
       <div class="container chapter">
         <h2>LCVケーブル・コンサート収録</h2>
         <p>1997年6月30日（月）　LCV本社スタジオ</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td rowspan="5">金管</td><td>へぼ詩人の歌によるソナタ</td><td>作曲者不詳</td></tr>
@@ -116,12 +118,12 @@
         </div>
       </div>
       <br>
-      <div class="cta" style="text-align:center; margin-top:2rem;">
+      <div class="cta">
           <a href="history/history96.html" class="btn-primary">
             1996年の演奏記録へ
           </a>
       </div>
-      <div class="cta" style="text-align:center; margin-top:2rem;">
+      <div class="cta">
           <a href="history/musiclist.html" class="btn-primary">
             全曲リスト（原題・編曲者名・出版社名含む）
           </a>

@@ -3,10 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#54A5C7">
   <base href="../">
   <title>演奏記録 | 諏訪市民吹奏楽団</title>
   <meta name="description" content="諏訪市民吹奏楽団の演奏記録を掲載しています。">
   <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP|Oswald&display=swap" rel="stylesheet">
   <!-- FontAwesome: アイコンライブラリ -->
   <link
@@ -21,13 +24,12 @@
 <div id="include-header"></div>
 
   <!-- メインコンテンツ -->
-  <main>
+  <main id="main">
     <section id="history" class="section fade-up">
       <div class="container">
         <h2 class="section-title">諏訪市民吹奏楽団<br>演奏記録一覧</h2>
         <p>団結成以来の諏訪市吹の活動を、演奏曲目とともにまとめてみました。</p>
-        <br>
-        <p id="history-year-nav" class="year-nav"></p>
+                <p id="history-year-nav" class="year-nav"></p>
       </div>
     </section>
 
@@ -36,7 +38,7 @@
         <h2>第21回定期演奏会</h2>
         <p>2015年12月6日（日）　茅野市民館マルチホール</p>
         <p class="note">（開演前：伊那市立春富中学校吹奏楽部の皆さんによるアンサンブル演奏）</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <thead>
               <tr><th colspan="2">第１部</th></tr>
@@ -73,7 +75,7 @@
       <div class="container chapter">
         <h2>第21回上社の杜音楽祭</h2>
         <p>2015年10月4日（日）　諏訪市博物館前・美しき広場</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
             <table>
             <thead>
                 <tr><th colspan="2">諏訪市吹ステージ</th></tr>
@@ -99,7 +101,7 @@
       <div class="container chapter">
         <h2>城南小学校秋祭り出演</h2>
         <p>2015年10月3日（土）　諏訪市立城南小学校大体育館</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>フローレンティナー行進曲</td><td>J.フチーク</td></tr>
@@ -114,7 +116,7 @@
       <div class="container chapter">
         <h2>紅林荘　敬老会出演</h2>
         <p>2015年9月12日（土）　富士見町・特別養護老人ホーム紅林荘</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td rowspan="2">クラリネット</td><td>私のお気に入り</td><td>R.ロジャース</td></tr>
@@ -131,7 +133,7 @@
       <div class="container chapter">
         <h2>聖母寮　慰問演奏</h2>
         <p>2015年7月25日（土）　諏訪市・養護老人ホーム聖母寮</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>輝け青春</td><td>真島俊夫</td></tr>
@@ -149,7 +151,7 @@
       <div class="container chapter">
         <h2>柿蔭山房　七夕コンサート</h2>
         <p>2015年7月4日（土）　下諏訪町・柿蔭山房</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td rowspan="4">サックス</td><td>となりのトトロより　さんぽ～ネコバス</td><td>久石　譲</td></tr>
@@ -177,7 +179,7 @@
       <div class="container chapter">
         <h2>第100回並木DEコンサート</h2>
         <p>2015年5月23日（土）　諏訪市柳並公園</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>輝け青春</td><td>真島俊夫</td></tr>
@@ -195,7 +197,7 @@
       <div class="container chapter">
         <h2>蓼科高原ロビーコンサート出演</h2>
         <p>2015年4月25日（土）　茅野市・蓼科グランドホテル滝の湯</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>輝け青春</td><td>真島俊夫</td></tr>
@@ -211,7 +213,7 @@
       <div class="container chapter">
         <h2>アイスキャンドル点灯式出演</h2>
         <p>2015年2月7日（土）　諏訪市・八十二銀行上諏訪駅前支店前<br>（トランペットパートのみ出演）</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>オリンピック東京大会ファンファーレ</td><td>今井光也</td></tr>
@@ -222,12 +224,12 @@
         </div>
       </div>
       <br>
-      <div class="cta" style="text-align:center; margin-top:2rem;">
+      <div class="cta">
           <a href="history/history14.html" class="btn-primary">
             2014年の演奏記録へ
           </a>
       </div>
-      <div class="cta" style="text-align:center; margin-top:2rem;">
+      <div class="cta">
           <a href="history/musiclist.html" class="btn-primary">
             全曲リスト（原題・編曲者名・出版社名含む）
           </a>

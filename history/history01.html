@@ -3,10 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#54A5C7">
   <base href="../">
   <title>演奏記録 | 諏訪市民吹奏楽団</title>
   <meta name="description" content="諏訪市民吹奏楽団の演奏記録を掲載しています。">
   <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP|Oswald&display=swap" rel="stylesheet">
   <!-- FontAwesome: アイコンライブラリ -->
   <link
@@ -21,13 +24,12 @@
 <div id="include-header"></div>
 
   <!-- メインコンテンツ -->
-  <main>
+  <main id="main">
     <section id="history" class="section fade-up">
       <div class="container">
         <h2 class="section-title">諏訪市民吹奏楽団<br>演奏記録一覧</h2>
         <p>団結成以来の諏訪市吹の活動を、演奏曲目とともにまとめてみました。</p>
-        <br>
-        <p id="history-year-nav" class="year-nav"></p>
+                <p id="history-year-nav" class="year-nav"></p>
       </div>
     </section>
 
@@ -35,7 +37,7 @@
       <div class="container chapter">
         <h2>クリスマス・ディナーコンサート出演</h2>
         <p>2001年12月23日（日）　蓼科東急ハーヴェストクラブ</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td rowspan="3">金管</td><td>へぼ詩人の歌によるソナタ</td><td>作曲者不詳</td></tr>
@@ -54,7 +56,7 @@
       <div class="container chapter">
         <h2>第７回定期演奏会</h2>
         <p>2001年11月25日（日）　諏訪市文化センター</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <thead>
               <tr><th colspan="2">第１部</th></tr>
@@ -91,7 +93,7 @@
       <div class="container chapter">
         <h2>第７回上社の杜音楽祭</h2>
         <p>2001年10月7日（日）　諏訪市博物館前・美しき広場</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <thead>
               <tr><th colspan="2">諏訪市吹ステージ</th></tr>
@@ -118,7 +120,7 @@
       <div class="container chapter">
         <h2>第19回諏訪湖少年野球選手権大会　開会式出演</h2>
         <p>2001年9月8日（土）　諏訪湖スタジアム</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <thead>
               <tr><th colspan="2">入場および退場行進曲</th></tr>
@@ -143,7 +145,7 @@
       <div class="container chapter">
         <h2>第22回クリーンレイク諏訪ふれあいまつり出演</h2>
         <p>2001年9月8日（土）　クリーンレイク諏訪</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>ミリタリー・エスコート</td><td>H.ベネット</td></tr>
@@ -165,7 +167,7 @@
       <div class="container chapter">
         <h2>高島小学校PTA　七夕コンサート出演</h2>
         <p>2001年7月7日（土）　諏訪市立石展望公園</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>ウィーンはいつもウィーン</td><td>J.シュランメル</td></tr>
@@ -190,7 +192,7 @@
       <div class="container chapter">
         <h2>第29回並木deコンサート</h2>
         <p>2001年5月26日（土）　諏訪市柳並公園</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>ウィーンはいつもウィーン</td><td>J.シュランメル</td></tr>
@@ -215,7 +217,7 @@
       <div class="container chapter">
         <h2>諏訪湖開き</h2>
         <p>2001年4月29日（日）　諏訪湖畔・遊覧船桟橋前</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>ウィーンはいつもウィーン</td><td>J.シュランメル</td></tr>
@@ -239,12 +241,12 @@
         </div>
       </div>
       <br>
-      <div class="cta" style="text-align:center; margin-top:2rem;">
+      <div class="cta">
           <a href="history/history00.html" class="btn-primary">
             2000年の演奏記録へ
           </a>
       </div>
-      <div class="cta" style="text-align:center; margin-top:2rem;">
+      <div class="cta">
           <a href="history/musiclist.html" class="btn-primary">
             全曲リスト（原題・編曲者名・出版社名含む）
           </a>

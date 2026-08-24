@@ -3,10 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#54A5C7">
   <base href="../">
   <title>演奏記録 | 諏訪市民吹奏楽団</title>
   <meta name="description" content="諏訪市民吹奏楽団の演奏記録を掲載しています。">
   <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP|Oswald&display=swap" rel="stylesheet">
   <!-- FontAwesome: アイコンライブラリ -->
   <link
@@ -21,13 +24,12 @@
 <div id="include-header"></div>
 
   <!-- メインコンテンツ -->
-   <main>
+   <main id="main">
     <section id="history" class="section fade-up">
       <div class="container">
         <h2 class="section-title">諏訪市民吹奏楽団<br>演奏記録一覧</h2>
         <p>団結成以来の諏訪市吹の活動を、演奏曲目とともにまとめてみました。</p>
-        <br>
-        <p id="history-year-nav" class="year-nav"></p>
+                <p id="history-year-nav" class="year-nav"></p>
       </div>
     </section>
 
@@ -36,7 +38,7 @@
         <h2>第25回定期演奏会</h2>
         <p>2019年12月8日（日）　茅野市民館マルチホール</p>
         <p class="note">（開演前：伊那市立春富中学校吹奏楽部の皆さんによるアンサンブル演奏）</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <thead>
               <tr><th colspan="2">第１部</th></tr>
@@ -71,7 +73,7 @@
       <div class="container chapter">
         <h2>第25回上社の杜音楽祭</h2>
         <p>2019年10月27日（日）　諏訪市博物館前・美しき広場</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
             <table>
             <thead>
                 <tr><th colspan="2">諏訪市吹ステージ</th></tr>
@@ -95,7 +97,7 @@
       <div class="container chapter">
         <h2>老人ホームアイリス　敬老会出演</h2>
         <p>2019年9月15日（日）　特別養護老人ホーム「アイリス」</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>コンサート・マーチ「シャイニング・スカイ」</td><td>河邊一彦</td></tr>
@@ -111,7 +113,7 @@
       <div class="container chapter">
         <h2>諏訪湖音楽の夕べ　出演</h2>
         <p>2019年8月6日（火）　諏訪市湖畔公園野外ステージ</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>行進曲「美中の美」</td><td>J.P.スーザ</td></tr>
@@ -128,7 +130,7 @@
       <div class="container chapter">
         <h2>聖母寮　慰問演奏</h2>
         <p>2019年7月27日（土）　諏訪市・養護老人ホーム聖母寮</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>U.S.A.</td><td>C.アカティーノ他</td></tr>
@@ -146,7 +148,7 @@
       <div class="container chapter">
         <h2>柿蔭山房　七夕コンサート</h2>
         <p>2019年7月6日（土）　下諏訪町・柿蔭山房</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td rowspan="2">トランペット</td><td>サークル・オブ・ライフ</td><td>E.ジョン</td></tr>
@@ -170,7 +172,7 @@
       <div class="container chapter">
         <h2>蓼科高原ロビーコンサート出演</h2>
         <p>2019年6月22日（土）　茅野市・蓼科グランドホテル滝の湯</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>行進曲「美中の美」</td><td>J.P.スーザ</td></tr>
@@ -186,7 +188,7 @@
       <div class="container chapter">
         <h2>第120回並木DEコンサート</h2>
         <p>2019年5月25日（土）　諏訪市柳並公園</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>行進曲「美中の美」</td><td>J.P.スーザ</td></tr>
@@ -204,7 +206,7 @@
       <div class="container chapter">
         <h2>諏訪の国開国フェス出演</h2>
         <p>2019年3月2日（土）　茅野市民館　中庭</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td rowspan="3">トランペット</td><td>オリンピック東京大会ファンファーレ</td><td>今井光也</td></tr>
@@ -220,7 +222,7 @@
       <div class="container chapter">
         <h2>アイスキャンドル点灯式出演</h2>
         <p>2019年2月2日（土）　諏訪市・諏訪一丁目交差点横（旧　八十二銀行上諏訪駅前支店前）<br>（トランペットパートのみ出演）</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>TBD（仮）</td><td>かなへび</td></tr>
@@ -231,12 +233,12 @@
         </div>
       </div>
       <br>
-      <div class="cta" style="text-align:center; margin-top:2rem;">
+      <div class="cta">
           <a href="history/history18.html" class="btn-primary">
             2018年の演奏記録へ
           </a>
       </div>
-      <div class="cta" style="text-align:center; margin-top:2rem;">
+      <div class="cta">
           <a href="history/musiclist.html" class="btn-primary">
             全曲リスト（原題・編曲者名・出版社名含む）
           </a>

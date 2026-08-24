@@ -3,10 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#54A5C7">
   <base href="../">
   <title>コンサート情報 | 諏訪市民吹奏楽団</title>
   <meta name="description" content="諏訪市民吹奏楽団の今後の演奏予定やコンサート情報を掲載しています。">
   <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP|Oswald&display=swap" rel="stylesheet">
   <!-- FontAwesome: アイコンライブラリ -->
   <link
@@ -21,14 +24,12 @@
   <div id="include-header"></div>
 
   <!-- メインコンテンツ -->
-  <main class="section fade-up visible">
+  <main id="main" class="section fade-up visible">
     <div class="container">
       <h2>コンサート情報</h2>
       <p>諏訪市民吹奏楽団の今後の演奏予定です。（詳細が決まり次第、随時更新します）</p>
-      <p>いずれの演奏も<span style="color:red;">入場無料</span>です。お気軽にお越しください。</p>
-      <br>
-      <p id="concert-year-nav" class="year-nav"></p>
-      <br>
+      <p>いずれの演奏も<span class="text-alert">入場無料</span>です。お気軽にお越しください。</p>
+            <p id="concert-year-nav" class="year-nav"></p>
 
       <div class="card">
         <h3>スワコエイトピークス　ミドルトライアスロン大会　応援演奏</h3>
@@ -60,7 +61,7 @@
       </div>
 
       <div class="card">
-        <h3>ヨルクレバ「夜のうまいもん市」出演 <span style="color:red;">演奏終了</span>（2026.2.7）</h3>
+        <h3>ヨルクレバ「夜のうまいもん市」出演 <span class="text-alert">演奏終了</span>（2026.2.7）</h3>
         <a href="concert/image/ph260207.jpg" target="_blank" rel="noopener noreferrer">
           <img src="concert/image/ph260207.jpg" alt="ヨルクレバ「夜のうまいもん市」出演" class="concert-photo" loading="lazy" decoding="async">
         </a>
@@ -68,14 +69,14 @@
       </div>
 
       <div class="card">
-        <h3>並木DEコンサート <span style="color:red;">演奏終了</span>（2026.5.16）</h3>
+        <h3>並木DEコンサート <span class="text-alert">演奏終了</span>（2026.5.16）</h3>
         <a href="concert/image/ph260516.jpg" target="_blank" rel="noopener noreferrer">
           <img src="concert/image/ph260516.jpg" alt="並木DEコンサート" class="concert-photo" loading="lazy" decoding="async">
         </a>
         <p>　上諏訪駅すぐ横の公園で、冬季を除き毎月1回開催される街角コンサート。1998年以来毎年、年度の初回に出演させていただいております。今回も無事天候に恵まれ、気持ちの良い気候の中、立ち見を含む多くのお客様にご来場いただき、マーチから最近のヒット曲まで、楽しく演奏することができました。ありがとうございました。</p>
       </div>
 
-      <p class="fade-up" style="text-align:center; margin-top:2rem;">
+      <p class="fade-up cta">
         <a href="concert/concert25.html" class="btn-primary">2025年のコンサート報告はこちら</a>
       </p>
     </div>

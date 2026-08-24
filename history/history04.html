@@ -3,10 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#54A5C7">
   <base href="../">
   <title>演奏記録 | 諏訪市民吹奏楽団</title>
   <meta name="description" content="諏訪市民吹奏楽団の演奏記録を掲載しています。">
   <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP|Oswald&display=swap" rel="stylesheet">
   <!-- FontAwesome: アイコンライブラリ -->
   <link
@@ -21,13 +24,12 @@
 <div id="include-header"></div>
 
   <!-- メインコンテンツ -->
-   <main>
+   <main id="main">
     <section id="history" class="section fade-up">
       <div class="container">
         <h2 class="section-title">諏訪市民吹奏楽団<br>演奏記録一覧</h2>
         <p>団結成以来の諏訪市吹の活動を、演奏曲目とともにまとめてみました。</p>
-        <br>
-        <p id="history-year-nav" class="year-nav"></p>
+                <p id="history-year-nav" class="year-nav"></p>
       </div>
     </section>
 
@@ -35,7 +37,7 @@
       <div class="container chapter">
         <h2>第10回定期演奏会</h2>
         <p>2004年12月5日（日）　諏訪市文化センター</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <thead>
               <tr><th colspan="2">第１部</th></tr>
@@ -70,7 +72,7 @@
       <div class="container chapter">
         <h2>第10回上社の杜音楽祭</h2>
         <p>2004年10月3日（日）　諏訪市博物館前・美しき広場</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
             <table>
             <thead>
                 <tr><th colspan="2">諏訪市吹ステージ</th></tr>
@@ -102,7 +104,7 @@
         <p>2004年9月5日（日）　クリーンレイク諏訪</p>
         <p>～いずれも雨天中止になってしまいました(; ;)。演奏予定だった曲は下記の通りです～</p>
         <p><b>（少年野球大会）</b></p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <thead>
               <tr><th colspan="2">入場および退場行進曲</th></tr>
@@ -123,7 +125,7 @@
           </table>
         </div>
         <p><b>（ふれあいまつり）</b></p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>ボギー大佐</td><td>K.J.アルフォード</td></tr>
@@ -140,7 +142,7 @@
       <div class="container chapter">
         <h2>ROUTE日本海-太平洋学童軟式野球大会　開会式出演</h2>
         <p>2004年8月7日（土）　諏訪湖スタジアム</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <thead>
               <tr><th colspan="2">入場および退場行進曲</th></tr>
@@ -163,7 +165,7 @@
       <div class="container chapter">
         <h2>第44回並木deコンサート</h2>
         <p>2004年5月22日（土）　諏訪市柳並公園</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>ボギー大佐</td><td>K.J.アルフォード</td></tr>
@@ -187,7 +189,7 @@
       <div class="container chapter">
         <h2>諏訪湖開き</h2>
         <p>2004年4月29日（木）　諏訪湖畔・遊覧船桟橋前<br>～当団常任指揮者、金子正洋先生が顧問を務める、辰野中学校吹奏楽部の皆さんと合同で演奏しました～</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td rowspan="5">諏訪市吹演奏</td><td>コンサートマーチ「バンドロジー」</td><td>E.オスターリング</td></tr>
@@ -214,12 +216,12 @@
         </div>
       </div>
       <br>
-      <div class="cta" style="text-align:center; margin-top:2rem;">
+      <div class="cta">
           <a href="history/history03.html" class="btn-primary">
             2003年の演奏記録へ
           </a>
       </div>
-      <div class="cta" style="text-align:center; margin-top:2rem;">
+      <div class="cta">
           <a href="history/musiclist.html" class="btn-primary">
             全曲リスト（原題・編曲者名・出版社名含む）
           </a>

@@ -3,10 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#54A5C7">
   <base href="./">
   <title>規約 | 諏訪市民吹奏楽団</title>
   <meta name="description" content="諏訪市民吹奏楽団の規約を掲載しています。">
-  <!-- Google Fonts: Noto Sans JP と Oswald フォントを読み込み -->
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP|Oswald&display=swap" rel="stylesheet">
   <!-- FontAwesome: アイコンライブラリ -->
   <link
@@ -21,7 +24,7 @@
 <div id="include-header"></div>
 
   <!-- メインコンテンツ -->
-  <main>
+  <main id="main">
     <section id="kiyaku" class="section fade-up visible">
       <div class="container">
         <h1 class="section-title">諏訪市民吹奏楽団 規約</h1>
@@ -265,7 +268,8 @@
         <article id="appendix" class="chapter">
             <h2>付則</h2>
             <p>この規約の改定には、運営委員会の承認を得た後、総会を開催し、出席者の３分の２以上の合意を必要とする。</p>
-            <table class="chapter">
+            <div class="table-scroll">
+            <table class="terms-table">
                 <thead>
                     <tr>
                     <th>改定日</th>
@@ -311,9 +315,10 @@
                     </tr>
                 </tbody>
             </table>
+            </div>
         </article>
         
-        <div class="cta" style="text-align:center; margin-top:2rem;">
+        <div class="cta">
           <a href="index.html" class="btn-primary">
             <i class="fas fa-home"></i> ホームへ戻る
           </a>

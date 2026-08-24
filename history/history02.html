@@ -3,10 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#54A5C7">
   <base href="../">
   <title>演奏記録 | 諏訪市民吹奏楽団</title>
   <meta name="description" content="諏訪市民吹奏楽団の演奏記録を掲載しています。">
   <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP|Oswald&display=swap" rel="stylesheet">
   <!-- FontAwesome: アイコンライブラリ -->
   <link
@@ -21,13 +24,12 @@
 <div id="include-header"></div>
 
   <!-- メインコンテンツ -->
-  <main>
+  <main id="main">
     <section id="history" class="section fade-up">
       <div class="container">
         <h2 class="section-title">諏訪市民吹奏楽団<br>演奏記録一覧</h2>
         <p>団結成以来の諏訪市吹の活動を、演奏曲目とともにまとめてみました。</p>
-        <br>
-        <p id="history-year-nav" class="year-nav"></p>
+                <p id="history-year-nav" class="year-nav"></p>
       </div>
     </section>
 
@@ -35,7 +37,7 @@
       <div class="container chapter">
         <h2>第８回定期演奏会</h2>
         <p>2002年11月24日（日）　諏訪市文化センター</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <thead>
               <tr><th colspan="2">第１部</th></tr>
@@ -71,7 +73,7 @@
       <div class="container chapter">
         <h2>第54回諏訪市スポーツ祭　開会式出演</h2>
         <p>2002年10月14日（月）　諏訪湖スタジアム</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
             <table>
             <thead>
                 <tr><th colspan="2">入場および退場行進曲</th></tr>
@@ -93,7 +95,7 @@
       <div class="container chapter">
         <h2>第８回上社の杜音楽祭</h2>
         <p>2002年10月6日（日）　諏訪市博物館前・美しき広場</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <thead>
               <tr><th colspan="2">諏訪市吹ステージ</th></tr>
@@ -120,7 +122,7 @@
       <div class="container chapter">
         <h2>老人ホームアイリス　敬老会出演</h2>
         <p>2002年9月15日（日）　特別養護老人ホーム「アイリス」</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>「マイ・フェア・レディ」より　踊り明かそう</td><td>F.ロウ</td></tr>
@@ -141,7 +143,7 @@
       <div class="container chapter">
         <h2>第23回よみがえれ諏訪湖ふれあいまつり出演</h2>
         <p>2002年9月8日（日）　クリーンレイク諏訪</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>スポーツショー行進曲</td><td>古関裕而</td></tr>
@@ -163,7 +165,7 @@
       <div class="container chapter">
         <h2>第20回諏訪湖少年野球選手権大会　開会式出演</h2>
         <p>2002年9月7日（土）　諏訪湖スタジアム</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <thead>
               <tr><th colspan="2">入場および退場行進曲</th></tr>
@@ -188,7 +190,7 @@
       <div class="container chapter">
         <h2>第21回やつがね区夏祭り出演</h2>
         <p>2002年8月14日（水）　原村やつがね区公民館</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>夏祭り</td><td>破矢ジンタ</td></tr>
@@ -209,7 +211,7 @@
       <div class="container chapter">
         <h2>第34回並木deコンサート</h2>
         <p>2002年5月25日（土）　諏訪市柳並公園</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>自由の鐘</td><td>J.P.スーザ</td></tr>
@@ -234,7 +236,7 @@
       <div class="container chapter">
         <h2>諏訪湖開き</h2>
         <p>2002年4月29日（月）　諏訪湖畔・遊覧船桟橋前</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>自由の鐘</td><td>J.P.スーザ</td></tr>
@@ -257,12 +259,12 @@
         </div>
       </div>
       <br>
-      <div class="cta" style="text-align:center; margin-top:2rem;">
+      <div class="cta">
           <a href="history/history01.html" class="btn-primary">
             2001年の演奏記録へ
           </a>
       </div>
-      <div class="cta" style="text-align:center; margin-top:2rem;">
+      <div class="cta">
           <a href="history/musiclist.html" class="btn-primary">
             全曲リスト（原題・編曲者名・出版社名含む）
           </a>

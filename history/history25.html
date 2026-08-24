@@ -3,10 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#54A5C7">
   <base href="../">
   <title>演奏記録 | 諏訪市民吹奏楽団</title>
   <meta name="description" content="諏訪市民吹奏楽団の演奏記録を掲載しています。">
   <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP|Oswald&display=swap" rel="stylesheet">
   <!-- FontAwesome: アイコンライブラリ -->
   <link
@@ -21,20 +24,19 @@
   <div id="include-header"></div>
 
   <!-- メインコンテンツ -->
-   <main>
+   <main id="main">
     <section id="history" class="section fade-up">
       <div class="container">
         <h2 class="section-title">諏訪市民吹奏楽団<br>演奏記録一覧</h2>
         <p>団結成以来の諏訪市吹の活動を、演奏曲目とともにまとめてみました。</p>
-        <br>
-        <p id="history-year-nav" class="year-nav"></p>
+                <p id="history-year-nav" class="year-nav"></p>
       </div>
     </section>
     <section class="section fade-up visible">
       <div class="container chapter">
         <h2>第31回定期演奏会</h2>
         <p>2025年12月7日（日）　茅野市民館マルチホール</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><th colspan="2"><b>第１部</b></th></tr>
@@ -59,7 +61,7 @@
       <div class="container chapter">
         <h2>第31回上社の杜音楽祭</h2>
         <p>2025年10月19日（日）　諏訪市博物館前・美しき広場</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><th colspan="2"><b>諏訪市吹ステージ</b></th></tr>
@@ -77,7 +79,7 @@
       <div class="container chapter">
         <h2>柿蔭山房　秋の演奏会</h2>
         <p>2025年10月12日（日）　下諏訪町・柿蔭山房</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><th rowspan="3">サックス</th><td>星に願いを</td><td>L.ハーライン</td></tr>
@@ -94,7 +96,7 @@
       <div class="container chapter">
         <h2>《すてぱフェス2025》出演</h2>
         <p>2025年9月28日（日）　諏訪ステーションパーク内特設会場</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>Glorious Edo</td><td>J.グラム</td></tr>
@@ -111,7 +113,7 @@
       <div class="container chapter">
         <h2>聖母寮　慰問演奏</h2>
         <p>2025年7月26日（土）　諏訪市・養護老人ホーム聖母寮</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>Glorious Edo</td><td>J.グラム</td></tr>
@@ -128,7 +130,7 @@
       <div class="container chapter">
         <h2>第3回スワコエイトピークス ミドルトライアスロン大会 応援演奏</h2>
         <p>2025年6月29日（日）　諏訪市湖畔公園</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>アフリカン・シンフォニー</td><td>V.マッコイ</td></tr>
@@ -145,7 +147,7 @@
       <div class="container chapter">
         <h2>第143回並木DEコンサート</h2>
         <p>2025年5月17日（土） 　諏訪市柳並公園</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>76本のトロンボーン</td><td>M.ウィルソン</td></tr>
@@ -162,12 +164,12 @@
         </div>
       </div>
 
-      <div class="cta" style="text-align:center; margin-top:2rem;">
+      <div class="cta">
           <a href="history/history24.html" class="btn-primary">
             2024年の演奏記録へ
           </a>
       </div>
-      <div class="cta" style="text-align:center; margin-top:2rem;">
+      <div class="cta">
           <a href="history/musiclist.html" class="btn-primary">
             全曲リスト（原題・編曲者名・出版社名含む）
           </a>

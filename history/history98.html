@@ -3,10 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#54A5C7">
   <base href="../">
   <title>演奏記録 | 諏訪市民吹奏楽団</title>
   <meta name="description" content="諏訪市民吹奏楽団の演奏記録を掲載しています。">
   <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP|Oswald&display=swap" rel="stylesheet">
   <!-- FontAwesome: アイコンライブラリ -->
   <link
@@ -21,13 +24,12 @@
 <div id="include-header"></div>
 
   <!-- メインコンテンツ -->
-   <main>
+   <main id="main">
     <section id="history" class="section fade-up">
       <div class="container">
         <h2 class="section-title">諏訪市民吹奏楽団<br>演奏記録一覧</h2>
         <p>団結成以来の諏訪市吹の活動を、演奏曲目とともにまとめてみました。</p>
-        <br>
-        <p id="history-year-nav" class="year-nav"></p>
+                <p id="history-year-nav" class="year-nav"></p>
       </div>
     </section>
 
@@ -35,7 +37,7 @@
       <div class="container chapter">
         <h2>第４回定期演奏会</h2>
         <p>1998年12月6日（日）　諏訪市文化センター</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <thead>
               <tr><th colspan="3">第１部</th></tr>
@@ -81,7 +83,7 @@
       <div class="container chapter">
         <h2>第４回上社の杜音楽祭</h2>
         <p>1998年10月4日（日）　諏訪市博物館前・美しき広場</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <thead>
               <tr><th colspan="2">諏訪市吹ステージ</th></tr>
@@ -108,7 +110,7 @@
       <div class="container chapter">
         <h2>LCVケーブル・コンサート収録</h2>
         <p>1998年9月14日（月）　LCV本社スタジオ</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>木管</td><td>「ディベルティメント」より　アレグロ・アンダンテ</td><td>F.J.ハイドン</td></tr>
@@ -125,7 +127,7 @@
       <div class="container chapter">
         <h2>諏訪湖少年野球選手権大会　開会式出演</h2>
         <p>1998年9月6日（日）　諏訪湖スタジアム</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <thead>
               <tr><th colspan="2">入場および退場行進曲</th></tr>
@@ -149,7 +151,7 @@
       <div class="container chapter">
         <h2>クリーンレイク諏訪ふれあいまつり出演</h2>
         <p>1998年9月6日（日）　クリーンレイク諏訪　（順不同）</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>双頭の鷲の旗の下に</td><td>J.F.ワーグナー</td></tr>
@@ -166,7 +168,7 @@
       <div class="container chapter">
         <h2>諏訪療護園　涼夏祭出演</h2>
         <p>1998年8月23日（日）　諏訪療護園</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>双頭の鷲の旗の下に</td><td>J.F.ワーグナー</td></tr>
@@ -182,7 +184,7 @@
       <div class="container chapter">
         <h2>湖明館通り商店街　夏祭り出演</h2>
         <p>1998年8月8日（土）　湖明館通り商店街</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>双頭の鷲の旗の下に</td><td>J.F.ワーグナー</td></tr>
@@ -204,7 +206,7 @@
       <div class="container chapter">
         <h2>長野県社会人バンド・フェスティバル参加</h2>
         <p>1998年7月12日（日）</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <thead>
               <tr><th colspan="2">金管アンサンブル</th></tr>
@@ -229,7 +231,7 @@
       <div class="container chapter">
         <h2>並木deコンサート</h2>
         <p>1998年5月23日（土）　諏訪市柳並公園</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>双頭の鷲の旗の下に</td><td>J.F.ワーグナー</td></tr>
@@ -253,7 +255,7 @@
       <div class="container chapter">
         <h2>諏訪湖開き</h2>
         <p>1998年4月29日（水）　諏訪湖畔・遊覧船桟橋前</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>錨を上げて</td><td>C.A.ツィンマーマン</td></tr>
@@ -271,7 +273,7 @@
       <div class="container chapter">
         <h2>グループ活動発表会出演</h2>
         <p>1998年2月14日（土）　諏訪市四賀公民館</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>リンゴの歌</td><td>万城目　正</td></tr>
@@ -295,7 +297,7 @@
       <div class="container chapter">
         <h2>角間川保育園　訪問演奏</h2>
         <p>1998年2月4日（水）　角間川保育園</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>「トトロ」ファンタジー</td><td>久石　譲</td></tr>
@@ -310,12 +312,12 @@
         </div>
       </div>
       <br>
-      <div class="cta" style="text-align:center; margin-top:2rem;">
+      <div class="cta">
           <a href="history/history97.html" class="btn-primary">
             1997年の演奏記録へ
           </a>
       </div>
-      <div class="cta" style="text-align:center; margin-top:2rem;">
+      <div class="cta">
           <a href="history/musiclist.html" class="btn-primary">
             全曲リスト（原題・編曲者名・出版社名含む）
           </a>
