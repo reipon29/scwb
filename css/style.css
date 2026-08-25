@@ -41,7 +41,12 @@
   --color-border: #E2E6EA;
 
   /* タイポグラフィ */
-  --font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Helvetica Neue', Arial, sans-serif;
+  /* 本文：可読性重視のゴシック */
+  --font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Yu Gothic Medium',
+                 'Helvetica Neue', Arial, sans-serif;
+  /* 見出し：やわらかい丸ゴシック（楽団の親しみやすさを出す） */
+  --font-heading: 'Zen Maru Gothic', 'Hiragino Maru Gothic ProN', 'Noto Sans JP',
+                  'Hiragino Kaku Gothic ProN', sans-serif;
 
   /* スペーシング / 形状 */
   --spacing: 1.5rem;
@@ -84,9 +89,30 @@ body {
   font-family: var(--font-family);
   background-color: var(--color-background);
   color: var(--color-text);
-  line-height: 1.75;
+  line-height: 1.85;
+  letter-spacing: 0.02em;           /* 和文はやや広めのほうが読みやすい */
   overflow-wrap: break-word;        /* 長い URL などで横スクロールしない */
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 見出しは丸ゴシック。palt で和文の字間アキを詰めて締まった見た目にする */
+h1, h2, h3, h4, h5, h6,
+.section-title,
+.hero-content h1,
+.footer-title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.45;
+  letter-spacing: 0.01em;
+  font-feature-settings: 'palt' 1;  /* 和文プロポーショナル字形 */
+  text-wrap: balance;               /* 見出しの折り返しを均等に */
+}
+
+/* 数字・英字だけ欧文の字形が有利なので tabular にはしない（自然な字幅を優先） */
+strong, b {
+  font-weight: 700;
 }
 
 /* 埋め込み要素が親幅を超えないようにする（横スクロール事故の予防） */
@@ -215,7 +241,7 @@ p + p {
   z-index: 3000;
   padding: 0.6rem 1rem;
   background: var(--color-secondary);
-  color: #000;
+  color: var(--color-text);
   border-radius: var(--radius);
   text-decoration: none;
   font-weight: 600;
@@ -491,13 +517,14 @@ body.menu-open {
   opacity: 1;
 }
 
-/* 暗幕（文字の可読性確保） */
+/* 暗幕（文字の可読性確保）
+   text-shadow を外したぶん、写真側をわずかに落として白文字を成立させる */
 .hero::before {
   content: '';
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.45));
+  background: linear-gradient(rgba(0, 0, 0, 0.42), rgba(0, 0, 0, 0.52));
 }
 
 .hero-content {
@@ -505,7 +532,8 @@ body.menu-open {
   text-align: center;
   color: #fff;
   max-width: 46rem;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+  /* text-shadow は使わない（文字裏のぼかし無し）。
+     可読性は .hero::before の暗幕だけで担保する。 */
 }
 
 .hero-content h1,
@@ -546,14 +574,14 @@ body.menu-open {
 
 .btn-primary {
   background-color: var(--color-secondary);
-  color: #000;
+  color: var(--color-text);
   padding: 0.75rem 1.5rem;
   border-radius: var(--radius);
 }
 
 .btn-primary:hover,
 .btn-primary:focus-visible {
-  color: #000;
+  color: var(--color-text);
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
@@ -954,7 +982,7 @@ body.menu-open {
 .footer-sns a:hover,
 .footer-sns a:focus-visible {
   background: var(--color-secondary);
-  color: #000;
+  color: var(--color-text);
 }
 
 .footer-divider {
