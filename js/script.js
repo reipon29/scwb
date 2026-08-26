@@ -1,271 +1,370 @@
-/* === Shared header/footer injection (added) === */
-async function injectHTML(targetId, url) {
-  const host = document.getElementById(targetId);
-  if (!host) return null;
-  try {
-    const res = await fetch(url, { credentials: 'same-origin' });
-    if (!res.ok) throw new Error(`Failed to load ${url}: ${res.status}`);
-    host.innerHTML = await res.text();
-    return host;
-  } catch (e) {
-    console.error(e);
-    return null;
+/* ================================================================
+   諏訪市民吹奏楽団 — 共通スクリプト
+   ----------------------------------------------------------------
+   1. 共通パーツ（ヘッダー / フッター / 年ナビ）の読み込み
+   2. ヘッダー高の計測
+   3. モバイルメニューの開閉
+   4. 年ナビの現在地強調
+   5. ヒーロー背景のクロスフェード
+   6. スクロール表示アニメーション
+   7. Facebook ページプラグインのレスポンシブ調整
+   ================================================================ */
+(function () {
+  'use strict';
+
+  /* CSS 側の「JS があるときだけ隠す」判定用フラグ。
+     読み込み直後に付けることで、JS が動かない環境では
+     コンテンツが最初から見える状態を保つ。 */
+  document.documentElement.classList.add('js');
+
+  var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  /** リサイズ等の連続イベントを間引く */
+  function debounce(fn, wait) {
+    var timer = null;
+    return function () {
+      var args = arguments;
+      var self = this;
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(function () { fn.apply(self, args); }, wait || 150);
+    };
   }
-}
 
-function initHeaderInteractions() {
-  if (document.body.dataset.headerInited === '1') return;
-  const navToggle = document.querySelector('.nav-toggle');
-  const overlay   = document.getElementById('mobile-menu');
-  const closeBtn  = document.querySelector('.menu-close');
-  if (!navToggle || !overlay || !closeBtn) return;
+  /* ==============================================================
+     1. 共通パーツの読み込み
+     ============================================================== */
+  /**
+   * 部分テンプレートを読み込んで差し込む。
+   * unwrap を true にすると、差し込み後にプレースホルダーの <div> を取り除き、
+   * 中身を body 直下へ引き上げる。
+   * これをしないと position:sticky のヘッダーが
+   * プレースホルダーの高さぶんしか追従できない（＝すぐ画面外に消える）。
+   */
+  function injectHTML(targetId, url, unwrap) {
+    var host = document.getElementById(targetId);
+    if (!host) return Promise.resolve(null);
 
-  navToggle.addEventListener('click', () => {
-    const isOpen = !overlay.classList.contains('open');
-    overlay.classList.toggle('open', isOpen);
-    overlay.setAttribute('aria-hidden', String(!isOpen));
-    navToggle.classList.toggle('open', isOpen);
-    navToggle.setAttribute('aria-expanded', String(isOpen));
-    navToggle.setAttribute('aria-label', isOpen ? 'メニューを閉じる' : 'メニューを開く');
-  });
+    return fetch(url, { credentials: 'same-origin' })
+      .then(function (res) {
+        if (!res.ok) throw new Error('Failed to load ' + url + ': ' + res.status);
+        return res.text();
+      })
+      .then(function (html) {
+        host.innerHTML = html;
+        if (!unwrap) return host;
 
-  closeBtn.addEventListener('click', () => {
-    overlay.classList.remove('open');
-    overlay.setAttribute('aria-hidden', 'true');
-    navToggle.classList.remove('open');
-    navToggle.setAttribute('aria-expanded', 'false');
-    navToggle.setAttribute('aria-label', 'メニューを開く');
-  });
+        var parent = host.parentNode;
+        while (host.firstChild) {
+          parent.insertBefore(host.firstChild, host);
+        }
+        parent.removeChild(host);
+        return parent;
+      })
+      .catch(function (err) {
+        console.error(err);
+        return null;
+      });
+  }
 
-  window.addEventListener('resize', () => {
-    if (window.innerWidth > 1024 && overlay.classList.contains('open')) {
-      closeBtn.click();
-    }
-  }, { passive: true });
+  /* ==============================================================
+     2. ヘッダー高の計測
+     アンカーリンクのスクロール位置補正（CSS の scroll-margin-top）に使う。
+     ============================================================== */
+  function trackHeaderHeight() {
+    var header = document.querySelector('.site-header');
+    if (!header) return;
 
-  document.body.dataset.headerInited = '1';
-}
-
-document.addEventListener('DOMContentLoaded', async () => {
-  await Promise.all([
-    injectHTML('include-header', 'common/header.html'),
-    injectHTML('include-footer', 'common/footer.html')
-  ]);
-  initHeaderInteractions();
-
-  // Inject year navigation blocks (concert/history) when placeholders exist
-  const [concertNav, historyNav] = await Promise.all([
-    injectHTML('concert-year-nav', 'concert/year-nav.html'),
-    injectHTML('history-year-nav', 'history/year-nav.html')
-  ]);
-
-  const enhanceYearNav = (navHost, section, defaultHref) => {
-    if (!navHost) return;
-    const anchors = Array.from(navHost.querySelectorAll('a'));
-    if (!anchors.length) return;
-
-    const applyCurrent = (anchor) => {
-      anchor.setAttribute('aria-current', 'page');
-      anchor.classList.add('is-current');
+    var apply = function () {
+      var h = Math.round(header.getBoundingClientRect().height);
+      document.documentElement.style.setProperty('--header-height', h + 'px');
     };
 
-    const pathname = (location.pathname || '').replace(/\/+/g, '/');
-    const sectionPath = `${section}/`;
-    const idx = pathname.lastIndexOf(`/${sectionPath}`);
-    const relative = idx >= 0
+    apply();
+    window.addEventListener('resize', debounce(apply, 120), { passive: true });
+    window.addEventListener('orientationchange', apply);
+
+    // Web フォント読み込み後にロゴ高さが変わるケースに追随
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(apply).catch(function () {});
+    }
+  }
+
+  /* ==============================================================
+     2b. スキップリンクの参照先を補正
+     全ページで <base href> を使っているため、"#main" だけだと
+     ベース URL（トップページ等）へ飛んでしまう。現在のパスを付け直す。
+     ============================================================== */
+  function fixSkipLink() {
+    var link = document.querySelector('.skip-link');
+    if (!link) return;
+    link.setAttribute('href', location.pathname + location.search + '#main');
+  }
+
+  /* ==============================================================
+     3. モバイルメニュー
+     ============================================================== */
+  function initMobileMenu() {
+    var toggle = document.querySelector('.nav-toggle');
+    var overlay = document.getElementById('mobile-menu');
+    var closeBtn = document.querySelector('.menu-close');
+    if (!toggle || !overlay || !closeBtn) return;
+
+    var isOpen = function () { return overlay.classList.contains('open'); };
+
+    function setState(open, moveFocus) {
+      overlay.classList.toggle('open', open);
+      overlay.setAttribute('aria-hidden', String(!open));
+      toggle.classList.toggle('open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'メニューを閉じる' : 'メニューを開く');
+      // 背面のスクロールを止める（iOS でメニュー越しに本文が動くのを防ぐ）
+      document.body.classList.toggle('menu-open', open);
+      if (moveFocus === false) return;
+      if (open) {
+        closeBtn.focus();
+      } else {
+        toggle.focus();
+      }
+    }
+
+    toggle.addEventListener('click', function () { setState(!isOpen(), true); });
+    closeBtn.addEventListener('click', function () { setState(false, true); });
+
+    // メニュー内のリンクを押したら閉じる（同一ページ内リンク対策）
+    overlay.addEventListener('click', function (e) {
+      if (e.target.closest && e.target.closest('a')) setState(false, false);
+    });
+
+    // Esc キーで閉じる
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && isOpen()) setState(false, true);
+    });
+
+    // デスクトップ幅に戻ったら閉じる（メニューが開いたまま残るのを防ぐ）
+    var desktop = window.matchMedia('(min-width: 1025px)');
+    var onChange = function (e) { if (e.matches && isOpen()) setState(false, false); };
+    if (desktop.addEventListener) {
+      desktop.addEventListener('change', onChange);
+    } else if (desktop.addListener) {
+      desktop.addListener(onChange);
+    }
+
+    // 初期状態を明示（このときはフォーカスを動かさない）
+    setState(false, false);
+  }
+
+  /* ==============================================================
+     4. 年ナビの現在地強調
+     ============================================================== */
+  function enhanceYearNav(navHost, section, defaultHref) {
+    if (!navHost) return;
+    var anchors = Array.prototype.slice.call(navHost.querySelectorAll('a'));
+    if (!anchors.length) return;
+
+    function applyCurrent(anchor) {
+      anchor.setAttribute('aria-current', 'page');
+      anchor.classList.add('is-current');
+    }
+
+    var pathname = (location.pathname || '').replace(/\/+/g, '/');
+    var sectionPath = section + '/';
+    var idx = pathname.lastIndexOf('/' + sectionPath);
+    var relative = idx >= 0
       ? pathname.slice(idx + 1)
       : pathname.replace(/^\/+/, '');
 
-    const matched = anchors.find(a => a.getAttribute('href') === relative);
+    var matched = anchors.filter(function (a) {
+      return a.getAttribute('href') === relative;
+    })[0];
+
     if (matched) {
       applyCurrent(matched);
       return;
     }
 
-    const normalized = pathname.replace(/\/+$/, '');
-    if (
-      normalized.endsWith(`/${section}`) ||
-      normalized.endsWith(`/${sectionPath}`)
-    ) {
-      const fallback = anchors.find(a => a.getAttribute('href') === defaultHref);
+    var normalized = pathname.replace(/\/+$/, '');
+    if (normalized.endsWith('/' + section) || normalized.endsWith('/' + sectionPath)) {
+      var fallback = anchors.filter(function (a) {
+        return a.getAttribute('href') === defaultHref;
+      })[0];
       if (fallback) applyCurrent(fallback);
     }
-  };
-
-  enhanceYearNav(concertNav, 'concert', 'concert/concert.html');
-  enhanceYearNav(historyNav, 'history', 'history/history.html');
-
-  // Sticky (JS-driven): ブラウザ差を無視して常にスクロール量で固定化を制御
-  (function initStickyFixed() {
-    const header = document.querySelector('.site-header');
-    if (!header) return;
-
-    // ヘッダー高をCSS変数へ反映（固定化時のレイアウトジャンプ防止）
-    const setHeaderHeight = () => {
-      const h = header.getBoundingClientRect().height;
-      document.documentElement.style.setProperty('--header-height', `${h}px`);
-    };
-    setHeaderHeight();
-    window.addEventListener('resize', setHeaderHeight, { passive: true });
-
-    // スクロールで .is-fixed を付与／削除
-    const onScroll = () => {
-      const sc = window.pageYOffset || document.documentElement.scrollTop || 0;
-      if (sc > 0) {
-        if (!header.classList.contains('is-fixed')) {
-          header.classList.add('is-fixed');
-        }
-        document.body.style.paddingTop =
-          getComputedStyle(document.documentElement).getPropertyValue('--header-height');
-      } else {
-        header.classList.remove('is-fixed');
-        document.body.style.paddingTop = '';
-      }
-    };
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-  })();
-
-  // -------------------------------
-  // (nav interactions are initialized in initHeaderInteractions() after injection)
-  // -------------------------------
-
-  // -------------------------------
-  // 2. Hero Text Animation
-  // -------------------------------
-  const hero = document.querySelector('.hero');
-  window.addEventListener('load', () => {
-    if (hero) hero.classList.add('loaded');
-  });
-
-  // -------------------------------
-  // 3. Background Cross-Fade
-  // -------------------------------
-  if (hero) {
-    const desktopLayers = ['desktop1.jpg', 'desktop2.jpg', 'desktop3.jpg'];
-    const mobileLayers  = ['mobile1.jpg','mobile2.jpg','mobile3.jpg','mobile4.jpg','mobile5.jpg','mobile6.jpg'];
-
-    // Viewport width helper (iPad Safariでツールバー表示/非表示によるレイアウト変動に強い)
-    const getViewportWidth = () => {
-      const vv = window.visualViewport;
-      return Math.min(window.innerWidth, vv ? Math.round(vv.width) : window.innerWidth);
-    };
-
-    // CSSと同じ判定に合わせる（767.98px以下をモバイル）
-    const isMobileMQ = () => window.matchMedia('(max-width: 767.98px)').matches;
-
-    // PC/Tablet判定（背景fixedはPCのみ）
-    const isPC = () => getViewportWidth() >= 1367;
-
-    // 現在のレイヤーセット
-    let layers = isMobileMQ() ? mobileLayers : desktopLayers;
-    let idx = 0;
-
-    function applyBg() {
-      // 背景attachmentはPCのみfixed、その他はscroll
-      const attachment = isPC() ? 'fixed' : 'scroll';
-      const repeat = 'no-repeat';
-      hero.style.background = `
-        linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
-        url('img/${layers[idx]}') center / cover ${repeat} ${attachment}
-      `;
-    }
-
-    // 初期適用
-    applyBg();
-
-    // リサイズ/向き変更/ビューポート変化に反応（iPad Safari対策）
-    let rafId = null;
-    const onResize = () => {
-      if (rafId) cancelAnimationFrame(rafId);
-      rafId = requestAnimationFrame(() => {
-        const nextLayers = isMobileMQ() ? mobileLayers : desktopLayers;
-        if (nextLayers !== layers) {
-          layers = nextLayers;
-          idx = 0; // セットが変わったら先頭に戻す
-        }
-        applyBg();
-      });
-    };
-
-    window.addEventListener('resize', onResize, { passive: true });
-    window.addEventListener('orientationchange', onResize);
-    if (window.visualViewport) {
-      window.visualViewport.addEventListener('resize', onResize, { passive: true });
-    }
-
-    // 4秒ごとに背景を巡回
-    setInterval(() => {
-      idx = (idx + 1) % layers.length;
-      applyBg();
-    }, 4000);
   }
 
-  // -------------------------------
-  // 4. Scroll-triggered Fade-in (IntersectionObserver)
-  // -------------------------------
-  const observer = new IntersectionObserver((entries, obs) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
+  /* ==============================================================
+     5. ヒーロー背景のクロスフェード
+     CSS には静止画のフォールバックを置き、JS が動くときだけ
+     2 枚のレイヤーを重ねて滑らかに切り替える。
+     ============================================================== */
+  function initHero() {
+    var hero = document.querySelector('.hero');
+    if (!hero) return;
+
+    hero.classList.add('loaded');
+
+    var desktopImages = ['desktop1.jpg', 'desktop2.jpg', 'desktop3.jpg'];
+    var mobileImages = ['mobile1.jpg', 'mobile2.jpg', 'mobile3.jpg',
+                        'mobile4.jpg', 'mobile5.jpg', 'mobile6.jpg'];
+
+    // CSS のブレークポイントと同じ基準でモバイル判定
+    var mobileMQ = window.matchMedia('(max-width: 767.98px)');
+
+    var media = document.createElement('div');
+    media.className = 'hero-media';
+    media.setAttribute('aria-hidden', 'true');
+
+    var layers = [document.createElement('div'), document.createElement('div')];
+    layers.forEach(function (layer) {
+      layer.className = 'hero-layer';
+      media.appendChild(layer);
+    });
+    hero.insertBefore(media, hero.firstChild);
+
+    var images = mobileMQ.matches ? mobileImages : desktopImages;
+    var index = 0;
+    var active = 0;
+
+    function baseHref() {
+      // <base href> があるページでも img/ を正しく解決させる
+      var base = document.querySelector('base');
+      return base ? base.getAttribute('href') : './';
+    }
+
+    function show(i) {
+      var next = (active + 1) % 2;
+      layers[next].style.backgroundImage = 'url("' + baseHref() + 'img/' + images[i] + '")';
+      layers[next].classList.add('is-active');
+      layers[active].classList.remove('is-active');
+      active = next;
+    }
+
+    show(index);
+
+    // 端末幅が変わったら画像セットを差し替える
+    var onBreakpointChange = function () {
+      var nextImages = mobileMQ.matches ? mobileImages : desktopImages;
+      if (nextImages === images) return;
+      images = nextImages;
+      index = 0;
+      show(index);
+    };
+    if (mobileMQ.addEventListener) {
+      mobileMQ.addEventListener('change', onBreakpointChange);
+    } else if (mobileMQ.addListener) {
+      mobileMQ.addListener(onBreakpointChange);
+    }
+
+    // 動きを減らす設定のときは切り替えない
+    if (prefersReducedMotion.matches) return;
+
+    var timer = null;
+    function start() {
+      if (timer) return;
+      timer = setInterval(function () {
+        index = (index + 1) % images.length;
+        show(index);
+      }, 6000);
+    }
+    function stop() {
+      if (!timer) return;
+      clearInterval(timer);
+      timer = null;
+    }
+
+    // 非表示タブでは止める（モバイルのバッテリー消費を抑える）
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) stop(); else start();
+    });
+    start();
+  }
+
+  /* ==============================================================
+     6. スクロール表示アニメーション
+     ============================================================== */
+  function initReveal() {
+    var targets = document.querySelectorAll('.fade-up, .card, .site-footer');
+
+    // IntersectionObserver 非対応、または動きを減らす設定ならすぐ表示
+    if (!('IntersectionObserver' in window) || prefersReducedMotion.matches) {
+      Array.prototype.forEach.call(targets, function (el) {
+        el.classList.add('visible');
+      });
+      return;
+    }
+
+    var observer = new IntersectionObserver(function (entries, obs) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
         entry.target.classList.add('visible');
         obs.unobserve(entry.target);
-      }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -5% 0px' });
+
+    Array.prototype.forEach.call(targets, function (el) {
+      observer.observe(el);
     });
-  }, { threshold: 0.2 });
+  }
 
-  // Observe fade-up elements and cards
-  document.querySelectorAll('.fade-up, .card').forEach(el => {
-    observer.observe(el);
-  });
+  /* ==============================================================
+     7. Facebook ページプラグイン
+     プラグインは実寸ピクセルでしか描画できないため、
+     コンテナ幅を実測して src と高さを合わせる。
+     ============================================================== */
+  function initFacebookPlugin() {
+    var frame = document.getElementById('fbPage');
+    if (!frame) return;
 
-  // Also observe footer for fade-in
-  const footer = document.querySelector('.site-footer');
-  if (footer) observer.observe(footer);
+    var PAGE = 'https%3A%2F%2Fwww.facebook.com%2FSuwaCityWindBand';
+    var BASE = 'https://www.facebook.com/plugins/page.php?href=' + PAGE +
+               '&tabs=timeline&hide_cover=false&show_facepile=true&adapt_container_width=true';
 
-  // -------------------------------
-  // 5. Close mobile menu on resize
-  // -------------------------------
-  window.addEventListener('resize', () => {
-    if (window.innerWidth > 1024) {
-      const overlay = document.getElementById('mobile-menu');
-      const closeBtn = document.querySelector('.menu-close');
-      if (overlay && closeBtn && overlay.classList.contains('open')) {
-        closeBtn.click();
-      }
+    var lastWidth = 0;
+
+    function apply() {
+      var host = frame.parentElement;
+      if (!host) return;
+
+      var available = Math.floor(host.getBoundingClientRect().width);
+      // Facebook 側の許容範囲は 180〜500px
+      var width = Math.max(180, Math.min(500, available));
+      var height = width <= 320 ? 560 : (width <= 420 ? 620 : 700);
+
+      // 幅が実質変わっていないなら再読み込みしない（ちらつき防止）
+      if (Math.abs(width - lastWidth) < 8) return;
+      lastWidth = width;
+
+      frame.style.width = width + 'px';
+      frame.style.height = height + 'px';
+      frame.src = BASE + '&width=' + width + '&height=' + height;
     }
+
+    apply();
+    window.addEventListener('resize', debounce(apply, 250), { passive: true });
+    window.addEventListener('orientationchange', debounce(apply, 250));
+  }
+
+  /* ==============================================================
+     起動
+     ============================================================== */
+  document.addEventListener('DOMContentLoaded', function () {
+    Promise.all([
+      injectHTML('include-header', 'common/header.html', true),
+      injectHTML('include-footer', 'common/footer.html', true),
+      injectHTML('concert-year-nav', 'concert/year-nav.html'),
+      injectHTML('history-year-nav', 'history/year-nav.html')
+    ]).then(function (results) {
+      var concertNav = results[2];
+      var historyNav = results[3];
+
+      trackHeaderHeight();
+      fixSkipLink();
+      initMobileMenu();
+      enhanceYearNav(concertNav, 'concert', 'concert/concert.html');
+      enhanceYearNav(historyNav, 'history', 'history/history.html');
+
+      initHero();
+      initReveal();
+      initFacebookPlugin();
+    });
   });
-  // -------------------------------
-  // 6. Facebook Page Plugin (iframe) responsive sizing
-  // -------------------------------
-  (function(){
-    const fbEl = document.getElementById('fbPage');
-    if (!fbEl) return; // Facebook iframe が無いページはスキップ
-
-    const FB_PAGE_URL = 'https%3A%2F%2Fwww.facebook.com%2FSuwaCityWindBand';
-    const BASE = `https://www.facebook.com/plugins/page.php?href=${FB_PAGE_URL}&tabs=timeline&hide_cover=false&show_facepile=true&adapt_container_width=false`;
-
-    const getVW = () => {
-      const vv = window.visualViewport;
-      return Math.min(window.innerWidth, vv ? Math.round(vv.width) : window.innerWidth);
-    };
-    const pickWidth  = vw => (vw <= 767 ? 300 : (vw <= 1024 ? 420 : 500));
-    const pickHeight = vw => (vw <= 767 ? 560 : (vw <= 1024 ? 640 : 700));
-
-    const applySrc = () => {
-      const vw = getVW();
-      const w = pickWidth(vw);
-      const h = pickHeight(vw);
-      fbEl.src = `${BASE}&width=${w}&height=${h}`;
-      fbEl.style.height = h + 'px';
-    };
-
-    // 初期適用とイベント登録
-    applySrc();
-    window.addEventListener('resize', applySrc, { passive: true });
-    window.addEventListener('orientationchange', applySrc);
-    if (window.visualViewport) {
-      window.visualViewport.addEventListener('resize', applySrc, { passive: true });
-    }
-  })();
-});
+})();

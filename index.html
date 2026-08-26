@@ -3,11 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#54A5C7">
   <base href="./">
   <title>諏訪市民吹奏楽団（すわしすい）</title>
   <meta name="description" content="新入団員募集中・コンサート情報など">
-  <!-- Google Fonts: Noto Sans JP と Oswald フォントを読み込み -->
-  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP|Oswald&display=swap" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Maru+Gothic:wght@500;700&display=swap" rel="stylesheet">
   <!-- FontAwesome: アイコンライブラリ -->
   <link
     rel="stylesheet"
@@ -24,13 +27,13 @@
   <!-- ====================
        メインコンテンツ
   ==================== -->
-  <main>
+  <main id="main">
     <!-- ヒーローセクション -->
     <section class="hero">
       <div class="hero-content">
-        <h2>心に響く演奏を、一緒に創りませんか？</h2>
-        <p>すべてのパートで新入団員募集中！</p>
-        <a href="sindai.html" class="btn btn-primary">詳しく見る</a>
+        <h1>諏訪の地に音楽を届けます♪</h1>
+        <p>結成32年目の【すわしすい】🎺</p>
+        <a href="sindai.html" class="btn-primary">詳しく見る</a>
       </div>
     </section>
 
@@ -39,16 +42,20 @@
       <div class="container">
         <h2>お知らせ</h2>
         <div class="card">
-          <strong>2026年05月16日</strong><br>
-          <a href="news/2026/20260516.html">\ 🌷並木DEコンサート🍀 /</a>
+          <strong>2026年08月01日</strong><br>
+          <a href="news/2026/20260801.html">8月練習日程</a>
         </div>
         <div class="card">
-          <strong>2026年05月01日</strong><br>
-          <a href="news/2026/20260501.html">5月練習日程</a>
+          <strong>2026年07月29日</strong><br>
+          <a href="news/2026/20260729.html">サックスアンサンブル依頼演奏</a>
         </div>
         <div class="card">
-          <strong>2026年04月25日</strong><br>
-          <a href="news/2026/20260425.html">【並木DEコンサート出演！】</a>
+          <strong>2026年07月28日</strong><br>
+          <a href="news/2026/20260728.html">暑気払い</a>
+        </div>
+        <div class="card">
+          <strong>2026年07月27日</strong><br>
+          <a href="news/2026/20260727.html">老人ホーム聖母寮様へ慰問演奏</a>
         </div>
         <div class="news-actions">
           <a href="news/news.html" class="btn-outline">一覧を見る</a>
@@ -68,11 +75,12 @@
             <div class="sns-frame">
               <a href="https://www.instagram.com/suwacitywindband/"
                 class="instagram-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                <img src="img/icon_insta.png" alt="Instagramロゴ">
+                <img src="img/icon_insta.png" alt="Instagram" width="256" height="256"
+                  loading="lazy" decoding="async">
               </a>
             </div>
             <a href="https://www.instagram.com/suwacitywindband/"
-              class="btn btn-primary" target="_blank" rel="noopener noreferrer">フォローする</a>
+              class="btn-primary" target="_blank" rel="noopener noreferrer">フォローする</a>
           </div>
 
           <!-- YouTube -->
@@ -81,10 +89,11 @@
             <div class="sns-frame">
               <iframe
                 src="https://www.youtube.com/embed/IHgYDZVFAJA?si=o-4J0ZrW20fj3sbX"
-                title="YouTube video player" frameborder="0" allowfullscreen></iframe>
+                title="諏訪市民吹奏楽団の演奏動画（YouTube）"
+                loading="lazy" allowfullscreen></iframe>
             </div>
             <a href="https://youtube.com/channel/UCslfo6opiRdj1zpFQ0ggwzA?si=N1rQtGrbsjeUWc8A"
-              class="btn btn-primary" target="_blank" rel="noopener noreferrer" aria-label="YouTubeチャンネルへ">
+              class="btn-primary" target="_blank" rel="noopener noreferrer" aria-label="YouTubeチャンネルへ">
               チャンネルを見る
             </a>
           </div>
@@ -93,10 +102,13 @@
           <div class="sns-card sns-card--fb">
             <h3>Facebook</h3>
             <div class="sns-frame">
-            <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FSuwaCityWindBand&tabs=timeline&width=300&height=500" width="300" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen></iframe>
+              <iframe id="fbPage"
+                src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FSuwaCityWindBand&amp;tabs=timeline&amp;width=300&amp;height=500&amp;adapt_container_width=true"
+                title="諏訪市民吹奏楽団のFacebookページ"
+                loading="lazy" scrolling="no" allowfullscreen></iframe>
             </div>
             <a href="https://www.facebook.com/SuwaCityWindBand"
-              class="btn btn-primary" target="_blank" rel="noopener noreferrer" aria-label="Facebookページへ">
+              class="btn-primary" target="_blank" rel="noopener noreferrer" aria-label="Facebookページへ">
               フォローする
             </a>
           </div>
@@ -121,7 +133,7 @@
           </div>
           <!-- 地図埋め込み -->
           <div class="location-map">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1140.7211504668137!2d138.11959034832887!3d36.03380397025016!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x601c5432cb5208c5%3A0x2d975ca7a7d0b740!2z6KuP6Kiq5biC56uL6KuP6Kiq5Lit5a2m5qCh!5e0!3m2!1sja!2sjp!4v1745564184221!5m2!1sja!2sjp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1140.7211504668137!2d138.11959034832887!3d36.03380397025016!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x601c5432cb5208c5%3A0x2d975ca7a7d0b740!2z6KuP6Kiq5biC56uL6KuP6Kiq5Lit5a2m5qCh!5e0!3m2!1sja!2sjp!4v1745564184221!5m2!1sja!2sjp" title="諏訪中学校（練習会場）の地図" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
         </div>
       </div>
@@ -134,13 +146,13 @@
         <div class="contact-wrapper">
           <!-- メールお問い合わせ -->
           <div class="contact-item">
-            <i class="fas fa-envelope"></i>
+            <i class="fas fa-envelope" aria-hidden="true"></i>
             <h3>メール</h3>
             <a href="mailto:info@scwb.net">info@scwb.net</a>
           </div>
           <!-- 電話お問い合わせ -->
           <div class="contact-item">
-            <i class="fas fa-phone-alt"></i>
+            <i class="fas fa-phone-alt" aria-hidden="true"></i>
             <h3>お電話（事務局）</h3>
             <a href="tel:080-6933-4114">080-6933-4114</a>
           </div>
@@ -152,9 +164,5 @@
 <div id="include-footer"></div>
   <!-- プロジェクト用スクリプト -->
   <script src="js/script.js"></script>
-  <div id="fb-root"></div>
-  <script async defer crossorigin="anonymous"
-    src="https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v18.0">
-  </script>
 </body>
 </html>

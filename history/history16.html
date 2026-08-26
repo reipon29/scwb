@@ -3,11 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#54A5C7">
   <base href="../">
   <title>演奏記録 | 諏訪市民吹奏楽団</title>
   <meta name="description" content="諏訪市民吹奏楽団の演奏記録を掲載しています。">
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP|Oswald&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Maru+Gothic:wght@500;700&display=swap" rel="stylesheet">
   <!-- FontAwesome: アイコンライブラリ -->
   <link
     rel="stylesheet"
@@ -21,13 +24,12 @@
 <div id="include-header"></div>
 
   <!-- メインコンテンツ -->
-   <main>
+   <main id="main">
     <section id="history" class="section fade-up">
       <div class="container">
         <h2 class="section-title">諏訪市民吹奏楽団<br>演奏記録一覧</h2>
         <p>団結成以来の諏訪市吹の活動を、演奏曲目とともにまとめてみました。</p>
-        <br>
-        <p id="history-year-nav" class="year-nav"></p>
+                <p id="history-year-nav" class="year-nav"></p>
       </div>
     </section>
 
@@ -36,7 +38,7 @@
         <h2>第22回定期演奏会</h2>
         <p>2016年12月11日（日）　茅野市民館マルチホール</p>
         <p class="note">（開演前：伊那市立春富中学校吹奏楽部の皆さんによるアンサンブル演奏）</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <thead>
               <tr><th colspan="2">第１部</th></tr>
@@ -72,7 +74,7 @@
       <div class="container chapter">
         <h2>第22回上社の杜音楽祭</h2>
         <p>2016年10月2日（日）　諏訪市博物館前・美しき広場</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
             <table>
             <thead>
                 <tr><th colspan="2">諏訪市吹ステージ</th></tr>
@@ -97,7 +99,7 @@
       <div class="container chapter">
         <h2>老人ホームアイリス　敬老会出演</h2>
         <p>2016年9月11日（日）　特別養護老人ホーム「アイリス」</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>双頭の鷲の旗の下に</td><td>J.F.ワーグナー</td></tr>
@@ -113,7 +115,7 @@
       <div class="container chapter">
         <h2>聖母寮　慰問演奏</h2>
         <p>2016年7月30日（土）　諏訪市・養護老人ホーム聖母寮</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>双頭の鷲の旗の下に</td><td>J.F.ワーグナー</td></tr>
@@ -131,7 +133,7 @@
       <div class="container chapter">
         <h2>柿蔭山房　七夕コンサート</h2>
         <p>2016年7月2日（土）　下諏訪町・柿蔭山房<br>（ユーフォニアムパートのみ出演）</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>星に願いを</td><td>L.ハーライン</td></tr>
@@ -145,7 +147,7 @@
       <div class="container chapter">
         <h2>第105回並木DEコンサート</h2>
         <p>2016年5月28日（土）　諏訪市柳並公園</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>トゥッティ！</td><td>ZAQ</td></tr>
@@ -163,7 +165,7 @@
       <div class="container chapter">
         <h2>蓼科高原ロビーコンサート出演</h2>
         <p>2016年4月23日（土）　茅野市・蓼科グランドホテル滝の湯</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>トゥッティ！</td><td>ZAQ</td></tr>
@@ -181,7 +183,7 @@
       <div class="container chapter">
         <h2>アイスキャンドル点灯式出演</h2>
         <p>2016年2月6日（土）　諏訪市・諏訪一丁目交差点横（旧　八十二銀行上諏訪駅前支店前）<br>（トランペットパートのみ出演）</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>アルペン・ファンファーレ</td><td>小倉　純</td></tr>
@@ -191,12 +193,12 @@
         </div>
       </div>
       <br>
-      <div class="cta" style="text-align:center; margin-top:2rem;">
+      <div class="cta">
           <a href="history/history15.html" class="btn-primary">
             2015年の演奏記録へ
           </a>
       </div>
-      <div class="cta" style="text-align:center; margin-top:2rem;">
+      <div class="cta">
           <a href="history/musiclist.html" class="btn-primary">
             全曲リスト（原題・編曲者名・出版社名含む）
           </a>

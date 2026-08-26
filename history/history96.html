@@ -3,11 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#54A5C7">
   <base href="../">
   <title>演奏記録 | 諏訪市民吹奏楽団</title>
   <meta name="description" content="諏訪市民吹奏楽団の演奏記録を掲載しています。">
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP|Oswald&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Maru+Gothic:wght@500;700&display=swap" rel="stylesheet">
   <!-- FontAwesome: アイコンライブラリ -->
   <link
     rel="stylesheet"
@@ -21,13 +24,12 @@
 <div id="include-header"></div>
 
   <!-- メインコンテンツ -->
-  <main>
+  <main id="main">
     <section id="history" class="section fade-up">
       <div class="container">
         <h2 class="section-title">諏訪市民吹奏楽団<br>演奏記録一覧</h2>
         <p>団結成以来の諏訪市吹の活動を、演奏曲目とともにまとめてみました。</p>
-        <br>
-        <p id="history-year-nav" class="year-nav"></p>
+                <p id="history-year-nav" class="year-nav"></p>
       </div>
     </section>
 
@@ -35,7 +37,7 @@
       <div class="container chapter">
         <h2>第２回演奏会</h2>
         <p>1996年12月1日（日）　諏訪市文化センター</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <thead>
               <tr><th colspan="2">第１部</th></tr>
@@ -70,7 +72,7 @@
       <div class="container chapter">
         <h2>第２回上社の杜音楽祭</h2>
         <p>1996年10月6日（日）　諏訪市博物館前・美しき広場</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>マーチ「ザ・ナイン」</td><td>小長谷宗一</td></tr>
@@ -101,7 +103,7 @@
       <div class="container chapter">
         <h2>諏訪湖開き</h2>
         <p>1996年4月29日（月）　諏訪湖畔</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>憧れのハワイ航路</td><td>江口夜詞</td></tr>
@@ -121,7 +123,7 @@
       <div class="container chapter">
         <h2>第１回演奏会</h2>
         <p>1995年11月12日（日）　諏訪市文化センター</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <thead>
               <tr><th colspan="2">第１部</th></tr>
@@ -158,7 +160,7 @@
       <div class="container chapter">
         <h2>第１回上社の杜音楽祭</h2>
         <p>1995年10月8日（日）　諏訪市博物館前・美しき広場</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>自由の鐘</td><td>J.P.スーザ</td></tr>
@@ -176,7 +178,7 @@
       <div class="container chapter">
         <h2>聖母寮慰問演奏</h2>
         <p>1995年9月15日(金)　聖母寮</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>リンゴの歌</td><td>万城目　正</td></tr>
@@ -198,7 +200,7 @@
       <div class="container chapter">
         <h2>台東区ジュニア・オーケストラとの<br>ジョイント・コンサート</h2>
         <p>1995年8月5日(土)</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>セカンド・センチュリー</td><td>A.リード</td></tr>
@@ -213,7 +215,7 @@
       <div class="container chapter">
         <h2>諏訪湖開き</h2>
         <p>1995年4月16日（日）　諏訪湖畔</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>吹奏楽のためのファンファーレ第２集より　No.2</td><td>喜久邦博</td></tr>
@@ -236,7 +238,7 @@
       <div class="container chapter">
         <h2>公開練習</h2>
         <p>1994年11月22日（火）</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>君が代</td><td>林　広守</td></tr>
@@ -257,7 +259,7 @@
       <div class="container chapter">
         <h2>公開練習</h2>
         <p>1994年11月20日（日）</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>若い力</td><td>高田信一</td></tr>
@@ -268,7 +270,7 @@
         </div>
       </div>
       <br>
-      <div class="cta" style="text-align:center; margin-top:2rem;">
+      <div class="cta">
           <a href="history/musiclist.html" class="btn-primary">
             全曲リスト（原題・編曲者名・出版社名含む）
           </a>

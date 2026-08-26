@@ -1,12 +1,12 @@
+<a class="skip-link" href="#main">本文へスキップ</a>
+
 <header class="site-header">
   <div class="container header-inner">
-    <a href="index.html" class="logo-link" aria-label="ホーム">
-      <img src="img/logo.png" alt="諏訪市民吹奏楽団" class="logo">
+    <a href="index.html" class="logo-link" aria-label="諏訪市民吹奏楽団 ホーム">
+      <img src="img/logo.png" alt="諏訪市民吹奏楽団" class="logo" width="320" height="80">
     </a>
-    <button class="nav-toggle" aria-label="メニューを開く" aria-expanded="false">
-      <span class="bar"></span><span class="bar"></span><span class="bar"></span>
-    </button>
-    <nav aria-hidden="true">
+
+    <nav class="site-nav" aria-label="メインメニュー">
       <ul class="nav-menu">
         <li><a href="shokai.html">楽団紹介</a></li>
         <li><a href="kiyaku.html">規約</a></li>
@@ -16,19 +16,27 @@
         <li><a href="concert/concert.html">コンサート情報</a></li>
       </ul>
     </nav>
+
+    <button class="nav-toggle" type="button" aria-label="メニューを開く"
+            aria-expanded="false" aria-controls="mobile-menu">
+      <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+    </button>
   </div>
 </header>
 
-<!-- モバイルオーバーレイ（メニュー） -->
-<div class="menu-overlay" id="mobile-menu" aria-hidden="true">
-  <button class="menu-close" aria-label="閉じる">&times;</button>
-  <ul>
-    <li><a href="index.html">ホーム</a></li>
-    <li><a href="shokai.html">楽団紹介</a></li>
-    <li><a href="kiyaku.html">規約</a></li>
-    <li><a href="sindai.html">新入団員募集</a></li>
-    <li><a href="news/news.html">お知らせ</a></li>
-    <li><a href="history/history.html">演奏記録</a></li>
-    <li><a href="concert/concert.html">コンサート情報</a></li>
-  </ul>
+<!-- モバイル用オーバーレイメニュー -->
+<div class="menu-overlay" id="mobile-menu" role="dialog" aria-modal="true"
+     aria-label="メニュー" aria-hidden="true">
+  <button class="menu-close" type="button" aria-label="メニューを閉じる">&times;</button>
+  <nav aria-label="モバイルメニュー">
+    <ul>
+      <li><a href="index.html">ホーム</a></li>
+      <li><a href="shokai.html">楽団紹介</a></li>
+      <li><a href="kiyaku.html">規約</a></li>
+      <li><a href="sindai.html">新入団員募集</a></li>
+      <li><a href="news/news.html">お知らせ</a></li>
+      <li><a href="history/history.html">演奏記録</a></li>
+      <li><a href="concert/concert.html">コンサート情報</a></li>
+    </ul>
+  </nav>
 </div>

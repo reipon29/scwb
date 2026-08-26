@@ -3,11 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#54A5C7">
   <base href="./">
   <title>新入団員募集 | 諏訪市民吹奏楽団</title>
   <meta name="description" content="諏訪市民吹奏楽団では全パートで新入団員を随時募集しています。">
-  <!-- Google Fonts: Noto Sans JP と Oswald フォントを読み込み -->
-  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP|Oswald&display=swap" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Maru+Gothic:wght@500;700&display=swap" rel="stylesheet">
   <!-- FontAwesome: アイコンライブラリ -->
   <link
     rel="stylesheet"
@@ -21,71 +24,65 @@
 <div id="include-header"></div>
 
   <!-- メインコンテンツ -->
-  <main>
+  <main id="main">
     <!-- 新入団員募集セクション -->
     <section id="sindai" class="section fade-up">
       <div class="container">
-        <h2 class="section-title">新入団員募集のお知らせ</h2>
+        <h1 class="section-title">新入団員募集のお知らせ</h1>
 
         <!-- キービジュアル -->
-        <img src="img/recruitment.jpg" alt="新入団員募集" class="concert-photo">
+        <img src="img/recruitment.jpg" alt="新入団員募集のご案内" class="concert-photo"
+          width="1200" height="675" decoding="async">
 
 
         <!-- リード文 -->
-        <p class="lead" style="margin:1.5rem 0; font-size:1.1rem;">
+        <p class="lead">
           諏訪市民吹奏楽団では、すべてのパートで新入団員を随時募集しています。<br>
           初心者からブランクのある方まで、大歓迎！まずは見学からお気軽にどうぞ。
         </p>
 
         <!-- 募集要項 -->
-        <dl class="recruit-specs" style="display:grid; gap:1.5rem;">
-        <div>
-            <h3><strong>入団資格</strong></h3>
-            <p>
-              音楽を楽しみたい方ならどなたでもOK。全国どこからでも参加可能。18才未満は保護者の同意が必要です。<br>
-              <br>
-              【参考:パート人数】※2026.4現在<br>
-              　大募集パート：★<br>
-              　フルート5<br>
-              　オーボエ1<br>
-              　クラリネット6 (バスクラ1)<br>
-              　サックス8（アルト5テナー2バリトン1）<br>
-              　トランペット5<br>
-              　トロンボーン4 ★<br>
-              　ホルン3 ★<br>
-              　ユーフォ3 ★<br>
-              　チューバ1 ★<br>
-              　パーカッション3 ★<br>
-            </p>
-        </div>
-        <div>
-            <h3><strong>活動内容（例:2024年度）</strong></h3>
+        <dl class="recruit-specs">
+          <div>
+            <dt>入団資格</dt>
+            <dd>音楽を楽しみたい方ならどなたでもOK。全国どこからでも参加可能。18才未満は保護者の同意が必要です。</dd>
+            <dd>
+              【参考：パート人数】※2026.4現在　大募集パートは★<br>
+              フルート5／オーボエ1／クラリネット6（バスクラ1）／サックス8（アルト5・テナー2・バリトン1）／
+              トランペット5／トロンボーン4 ★／ホルン3 ★／ユーフォニアム3 ★／チューバ1 ★／パーカッション3 ★
+            </dd>
+          </div>
+          <div>
+            <dt>活動内容（例：2024年度）</dt>
             <dd>並木DEコンサート、サマーコンサート、すてぱフェス、上社の杜音楽祭、定期演奏会など</dd>
-        </div>
-        <div>
-            <h3><strong>練習日</strong></h3>
-            <dd>火曜 19:00〜21:00（合奏）、木曜 19:00〜21:00（個人・パート練）<br>
-                演奏会前は月1回程度の日曜練習あり</dd>
-        </div>
-        <div>
-            <h3><strong>練習会場</strong></h3>
+          </div>
+          <div>
+            <dt>練習日</dt>
+            <dd>火曜 19:00〜21:00（合奏）、木曜 19:00〜21:00（個人・パート練）</dd>
+            <dd>演奏会前は月1回程度の日曜練習あり</dd>
+          </div>
+          <div>
+            <dt>練習会場</dt>
             <dd>諏訪市立諏訪中学校 小体育館</dd>
             <dd>住所：長野県諏訪市清水3丁目3619-3</dd>
-            <div class="responsive-map">
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1140.7211504668137!2d138.11959034832887!3d36.03380397025016!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x601c5432cb5208c5%3A0x2d975ca7a7d0b740!2z6KuP6Kiq5biC56uL6KuP6Kiq5Lit5a2m5qCh!5e0!3m2!1sja!2sjp!4v1745564184221!5m2!1sja!2sjp" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-            
-        </div>
-        <div>
-            <h3><strong>団費</strong></h3>
+            <dd>
+              <div class="responsive-map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1140.7211504668137!2d138.11959034832887!3d36.03380397025016!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x601c5432cb5208c5%3A0x2d975ca7a7d0b740!2z6KuP6Kiq5biC56uL6KuP6Kiq5Lit5a2m5qCh!5e0!3m2!1sja!2sjp!4v1745564184221!5m2!1sja!2sjp"
+                  title="諏訪中学校（練習会場）の地図" allowfullscreen loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"></iframe>
+              </div>
+            </dd>
+          </div>
+          <div>
+            <dt>団費</dt>
             <dd>一般：2,000円/月、学生：1,000円/月</dd>
-        </div>
+          </div>
         </dl>
 
         <!-- CTA -->
-        <div class="text-center" style="margin:3rem 0;">
+        <div class="cta">
           <a href="mailto:info@scwb.net" class="btn-primary">
-            <i class="fas fa-envelope"></i> 見学申し込み・お問い合わせ
+            <i class="fas fa-envelope" aria-hidden="true"></i> 見学申し込み・お問い合わせ
           </a>
         </div>
       </div>

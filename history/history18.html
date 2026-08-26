@@ -3,11 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#54A5C7">
   <base href="../">
   <title>演奏記録 | 諏訪市民吹奏楽団</title>
   <meta name="description" content="諏訪市民吹奏楽団の演奏記録を掲載しています。">
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP|Oswald&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Maru+Gothic:wght@500;700&display=swap" rel="stylesheet">
   <!-- FontAwesome: アイコンライブラリ -->
   <link
     rel="stylesheet"
@@ -21,13 +24,12 @@
 <div id="include-header"></div>
 
   <!-- メインコンテンツ -->
-  <main>
+  <main id="main">
     <section id="history" class="section fade-up">
       <div class="container">
         <h2 class="section-title">諏訪市民吹奏楽団<br>演奏記録一覧</h2>
         <p>団結成以来の諏訪市吹の活動を、演奏曲目とともにまとめてみました。</p>
-        <br>
-        <p id="history-year-nav" class="year-nav"></p>
+                <p id="history-year-nav" class="year-nav"></p>
       </div>
     </section>
 
@@ -36,7 +38,7 @@
         <h2>第24回定期演奏会</h2>
         <p>2018年12月16日（日）　茅野市民館マルチホール</p>
         <p class="note">（開演前：伊那市立春富中学校吹奏楽部の皆さんによるアンサンブル演奏）</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <thead>
               <tr><th colspan="2">第１部</th></tr>
@@ -69,7 +71,7 @@
       <div class="container chapter">
         <h2>自治体消防制度70周年記念諏訪大会出演</h2>
         <p>2018年9月16日（日）　諏訪市文化センター大ホール</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
             <table>
             <tbody>
                 <tr><td>行進曲「国民の象徴」</td><td>E.E.バーグレイ</td></tr>
@@ -85,7 +87,7 @@
       <div class="container chapter">
         <h2>聖母寮　慰問演奏</h2>
         <p>2018年7月28日（土）　諏訪市・養護老人ホーム聖母寮</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>ようこそジャパリパークへ</td><td>大石昌良</td></tr>
@@ -103,7 +105,7 @@
       <div class="container chapter">
         <h2>柿蔭山房　七夕コンサート</h2>
         <p>2018年7月8日（日）　下諏訪町・柿蔭山房</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td rowspan="2">クラリネット</td><td>クラリネットこわしちゃった</td><td>フランス童謡</td></tr>
@@ -129,7 +131,7 @@
       <div class="container chapter">
         <h2>第115回並木DEコンサート</h2>
         <p>2018年5月26日（土）　諏訪市柳並公園</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>マーチ「晴天の風」</td><td>糸谷　良</td></tr>
@@ -147,7 +149,7 @@
       <div class="container chapter">
         <h2>蓼科高原ロビーコンサート出演</h2>
         <p>2018年4月21日（土）　茅野市・蓼科グランドホテル滝の湯</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>マーチ「晴天の風」</td><td>糸谷　良</td></tr>
@@ -164,7 +166,7 @@
       <div class="container chapter">
         <h2>アイスキャンドル点灯式出演</h2>
         <p>2018年2月3日（土）　諏訪市・諏訪一丁目交差点横（旧　八十二銀行上諏訪駅前支店前）<br>（トランペットパートのみ出演）</p>
-        <div style="overflow-x:auto; margin-top:1rem;">
+        <div class="table-scroll">
           <table>
             <tbody>
               <tr><td>オリンピック東京大会ファンファーレ</td><td>今井光也</td></tr>
@@ -175,12 +177,12 @@
         </div>
       </div>
       <br>
-      <div class="cta" style="text-align:center; margin-top:2rem;">
+      <div class="cta">
           <a href="history/history17.html" class="btn-primary">
             2017年の演奏記録へ
           </a>
       </div>
-      <div class="cta" style="text-align:center; margin-top:2rem;">
+      <div class="cta">
           <a href="history/musiclist.html" class="btn-primary">
             全曲リスト（原題・編曲者名・出版社名含む）
           </a>

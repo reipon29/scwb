@@ -3,11 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#54A5C7">
   <base href="../"> 
   <title>コンサート情報 | 諏訪市民吹奏楽団</title>
   <meta name="description" content="諏訪市民吹奏楽団のコンサート活動報告です。">
-  <!-- Google Fonts: Noto Sans JP と Oswald フォントを読み込み -->
-  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP|Oswald&display=swap" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Maru+Gothic:wght@500;700&display=swap" rel="stylesheet">
   <!-- FontAwesome: アイコンライブラリ -->
   <link
     rel="stylesheet"
@@ -21,13 +24,12 @@
   <div id="include-header"></div>
 
   <!-- メインコンテンツ -->
-   <main class="section fade-up visible">
+   <main id="main" class="section fade-up visible">
     <div class="container">
       <h2>コンサート報告（2024年）</h2>
       <p id="concert-year-nav" class="year-nav"></p>
-      <br>
       <div class="card">
-        <h3>アイスキャンドル点灯式出演 <span style="color:red;">演奏終了</span>（2024.2.3）</h3>
+        <h3>アイスキャンドル点灯式出演 <span class="text-alert">演奏終了</span>（2024.2.3）</h3>
         <a href="concert/image/ph240203.jpg" target="_blank" rel="noopener noreferrer">
           <img src="concert/image/ph240203.jpg" alt="アイスキャンドル" class="concert-photo" loading="lazy" decoding="async">
         </a>
@@ -35,7 +37,7 @@
       </div>
 
       <div class="card">
-        <h3>並木DEコンサート <span style="color:red;">演奏終了</span>（2024.5.18）</h3>
+        <h3>並木DEコンサート <span class="text-alert">演奏終了</span>（2024.5.18）</h3>
         <a href="concert/image/ph240518.jpg" target="_blank" rel="noopener noreferrer">
           <img src="concert/image/ph240518.jpg" alt="並木DEコンサート" class="concert-photo" loading="lazy" decoding="async">
         </a>
@@ -43,7 +45,7 @@
       </div>
 
       <div class="card">
-        <h3>スワコエイトピークス ミドルトライアスロン大会 応援演奏 <span style="color:red;">雨天中止</span>（2024.6.23）</h3>
+        <h3>スワコエイトピークス ミドルトライアスロン大会 応援演奏 <span class="text-alert">雨天中止</span>（2024.6.23）</h3>
         <a href="concert/image/ph240623.jpg" target="_blank" rel="noopener noreferrer">
           <img src="concert/image/ph240623.jpg" alt="合同練習風景" class="concert-photo" loading="lazy" decoding="async">
         </a>
@@ -51,7 +53,7 @@
       </div>
 
       <div class="card">
-        <h3>サマーコンサート＠レイクウォーク <span style="color:red;">演奏終了</span>（2024.7.21）</h3>
+        <h3>サマーコンサート＠レイクウォーク <span class="text-alert">演奏終了</span>（2024.7.21）</h3>
         <a href="concert/image/ph240721.jpg" target="_blank" rel="noopener noreferrer">
           <img src="concert/image/ph240721.jpg" alt="サマーコンサート" class="concert-photo" loading="lazy" decoding="async">
         </a>
@@ -59,7 +61,7 @@
       </div>
 
       <div class="card">
-        <h3>すてぱフェス2024出演 <span style="color:red;">演奏終了</span>（2024.9.22）</h3>
+        <h3>すてぱフェス2024出演 <span class="text-alert">演奏終了</span>（2024.9.22）</h3>
         <a href="concert/image/ph240922.jpg" target="_blank" rel="noopener noreferrer">
           <img src="concert/image/ph240922.jpg" alt="すてぱフェス" class="concert-photo" loading="lazy" decoding="async">
         </a>
@@ -67,7 +69,7 @@
       </div>
 
       <div class="card">
-        <h3>第30回上社の杜音楽祭 <span style="color:red;">演奏終了</span>（2024.10.20）</h3>
+        <h3>第30回上社の杜音楽祭 <span class="text-alert">演奏終了</span>（2024.10.20）</h3>
         <a href="concert/image/ph241020.jpg" target="_blank" rel="noopener noreferrer">
           <img src="concert/image/ph241020.jpg" alt="上社の杜音楽祭" class="concert-photo" loading="lazy" decoding="async">
         </a>
@@ -75,7 +77,7 @@
       </div>
 
       <div class="card">
-        <h3>第30回定期演奏会 <span style="color:red;">演奏終了</span>（2024.12.15）</h3>
+        <h3>第30回定期演奏会 <span class="text-alert">演奏終了</span>（2024.12.15）</h3>
         <div class="concert-photo-pair">
           <a href="concert/image/ph241215b.jpg" target="_blank" rel="noopener noreferrer">
               <img src="concert/image/ph241215b.jpg" alt="定期演奏会b" class="concert-photo" loading="lazy" decoding="async">
@@ -89,7 +91,7 @@
         <p>　団最大の行事、定期演奏会。30回の節目を記念して高橋宏樹先生に作曲いただいた新曲<a href="https://www.youtube.com/watch?v=IHgYDZVFAJA">「March on Bustle」の初演</a>を行いました。当日は高橋先生にもご来場いただき、温かいコメントをいただきました。また、客席も利用してのフラッシュモブ風演出を加えた演奏を10年ぶりに実施。大いに企画を盛り込んだステージとしました。<br>　おかげさまで過去最高の730人のお客様にご来場いただき、団員一同、感激しているところです。プログラムの部数がなくなってしまうなど、行き届かぬところもあったかと存じます。お詫び申し上げますとともに、年末の忙しい中、ご来場いただいたことに心より厚く御礼申し上げます。<br>　次の10年に向けて、これからも楽しい音楽を諏訪圏の皆さんにお届けしたいと思っております。今後とも諏訪市吹を、どうぞよろしくお願いいたします。</p>
       </div>
 
-      <p class="fade-up" style="text-align:center; margin-top:2rem;">
+      <p class="fade-up cta">
         <a href="concert/concert23.html" class="btn-primary">2023年のコンサート報告はこちら</a>
       </p>
     </div>
